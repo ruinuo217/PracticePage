@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>考生服務網</title>
+
+<style> 
+body
+{
+    
+    /* background-image: url('images/bg.jpg');*/
+    /* background-image: url(data:image/jpeg;base64,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);*/
+    background-image: linear-gradient(90deg, #74ebd5 0%, #ACB6E5 100%);
+    
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+}   
+h1{
+    color: navy;
+    text-align: center;
+    font-size: 36px;}
+
+h2{
+    color: green; }   
+
+
+</style>
+
+
+</head>
+<body>
+<img src="../web2/images/logo.gif" alt="">
+<h1>考生服務網</h1>
+<img src="../web2/images/line.gif" alt="">
+<p>今天日期：2025-11-19</p>
+<h2>最新消息</h2>
+<ul>
+    <li>98年度3月份ITE經濟部資訊專業人員鑑定、EEC企業電子化人才能力鑑定考試公告(2009/2/19)</li>
+    <li>「財團法人中華民國電腦技能基金會獎學金」錄取名單將於3月10日公告，敬請留意！(2009/2/19)</li>
+    <li>【恭賀】97年度TQC認證共10項目獲得教育部採認推薦(2009/1/23)</li>
+    <li>專業證照教師研習營-Linux維運管理專業人員，報名至2月9日止(2009/1/22)</li>
+    <li>【2009新服務開張】本會與104理工人才銀行合作，開通TQC、ITE、EEC證照線上驗證服務 (2009/1/21)</li>
+    <li>ITE嵌入式系統類教師研習暨認證活動，即日起開放報名！(2009/1/13)</li>
+    <li>98年e-office專業人員寒假教師研習活動，1/6開放報名(2009/1/7)</li>
+    <li>公告本會受理身心障礙者參加TQC認證報名費補助原則(2008/12/18)</li>
+    <li>大學生 證照多一點、求職順一點 (2008/12/17)</li>
+    <li>大仁資管系 今年拿209張證照 (2008/12/17)</li>
+    <li>TQC授權訓練中心(TATC)線上申請</li>
+</ul>
+
+<hr>
+
+<h2>新書登場</h2>
+<ul>
+    <li>Excel 2007實力養成暨評量解題秘笈 - 松崗 - (2009/2/15)</li>
+    <li>Excel 2007實力養成暨評量解題秘笈 - 碁峰 - (2009/2/15)</li>
+    <li>Excel 2007實力養成暨評量解題秘笈 - 全華 - (2009/2/15)</li>
+    <li>Access 2007實力養成暨評量 - 碁峰 - (2009/1/16)</li>
+    <li>Access 2007實力養成暨評量 - 松崗 - (2009/1/16)</li>
+</ul>
+
+<hr/>
+
+<h2>認證課程</h2>
+<ul>
+    <li>TQC-WORD實務班</li>
+    <li>電腦文書網路應用班</li>
+    <li>ACE解題輔導班</li>
+    <li>資料庫程式設計訓練</li>
+    <li>ILLSTRATOR 美工設計班</li>
+    <li>TQC-Photo Impact認證班</li>
+    <li>Pro-E Wildfire初階實體繪畫班</li>
+    <li>windows基礎班</li>
+</ul>
+<img src="../web2/images/line.gif" alt="">
+<p>2003-2010(&copy;) 中華民國電腦技能基金會</p>
+</body>
+</html>

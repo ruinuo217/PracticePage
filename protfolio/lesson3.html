@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第三堂課｜Reyna 作品集</title>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- 左側側邊欄 -->
+    <aside class="sidebar">
+        <h2 class="logo">Reyna</h2>
+        <p class="sub">Web Design Portfolio</p>
+
+        <nav class="menu">
+            <a class="menu-item" href="index.html">Opening Page</a>
+            <a class="menu-item" href="lesson1.html">第一堂課</a>
+            <a class="menu-item" href="lesson2.html">第二堂課</a>
+            <a class="menu-item active" href="lesson3.html">第三堂課</a>
+            <a class="menu-item" href="#">第四堂課</a>
+            <a class="menu-item" href="#">第五堂課</a>
+            <a class="menu-item" href="#">第六堂課</a>
+            <a class="menu-item" href="#">第七堂課</a>
+            <a class="menu-item" href="#">第八堂課</a>
+            <a class="menu-item" href="#">第九堂課</a>
+            <a class="menu-item" href="#">第十堂課</a>
+        </nav>
+
+        <div class="bottom-info">
+            課堂練習的資料
+        </div>
+    </aside>
+
+    <!-- 右側內容 -->
+    <main class="content">
+
+        <header class="topbar">
+            <div class="title-section">
+                <h1>第三堂課內容</h1>
+                <p>深入了解表格操作、媒體嵌入與 iframe 基本語法</p>
+            </div>
+        </header>
+
+        <section class="page-section">
+            <h2 class="section-title">課程介紹</h2>
+
+            <div class="cards">
+
+
+                <!-- Card 1：簡介 -->
+                <div class="card">
+                    <h3 class="card-title">簡介</h3>
+                    <ul>
+                        <li>表格的操作</li>
+                        <li>插入音樂</li>
+                        <li>插入影片</li>
+                        <li>嵌入網頁</li>
+                    </ul>
+                </div>
+
+                <!-- Card：練習 -->
+                <div class="card">
+                    <h3 class="card-title">課堂實際練習</h3>
+                    <a href="../web5/index.html" target="_blank">web5</a>
+                </div>
+
+                <!-- Card 2：重點（表格） -->
+                <div class="card">
+                    <h3 class="card-title">表格語法重點</h3>
+
+                    <p><strong>表格基本語法：</strong></p>
+
+<pre>
+&lt;table border="1"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;row 1, cell 1&lt;/th&gt;
+            &lt;th&gt;row 1, cell 2&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;row 2, cell 1&lt;/td&gt;
+            &lt;td&gt;row 2, cell 2&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+                    <p><strong>基本屬性：</strong></p>
+                    <ul>
+                        <li>邊框：<code>border="寬度"</code></li>
+                        <li>對齊方式：<code>align="方向"</code></li>
+                        <li>儲存格內距：<code>cellpadding="寬度"</code></li>
+                        <li>儲存格間距：<code>cellspacing="寬度"</code></li>
+                    </ul>
+
+                    <p><strong>合併儲存格：</strong></p>
+                    <ul>
+                        <li>合併欄：<code>colspan="格數"</code></li>
+                        <li>合併列：<code>rowspan="格數"</code></li>
+                    </ul>
+                </div>
+
+                <!-- Card 3：音樂 -->
+                <div class="card">
+                    <h3 class="card-title">音樂播放語法</h3>
+
+                    <p><strong>完整語法：</strong></p>
+<pre>
+&lt;audio controls="controls"&gt;
+    &lt;source src="song.mp3" type="audio/mp3" /&gt;
+    &lt;source src="song.ogg" type="audio/ogg" /&gt;
+    Your browser does not support this audio format.
+&lt;/audio&gt;
+</pre>
+
+                    <p><strong>簡易寫法：</strong></p>
+<pre>
+&lt;audio controls src="song.mp3"&gt;&lt;/audio&gt;
+</pre>
+                </div>
+
+                <!-- Card 4：影片 -->
+                <div class="card">
+                    <h3 class="card-title">影片播放語法</h3>
+
+                    <p><strong>完整語法：</strong></p>
+<pre>
+&lt;video width="420" controls&gt;
+    &lt;source src="mov.mp4" type="video/mp4" /&gt;
+    &lt;source src="mov.ogg" type="video/ogg" /&gt;
+    Your browser does not support HTML5 video.
+&lt;/video&gt;
+</pre>
+
+                    <p><strong>簡易寫法：</strong></p>
+<pre>
+&lt;video width="480" controls src="mov.mp4"&gt;&lt;/video&gt;
+</pre>
+                </div>
+
+                <!-- Card 5：iframe -->
+                <div class="card">
+                    <h3 class="card-title">嵌入網頁（iframe）</h3>
+
+                    <p>iframe 可在網頁中嵌入其他網站或子頁面：</p>
+
+<pre>
+&lt;iframe 
+    src="來源網址"
+    name="名稱"
+    width="寬"
+    height="高"
+    frameborder="1"
+    scrolling="yes"&gt;
+&lt;/iframe&gt;
+</pre>
+
+
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+

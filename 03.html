@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 群組選擇器 */
+        #tb01, #tb02 {
+            /* 框線 */
+            border: 2px solid green;
+            width: 300px;
+            margin: 20px auto;
+            /* 取消儲存格間距 */
+            /* border-collapse: collapse; */
+            /* 設定儲存格間距 */
+            border-spacing: 5px;
+            color: red;
+        }
+        #tb01 td, #tb02 td {
+            border: 1px solid green;
+            text-align: center;
+            padding: 10px;
+            color: blue;
+        }
+        /* 結構選擇器  第一個子元表 */
+        #tb01 tr:first-child, #tb02 tr:first-child {
+            font-weight: bold;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>第三堂</h1>
+    <h2>Blockquote</h2>
+    <p>
+        自從紅綠燈誕生以來，交通號誌系統已超過百年未曾有重大變革，不過來自北卡羅來納州立大學的研究團隊，近期提出了一項突破性的交通理念，在現行的紅、黃、綠三色號誌外，新增第四個「白燈」，以配合自動駕駛車輛的普及，藉此實現更高效率的交叉路口管理。
+    </p>
+    <blockquote>
+        來自北卡羅來納州立大學的研究團隊，近期提出了一項突破性的交通理念，在現行的紅、黃、綠三色號誌外，新增第四個「白燈」，藉此實現更高效率的交叉路口管理。
+    </blockquote>
+    <p>
+        根據該研究，「白燈」並非全面取代現有號誌，而是在自駕車比例達到一定程度時才會啟動。當交叉路口內的連網自動駕駛車輛達到臨界數量時，將進入「白燈階段」，由這些自駕車根據即時數據進行交通協調。這些車輛將扮演移動式交通指揮官角色，分析整體車流，優化行進路徑與時機，減少停等與擁塞。對於人類駕駛者來說，「白燈」則代表「跟著前車走」。如此設計不僅簡化駕駛指令，也可確保在混合車流中保持秩序與效率。
+    </p>
+    <h2>表格</h2>
+    <table border="5">
+        <tr>
+            <th>姓名</th>
+            <th>年齡</th>
+        </tr>
+        <tr>
+            <td>王小明</td>
+            <td>25</td>
+        </tr>
+    </table>
+    <!-- Emmet：table>tr*3>td*3 -->
+    <!-- cellspacing：儲存格間距，cellpadding：儲存格內距 -->
+    <table border="2" align="center" cellspacing="0" cellpadding="10">
+        <tr bgcolor="yellow">
+            <th align="center">編號</th>
+            <th align="center">公司</th>
+            <th align="center">電話</th>
+        </tr>
+        <tr align="center">
+            <td>1</td>
+            <td>Yahoo</td>
+            <td>12345678</td>
+        </tr>
+        <tr align="center">
+            <td>2</td>
+            <td>Google</td>
+            <td>98765432</td>
+        </tr>
+    </table>
+    <!-- 樣式版 -->
+    <table id="tb01">
+        <tr>
+            <td>編號</td>
+            <td>公司</td>
+            <td>電話</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Yahoo</td>
+            <td>12345678</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Google</td>
+            <td>98765432</td>
+        </tr>
+    </table>
+    <!-- 合併儲存格 -->
+     <table id="tb02">
+        <tr>
+            <td>編號</td>
+            <td>公司</td>
+            <td>電話</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Yahoo</td>
+            <td>12345678</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Google</td>
+            <td>98765432</td>
+        </tr>
+        <tr>
+            <!-- 跨列合併 -->
+            <td rowspan="2">3</td>
+            <td rowspan="2">Open AI</td>
+            <td>11111111</td>
+        </tr>
+        <tr>
+            <td>22222222</td>
+        </tr>
+        <tr>
+            <!-- 跨欄合併 -->
+            <td colspan="3">備註：以上純屬虛構，如有雷同，是你業障太多！</td>
+        </tr>
+    </table>
+</body>
+</html>

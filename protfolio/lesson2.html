@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二堂課｜Reyna 作品集</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">Reyna</h2>
+        <p class="sub">Web Design Portfolio</p>
+
+        <nav class="menu">
+            <a class="menu-item" href="index.html">Opening Page</a>
+            <a class="menu-item" href="lesson1.html">第一堂課</a>
+            <a class="menu-item active" href="lesson2.html">第二堂課</a>
+            <a class="menu-item" href="lesson3.html">第三堂課</a>
+            <a class="menu-item" href="#">第四堂課</a>
+            <a class="menu-item" href="#">第五堂課</a>
+            <a class="menu-item" href="#">第六堂課</a>
+            <a class="menu-item" href="#">第七堂課</a>
+            <a class="menu-item" href="#">第八堂課</a>
+            <a class="menu-item" href="#">第九堂課</a>
+            <a class="menu-item" href="#">第十堂課</a>
+        </nav>
+
+        <div class="bottom-info">
+            課堂練習的資料
+        </div>
+    </aside>
+
+
+    <!-- Main -->
+    <main class="content">
+
+        <header class="topbar">
+            <div class="title-section">
+                <h1>第二堂課內容</h1>
+                <p>深入了解更多 HTML 標籤、結構、文字格式與超連結</p>
+            </div>
+        </header>
+
+        <section class="page-section">
+
+            <h2 class="section-title">課程介紹</h2>
+
+            <div class="cards">
+
+                <!-- Card 1：簡介 -->
+                <div class="card">
+                    <h3 class="card-title">簡介</h3>
+                    <ul>
+                        <li>HTML 文件結構</li>
+                        <li>文字段落與格式</li>
+                        <li>加入圖片</li>
+                        <li>加入超連結</li>
+                    </ul>
+                </div>
+
+                <!-- Card：練習 -->
+                <div class="card">
+                    <h3 class="card-title">課堂實際練習</h3>
+                    <a href="../web1/index.html" target="_blank">web1</a>
+                    <a href="../web2/index.html" target="_blank">web2</a>
+                    <a href="../web3/index.html" target="_blank">web3</a>
+                </div>
+
+                <!-- Card 2：HTML 基本結構 -->
+                <div class="card">
+                    <h3 class="card-title">HTML 基本文件結構</h3>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant"&gt;
+&lt;head&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;p&gt;Hello World!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+                </div>
+
+                <!-- Card 3：Head 區塊 -->
+                <div class="card">
+                    <h3 class="card-title">HTML 檔頭資訊 &lt;head&gt;</h3>
+
+                    <p><strong>常見標籤：</strong></p>
+                    <ul>
+                        <li>&lt;title&gt;：網頁標題</li>
+                        <li>&lt;meta charset="utf-8"&gt;：宣告編碼</li>
+                        <li>&lt;meta name="keywords" content="HTML, CSS"&gt;</li>
+                        <li>&lt;meta name="description" content="網站描述"&gt;</li>
+                        <li>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4：Body 區塊 -->
+                <div class="card">
+                    <h3 class="card-title">HTML 頁面內容 &lt;body&gt;</h3>
+                    <p>常用 style 屬性：</p>
+
+<pre>
+background-color: 顏色;
+background-image: url(圖片位置);
+
+margin-left: 左距;
+margin-top: 上距;
+margin-right: 右距;
+margin-bottom: 下距;
+</pre>
+                </div>
+
+                <!-- Card 5：行內 style 介紹 -->
+                <div class="card">
+                    <h3 class="card-title">style 行內樣式</h3>
+
+                    <ul>
+                        <li>文字對齊：text-align</li>
+                        <li>字型：font-family</li>
+                        <li>字體大小：font-size</li>
+                        <li>文字顏色：color</li>
+                        <li>強制換行：word-wrap: break-word;</li>
+                    </ul>
+
+                    <p><strong>圖片文繞圖：</strong></p>
+                    <ul>
+                        <li>float: left / right</li>
+                        <li>clear: both</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6：標題與段落 -->
+                <div class="card">
+                    <h3 class="card-title">標題、段落與列表</h3>
+
+<pre>
+&lt;h1&gt;這是標題一&lt;/h1&gt;
+&lt;h2&gt;這是標題二&lt;/h2&gt;
+&lt;h3&gt;這是標題三&lt;/h3&gt;
+
+&lt;p&gt;這是一個文字段落&lt;/p&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;項目一&lt;/li&gt;
+    &lt;li&gt;項目二&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;清單項目&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+                </div>
+
+                <!-- Card 7：水平線 -->
+                <div class="card">
+                    <h3 class="card-title">水平線 &lt;hr&gt;</h3>
+
+<pre>
+&lt;p&gt;段落 1&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;段落 2&lt;/p&gt;
+</pre>
+
+                </div>
+
+                <!-- Card 8：圖片 -->
+                <div class="card">
+                    <h3 class="card-title">HTML 圖片語法</h3>
+
+<pre>
+&lt;img src="url" width="寬" height="高"&gt;
+</pre>
+
+                    <p>img 為「空標籤」，不需要結束標籤。</p>
+                </div>
+
+                <!-- Card 9：超連結 -->
+                <div class="card">
+                    <h3 class="card-title">HTML 超連結</h3>
+
+<pre>
+&lt;a href="網址"&gt;連結文字&lt;/a&gt;
+</pre>
+
+                    <p>可連到：其他網站、本地網頁、圖片、頁面錨點等。</p>
+                </div>
+
+
+<!-- Card 10：超連結屬性  -->
+<div class="card">
+    <h3 class="card-title">超連結屬性</h3>
+    <div class="card-content">
+        
+        <p><strong>1. href 屬性：指定連到哪裡</strong></p>
+        <p>可連到網頁、檔案、圖片、email、錨點等。</p>
+
+        <pre><code>&lt;a href="https://google.com"&gt;Google&lt;/a&gt;
+</code></pre>
+
+        <p><strong>2. id 屬性：設定錨點（頁面內跳轉）</strong></p>
+
+        <pre><code>&lt;h2 id="section2"&gt;第二段&lt;/h2&gt;
+&lt;a href="#section2"&gt;跳到第二段&lt;/a&gt;
+</code></pre>
+
+        <p><strong>3. target 屬性：決定在哪裡開啟連結</strong></p>
+
+        <ul>
+            <li>_blank — 在新視窗開啟</li>
+            <li>new — 在新視窗開啟（類似 _blank）</li>
+            <li>_top — 在最上層框架開啟</li>
+            <li>_parent — 在父層框架開啟</li>
+            <li>_self — 在原頁面開啟（預設）</li>
+        </ul>
+
+        <p>範例：</p>
+
+        <pre><code>&lt;a href="https://google.com" target="_blank"&gt;新視窗開啟 Google&lt;/a&gt;
+</code></pre>
+
+    </div>
+</div>
+
+
+
+                <!-- Card 11：註解與引用 -->
+                <div class="card">
+                    <h3 class="card-title">註解與引用</h3>
+
+<pre>
+&lt;!-- 這是註解 --&gt;
+
+&lt;q&gt;短引用&lt;/q&gt;
+
+&lt;blockquote cite="網址"&gt;
+長引用內容...
+&lt;/blockquote&gt;
+</pre>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
