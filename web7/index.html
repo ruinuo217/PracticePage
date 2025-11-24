@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>多媒體播放</h1>
+    <h2>音樂播放</h2>
+    <!-- 支援 .wav, .wma, .mp3(串流) -->
+    <audio src="media/audio.mp3" controls style="width: 500px;"></audio>
+    
+    <h2>影片播放</h2>
+    <!-- 支援 .mp4(串流), .webm, .ogg -->
+    <video src="media/video.mp4" controls style="width: 300px;"></video>
+    
+    <h2>流量問題</h2>
+    <p>伺服器串流影片時，會佔用較多頻寬，建議使用嵌入的影片。</p>
+    <p>架設網站主要需要固定IP,我第一個跟Hinet申請的固網是 4M/4M</p>
+    <p>假設我的影片是190mb (1080p)   上傳時間為：190/4=47.5秒</p>
+
+    <h2>嵌入影片</h2>
+    <iframe width="424" height="238" src="https://www.youtube.com/embed/zm3E2N-cEu8" title="台灣歌手王世堅，抖音神曲「沒出息」 (舒情吉他完整版) #自彈自唱  #吉他彈唱" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
+    <h2>嵌入podcast</h2>
+    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/tw/podcast/ep025-%E5%9C%8B%E9%9A%9B%E7%B4%9A%E5%AE%A4%E5%85%A7%E8%A8%AD%E8%A8%88%E7%BE%8E%E5%AD%B8-%E5%AE%A4%E5%85%A7%E8%A8%AD%E8%A8%88%E5%B8%AB%E4%BA%BA%E6%89%8D%E5%8A%9B/id1748709772?i=1000696365076&theme=light"></iframe>
+</body>
+</html>
