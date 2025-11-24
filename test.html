@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Phoenix editor</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="script.js"></script>
+    </head>
+
+    
+    <body >
+        
+    <script>
+       
+        
+// 規劃兩個變數（身高：cm，體重：kg）
+        
+        let height = 170; // 身高（公分）
+let weight = 70;  // 體重（公斤）
+
+// 公式需要把 cm 換成 m
+let heightMeter = height / 100;
+
+// 計算 BMI
+let bmi = weight / (heightMeter * heightMeter);
+
+// 判斷體重狀態
+let status = "";
+
+if (bmi < 18.5) {
+    status = "過輕";
+} else if (bmi >= 18.5 && bmi < 25) {
+    status = "正常";
+} else if (bmi >= 25 && bmi < 30) {
+    status = "過重";
+} else {
+    status = "肥胖";
+}
+
+// 印出結果
+console.log(`身高 ${height}cm，體重 ${weight}kg，BMI ${bmi.toFixed(1)}，體重狀態：${status}`);
+
+             </script>
+        
+            
+            
+    </body>
+</html>
+
+
+
