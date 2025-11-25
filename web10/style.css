@@ -1,0 +1,41 @@
+body {
+    width: 800px;
+    margin: 0 auto;
+}
+#header {
+    background-image: url(images/01.png);
+    height: 235px;
+}
+#menuButton {
+    background-image: url(images/02.png);
+    height: 45px;
+}
+#main {
+    background-image: url(images/03.png);
+}
+#footer {
+    background-image: url(images/04.png);
+    height: 61px;
+}
+/* 800-(210*3)=170-30=140/2=70 */
+#album {
+    padding: 0px 70px;
+}
+.myPhoto {
+    width: 210px;
+    margin: 0 5px;
+    float: left;
+    position: relative;
+}
+.Watermark {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#album p {
+    text-align: center;
+    margin-top: 0;
+}
+#mainB {
+    clear: both;
+}

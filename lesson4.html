@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第四堂課｜Reyna 作品集</title>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- 左側側邊欄 -->
+    <aside class="sidebar">
+        <h2 class="logo">Reyna</h2>
+        <p class="sub">Web Design Portfolio</p>
+
+        <nav class="menu">
+            <a class="menu-item" href="index.html">Opening Page</a>
+            <a class="menu-item" href="lesson1.html">第一堂課</a>
+            <a class="menu-item" href="lesson2.html">第二堂課</a>
+            <a class="menu-item" href="lesson3.html">第三堂課</a>
+            <a class="menu-item active" href="lesson4.html">第四堂課</a>
+            <a class="menu-item" href="#">第五堂課</a>
+            <a class="menu-item" href="#">第六堂課</a>
+            <a class="menu-item" href="#">第七堂課</a>
+            <a class="menu-item" href="#">第八堂課</a>
+            <a class="menu-item" href="#">第九堂課</a>
+            <a class="menu-item" href="#">第十堂課</a>
+        </nav>
+
+        <div class="bottom-info">
+            課堂練習的資料
+        </div>
+    </aside>
+
+    <!-- 右側內容 -->
+    <main class="content">
+
+        <header class="topbar">
+            <div class="title-section">
+                <h1>第四堂課內容</h1>
+                <p>認識 CSS Selector、套用方式、樣式與盒模型概念</p>
+                <p>課堂實際練習：</p>
+                <a href="https://ruinuo217.github.io/PracticePage/web8/index.html" target="_blank">web8</a>
+                <a href="https://ruinuo217.github.io/PracticePage/web9/index.html" target="_blank">web9</a>
+                <a href="https://ruinuo217.github.io/PracticePage/web10/index.html" target="_blank">web10</a>
+
+            </div>
+            </div>
+        </header>
+
+        <section class="page-section">
+            <h2 class="section-title">課程介紹</h2>
+
+            <div class="cards">
+
+<!-- Card 1：課程簡介 -->
+                <div class="card">
+                    <h3 class="card-title">簡介</h3>
+                    <ul>
+                        <li>CSS 樣式規則</li>
+                        <li>CSS 選擇器</li>
+                        <li>CSS 盒模型</li>
+                        <li>CSS 定位方式</li>   
+                    </ul>
+                </div>
+
+
+
+
+                <!-- Card 1：CSS 基礎語法 -->
+                <div class="card">
+                    <h3 class="card-title">CSS 規則組成</h3>
+                    <p>CSS 由 <strong>選擇器 (selector)</strong> 和 <strong>宣告區塊 (declaration)</strong> 組成。</p>
+<pre>
+selector {
+   property: value;
+   property2: value2;
+}
+</pre>
+                </div>
+
+                <!-- Card 2：CSS 套用方式 -->
+                <div class="card">
+                    <h3 class="card-title">CSS 套用方式</h3>
+                    <ul>
+                        <li><strong>行內樣式 Inline</strong>：寫在標籤內</li>
+                    </ul>
+<pre>
+&lt;p style="font-size:16px"&gt;文字內容&lt;/p&gt;
+</pre>
+
+                    <ul>
+                        <li><strong>內嵌樣式 Embedded</strong>：寫在 &lt;style&gt; 內</li>
+                    </ul>
+<pre>
+&lt;style&gt;
+p { background-color: red; }
+&lt;/style&gt;
+</pre>
+
+                    <ul>
+                        <li><strong>外部樣式 External</strong>：連結 CSS 檔</li>
+                    </ul>
+<pre>
+&lt;link rel="stylesheet" href="style.css"&gt;
+</pre>
+
+                    <ul>
+                        <li><strong>匯入樣式 Import</strong></li>
+                    </ul>
+<pre>
+&lt;style&gt;
+@import url("style.css");
+&lt;/style&gt;
+</pre>
+                </div>
+
+                <!-- Card 3：媒體類別 -->
+                <div class="card">
+                    <h3 class="card-title">媒體類別（Media Types）</h3>
+                    <p>不同裝置可使用不同 CSS。</p>
+<pre>
+&lt;link rel="stylesheet" href="style.css" media="print"&gt;
+&lt;style media="screen"&gt; ... &lt;/style&gt;
+</pre>
+                </div>
+
+                <!-- Card 4：選擇器 Selector -->
+                <div class="card">
+                    <h3 class="card-title">CSS 選擇器</h3>
+
+                    <p><strong>1. 群組選擇器（Grouping）</strong></p>
+<pre>
+h1, h2, h3 { color: green; }
+</pre>
+
+                    <p><strong>2. 後代選擇器（Descendant）</strong></p>
+<pre>
+li strong {
+   font-style: italic;
+}
+</pre>
+
+                    <p><strong>3. Class 選擇器</strong></p>
+<pre>
+.center { text-align: center; }
+</pre>
+
+                    <p><strong>4. ID 選擇器</strong></p>
+<pre>
+#red { color: red; }
+#green { color: green; }
+</pre>
+
+                    <p><strong>5. 屬性選擇器 Attribute</strong></p>
+<pre>
+[title] { color: red; }
+[title="Hello"] { border: 5px solid blue; }
+</pre>
+                </div>
+
+                <!-- Card 5：CSS 樣式：背景 -->
+                <div class="card">
+                    <h3 class="card-title">CSS 樣式：背景設定</h3>
+
+                    <p><strong>背景顏色：</strong></p>
+<pre>
+p { background-color: gray; }
+</pre>
+
+                    <p><strong>背景圖片：</strong></p>
+<pre>
+p { background-image: url(bg.jpg); }
+</pre>
+
+                    <p><strong>背景重複：</strong></p>
+<pre>
+body {
+   background-image: url(pic.png);
+   background-repeat: repeat-y;
+}
+</pre>
+
+                    <p><strong>背景定位：</strong></p>
+<pre>
+body {
+   background-position: center top;
+}
+</pre>
+                </div>
+
+                <!-- Card 6：CSS 盒模型 -->
+                <div class="card">
+                    <h3 class="card-title">CSS 盒模型（Box Model）</h3>
+                    <p>每個元素都由四部分組成：</p>
+                    <ul>
+                        <li>內容 content</li>
+                        <li>內距 padding</li>
+                        <li>邊框 border</li>
+                        <li>外距 margin</li>
+                    </ul>
+                </div>
+
+                <!-- Card 7：定位 Position -->
+                <div class="card">
+                    <h3 class="card-title">CSS 定位（Position）</h3>
+                    <ul>
+                        <li><strong>static</strong>（預設）</li>
+                        <li><strong>relative</strong>（相對定位）</li>
+                        <li><strong>absolute</strong>（絕對定位）</li>
+                        <li><strong>fixed</strong>（固定位置）</li>
+                        <li><strong>sticky</strong>（黏在視窗）</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
