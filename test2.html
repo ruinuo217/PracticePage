@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">        
+
+<>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+  <body>      
+
+    <h1> switch   </h1>
+
+    <pre>       
+        switch (表達式) {
+    case 值1:
+        // 當表達式等於值1時執行的程式碼
+        break;
+    case 值2:
+        // 當表達式等於值2時執行的程式碼
+        break;
+    default:
+        // 當表達式不符合任何值時執行}
+    </pre>
+
+        <select id="myday" onchange="showdaymessage()"> 
+            <option value="1">Monday</option> 
+            <option value="2">Tuesday</option> 
+            <option value="3">Wednesday</option> 
+            <option value="4">Thursday</option> 
+            <option value="5">Friday</option> 
+            <option value="6">Saturday</option> 
+            <option value="7">Sunday</option>
+        </select>
+
+        <Script>
+           
+
+            function showDayMessage() {
+    var mySelect = document.getElementById("myDay");
+    var value = mySelect.value; // 取得你選到的數字（0~6）
+
+    switch (value) {
+        case "0":
+            alert("你選的是星期日！");
+            break;
+        case "1":
+            alert("你選的是星期一！");
+            break;
+        case "2":
+            alert("你選的是星期二！");
+            break;
+        case "3":
+            alert("你選的是星期三！");
+            break;
+        case "4":
+            alert("你選的是星期四！");
+            break;
+        case "5":
+            alert("你選的是星期五！");
+            break;
+        case "6":
+            alert("你選的是星期六！");
+            break;
+        default:
+            alert("無效的選項");
+    }
+}
+
+        </Script>
+
+
+<h2> 迴圈 </h2>
+
+<select name="" id="year">
+<option value="2020">請選擇年份</option>
+</select>
+
+<script>
+    for (let i = 1; i <= 1000; i++) {
+        console.log("i =", i);
+    }
+
+    // let year = 2025;
+
+    let yearNow = new Date().getFullYear();
+    year -= 120;
+
+    for (let i = 1; i <= 120; i++) {
+        // 建立一個 option 元素
+        let option = document.createElement("option");
+        option.value = year + i;
+        option.text = year + i;
+
+        // 將上面所產生的 option 元素，加入到下拉式選單中
+        document.getElementById("year").appendChild(option);
+    }
+</script>
+
+<h3>for/in</h3>
+
+<script>
+    let person = {
+        name: "John",
+        age: 30,
+        city: "New York"
+    };
+
+    for (let key in person) {
+        console.log(key + ": " + person[key]);
+    }   
+</script>
+
+<h3>while 迴圈</h3>
+
+輸入密碼：
+
+<p id="msg01"></p>
+<script>
+    // 取得亂數 Math.random() 產生 0~1 之間的亂數
+    // 如果要取得 1~10 之間的亂數, 可以這樣寫:
+    //let n = Math.floor(Math.random() * 10) + 1;
+
+    let n = 0;
+
+    while (n < 10) {
+        document.getElementById("msg01").innerHTML += "n 的值是 " + n + "<br>";
+        n++;
+    }
+</script>
+
+
+
+
+<h3>do...while 迴圈</h3>  
+<p>
+    do {
+        // 迴圈內要執行的程式碼
+    } while (條件);
+
+    最少會跑一次  
+</p>
+
+<p id="msg02"></p>
+
+
+<script>
+    let m = 0;
+
+    do {
+        m = Math.floor(Math.random() * 20); // 產生 0~19 之間的亂數
+        document.getElementById("msg02").innerHTML += "m 的值是 " + m + "<br>";
+        m++;
+    } while (m < 10);   
+
+</script>   
+
+
+<h3>break 與 continue</h3>  
+
+<script>
+    for (let i = 1; i <= 10; i++) {
+        if (i === 5) {
+            break; // 跳出整個迴圈
+        }
+        console.log("break i =", i);
+    }
+
+    for (let j = 1; j <= 10; j++) {
+        if (j === 5) {
+            continue; // 跳過本次迴圈，進入下一次迴圈
+        }
+        console.log("continue j =", j);
+    }
+</script>
+
+
+
+
+<h3>typeof</h3>
+
+<p id="msg03"></p>  
+
+
+<script>
+    let a = 42;
+    let b = "Hello, world!";
+    let c = true;
+    let d = { name: "Alice", age: 25 };
+    let e = [1, 2, 3, 4, 5];
+    let f;
+
+    document.getElementById("msg03").innerHTML += "a 的類型是 " + typeof a + "<br>";
+    document.getElementById("msg03").innerHTML += "b 的類型是 " + typeof b + "<br>";
+    document.getElementById("msg03").innerHTML += "c 的類型是 " + typeof c + "<br>";
+    document.getElementById("msg03").innerHTML += "d 的類型是 " + typeof d + "<br>";
+    document.getElementById("msg03").innerHTML += "e 的類型是 " + typeof e + "<br>";
+    document.getElementById("msg03").innerHTML += "f 的類型是 " + typeof f + "<br>";
+</script>
+
+
+
+  </body>
+</html>
+
+
+
+
+
+

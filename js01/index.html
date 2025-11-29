@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0px;
+        }
+        
+        #player {
+            width: 760px;
+        }
+        
+        .float {
+            float: left;
+        }
+
+#player {
+    position: relative;
+}
+
+        #c2 {
+            position: absolute;
+            top: 200px;
+            left: 150px;
+            visibility: hidden;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="player">
+        <div class="float" style="height:122px"><img src="images/1_01.jpg" alt="" onmouseout="document.getElementById('c3').style.visibility='hidden'" onmouseover="document.getElementById('c3').style.visibility='visible'"></div>
+        <div class="float" style="height:122px"><img src="images/1_02.jpg" alt=""></div>
+        <div class="float" style="width: 144px">
+            <div style="height:235px">
+                <img src="images/1_03.jpg" alt="">
+            </div>
+            <div style="height:154px">
+                <img src="images/1_07.jpg" alt="" onmouseout="document.getElementById('c1').style.visibility='hidden'" onmouseover="document.getElementById('c1').style.visibility='visible'">
+            </div>
+        </div>
+        <div class="float" style="height:337px"><img src="images/1_04.jpg" alt=""></div>
+        <div class="float" style="height:337px"><img src="images/1_05.jpg" alt="" onmouseout="document.getElementById('c2').style.visibility='hidden'" onmouseover="document.getElementById('c2').style.visibility='visible'"></div>
+        <div class="float" style="height:337px"><img src="images/1_06.jpg" alt=""></div>
+        <div class="float" style="height:52px"><img src="images/1_08.jpg" alt=""></div>
+    </div>
+
+    <div id="c2">
+        <img src="images/1-2.gif" alt="" >
+    </div>
+
+
+
+
+</body>
+
+</html>
