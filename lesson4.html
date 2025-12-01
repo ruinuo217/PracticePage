@@ -49,8 +49,6 @@
                 <a href="https://ruinuo217.github.io/PracticePage/web8/index.html" target="_blank">web8</a>
                 <a href="https://ruinuo217.github.io/PracticePage/web9/index.html" target="_blank">web9</a>
                 <a href="https://ruinuo217.github.io/PracticePage/web10/index.html" target="_blank">web10</a>
-
-            </div>
             </div>
         </header>
 
@@ -59,23 +57,18 @@
 
             <div class="cards">
 
-                
-
-<!-- Card 1：課程簡介 -->
+                <!-- Card 1 -->
                 <div class="card">
                     <h3 class="card-title">簡介</h3>
                     <ul>
                         <li>CSS 樣式規則</li>
                         <li>CSS 選擇器</li>
                         <li>CSS 盒模型</li>
-                        <li>CSS 定位方式</li>   
+                        <li>CSS 定位方式</li>
                     </ul>
                 </div>
 
-
-
-
-                <!-- Card 1：CSS 基礎語法 -->
+                <!-- Card 2 -->
                 <div class="card">
                     <h3 class="card-title">CSS 規則組成</h3>
                     <p>CSS 由 <strong>選擇器 (selector)</strong> 和 <strong>宣告區塊 (declaration)</strong> 組成。</p>
@@ -87,43 +80,35 @@ selector {
 </pre>
                 </div>
 
-                <!-- Card 2：CSS 套用方式 -->
+                <!-- Card 3 -->
                 <div class="card">
                     <h3 class="card-title">CSS 套用方式</h3>
                     <ul>
                         <li><strong>行內樣式 Inline</strong>：寫在標籤內</li>
                     </ul>
-<pre>
-&lt;p style="font-size:16px"&gt;文字內容&lt;/p&gt;
-</pre>
+<pre>&lt;p style="font-size:16px"&gt;文字內容&lt;/p&gt;</pre>
 
                     <ul>
                         <li><strong>內嵌樣式 Embedded</strong>：寫在 &lt;style&gt; 內</li>
                     </ul>
-<pre>
-&lt;style&gt;
+<pre>&lt;style&gt;
 p { background-color: red; }
-&lt;/style&gt;
-</pre>
+&lt;/style&gt;</pre>
 
                     <ul>
-                        <li><strong>外部樣式 External</strong>：連結 CSS 檔</li>
+                        <li><strong>外部樣式 External</strong>：連結 CSS</li>
                     </ul>
-<pre>
-&lt;link rel="stylesheet" href="style.css"&gt;
-</pre>
+<pre>&lt;link rel="stylesheet" href="style.css"&gt;</pre>
 
                     <ul>
                         <li><strong>匯入樣式 Import</strong></li>
                     </ul>
-<pre>
-&lt;style&gt;
+<pre>&lt;style&gt;
 @import url("style.css");
-&lt;/style&gt;
-</pre>
+&lt;/style&gt;</pre>
                 </div>
 
-                <!-- Card 3：媒體類別 -->
+                <!-- Card 4 -->
                 <div class="card">
                     <h3 class="card-title">媒體類別（Media Types）</h3>
                     <p>不同裝置可使用不同 CSS。</p>
@@ -133,16 +118,14 @@ p { background-color: red; }
 </pre>
                 </div>
 
-                <!-- Card 4：選擇器 Selector -->
+                <!-- Card 5 -->
                 <div class="card">
                     <h3 class="card-title">CSS 選擇器</h3>
 
-                    <p><strong>1. 群組選擇器（Grouping）</strong></p>
-<pre>
-h1, h2, h3 { color: green; }
-</pre>
+                    <p><strong>1. 群組選擇器</strong></p>
+<pre>h1, h2, h3 { color: green; }</pre>
 
-                    <p><strong>2. 後代選擇器（Descendant）</strong></p>
+                    <p><strong>2. 後代選擇器</strong></p>
 <pre>
 li strong {
    font-style: italic;
@@ -150,9 +133,7 @@ li strong {
 </pre>
 
                     <p><strong>3. Class 選擇器</strong></p>
-<pre>
-.center { text-align: center; }
-</pre>
+<pre>.center { text-align: center; }</pre>
 
                     <p><strong>4. ID 選擇器</strong></p>
 <pre>
@@ -160,26 +141,22 @@ li strong {
 #green { color: green; }
 </pre>
 
-                    <p><strong>5. 屬性選擇器 Attribute</strong></p>
+                    <p><strong>5. 屬性選擇器</strong></p>
 <pre>
 [title] { color: red; }
 [title="Hello"] { border: 5px solid blue; }
 </pre>
                 </div>
 
-                <!-- Card 5：CSS 樣式：背景 -->
+                <!-- Card 6 -->
                 <div class="card">
-                    <h3 class="card-title">CSS 樣式：背景設定</h3>
+                    <h3 class="card-title">CSS 樣式：背景</h3>
 
                     <p><strong>背景顏色：</strong></p>
-<pre>
-p { background-color: gray; }
-</pre>
+<pre>p { background-color: gray; }</pre>
 
                     <p><strong>背景圖片：</strong></p>
-<pre>
-p { background-image: url(bg.jpg); }
-</pre>
+<pre>p { background-image: url(bg.jpg); }</pre>
 
                     <p><strong>背景重複：</strong></p>
 <pre>
@@ -197,10 +174,10 @@ body {
 </pre>
                 </div>
 
-                <!-- Card 6：CSS 盒模型 -->
+                <!-- Card 7 -->
                 <div class="card">
                     <h3 class="card-title">CSS 盒模型（Box Model）</h3>
-                    <p>每個元素都由四部分組成：</p>
+                    <p>每個元素包含：</p>
                     <ul>
                         <li>內容 content</li>
                         <li>內距 padding</li>
@@ -209,15 +186,15 @@ body {
                     </ul>
                 </div>
 
-                <!-- Card 7：定位 Position -->
+                <!-- Card 8 -->
                 <div class="card">
                     <h3 class="card-title">CSS 定位（Position）</h3>
                     <ul>
-                        <li><strong>static</strong>（預設）</li>
-                        <li><strong>relative</strong>（相對定位）</li>
-                        <li><strong>absolute</strong>（絕對定位）</li>
-                        <li><strong>fixed</strong>（固定位置）</li>
-                        <li><strong>sticky</strong>（黏在視窗）</li>
+                        <li><strong>static</strong></li>
+                        <li><strong>relative</strong></li>
+                        <li><strong>absolute</strong></li>
+                        <li><strong>fixed</strong></li>
+                        <li><strong>sticky</strong></li>
                     </ul>
                 </div>
 
