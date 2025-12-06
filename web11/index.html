@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>好野人行銷網</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* 自訂樣式 */
+    .team-img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .feature-section {
+      background-color: #6c757d;
+      color: white;
+      padding: 50px 0;
+    }
+    footer {
+      background-color: #111;
+      color: #aaa;
+      padding: 40px 0;
+    }
+    .carousel-caption {
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+    /* hero 高度（可依需求調整） */
+    .hero-img {
+      height: 540px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">好野人行銷網</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#">關於產品</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">特色</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">價格</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">聯絡我們</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Carousel (含指示點 + 控制按鈕) -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- 指示點 -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://picsum.photos/1500/540?random=1" class="d-block w-100 hero-img" alt="slide1">
+      <div class="carousel-caption d-none d-md-block">
+        <h1 class="display-5">好野人行銷網</h1>
+        <p class="lead">找好野人，變成好野人</p>
+        <a href="#" class="btn btn-outline-light me-2">登入</a>
+        <a href="#" class="btn btn-primary">註冊</a>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="https://picsum.photos/1500/540?random=2" class="d-block w-100 hero-img" alt="slide2">
+      <div class="carousel-caption d-none d-md-block">
+        <h2>Title 2</h2>
+        <p>Description 2</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="https://picsum.photos/1500/540?random=3" class="d-block w-100 hero-img" alt="slide3">
+      <div class="carousel-caption d-none d-md-block">
+        <h2>Title 3</h2>
+        <p>Description 3</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 左右控制器 -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">上一張</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">下一張</span>
+  </button>
+</div>
+
+<!-- What is Section -->
+<section class="container py-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <img src="https://picsum.photos/400/300?random=4" class="w-100 rounded" alt="ipad">
+    </div>
+    <div class="col-md-6">
+      <h3>什麼是好野人</h3>
+      <p>好野人是內容行銷專門平台，提供高效能網站建立與品牌曝光。企業可透過我們的系統建立專屬內容、進行 SEO 優化、並串接外部表單或外掛。</p>
+      <a class="btn btn-primary" href="#">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Section -->
+<section class="container py-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 order-md-2">
+      <img src="https://picsum.photos/400/300?random=5" class="w-100 rounded" alt="phone">
+    </div>
+    <div class="col-md-6 order-md-1">
+      <h4>企業為什麼需要經營內容？</h4>
+      <p>在數位時代，內容是吸引與留住客戶的關鍵，不論是SEO排名或社群曝光，都需要穩定且有價值的內容策略。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="feature-section text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h5>Landing Page</h5>
+        <p>把每一頁變成高轉換的 Landing Page，讓潛在客戶更容易產生互動。</p>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h5>數據分析</h5>
+        <p>提供即時流量分析與報表，協助你理解內容效益。</p>
+      </div>
+      <div class="col-md-4">
+        <h5>SEO 優化</h5>
+        <p>結合SEO最佳實務，讓品牌在搜尋引擎中更容易被找到。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Table -->
+<section class="container py-5">
+  <h3 class="text-center mb-4">價格表</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle text-center">
+      <thead class="table-light">
+        <tr>
+          <th>價格</th>
+          <th>免費方案</th>
+          <th>標準方案</th>
+          <th>豪華方案</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>價格</td>
+          <td>$0</td>
+          <td>$9800</td>
+          <td>$49800</td>
+        </tr>
+        <tr>
+          <td>可製作網頁數</td>
+          <td>5頁</td>
+          <td>無限頁</td>
+          <td>無限頁</td>
+        </tr>
+        <tr>
+          <td>架設網站 / 建立首頁 / 產品</td>
+          <td>✔</td>
+          <td>✔</td>
+          <td>✔</td>
+        </tr>
+        <tr>
+          <td>建立分類頁 / 優惠</td>
+          <td>-</td>
+          <td>✔</td>
+          <td>✔</td>
+        </tr>
+        <tr>
+          <td>Third-party 外掛</td>
+          <td>-</td>
+          <td>-</td>
+          <td>✔</td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <a href="#" class="btn btn-success mx-2">購買（免費）</a>
+            <a href="#" class="btn btn-primary mx-2">購買（標準）</a>
+            <a href="#" class="btn btn-danger mx-2">購買（豪華）</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="container text-center py-5">
+  <h4>營運團隊</h4>
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4">
+      <img src="https://picsum.photos/200?random=6" class="team-img mb-2" alt="王帥虎">
+      <h6>王帥虎</h6>
+      <p class="text-muted">CEO</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <img src="https://picsum.photos/200?random=7" class="team-img mb-2" alt="吳佳鼠">
+      <h6>吳佳鼠</h6>
+      <p class="text-muted">CTO</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <img src="https://picsum.photos/200?random=8" class="team-img mb-2" alt="迪斯狗">
+      <h6>迪斯狗</h6>
+      <p class="text-muted">CIO</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Register Bottom -->
+<section class="text-center py-5 bg-light">
+  <div class="container">
+    <p class="mb-3">請註冊帳號並與我們保持聯繫，就能及時收到來自我們的最新資訊。</p>
+    <a href="#" class="btn btn-outline-dark me-2">登入</a>
+    <a href="#" class="btn btn-primary">註冊</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <strong>Logo</strong>
+      </div>
+      <div class="col-md-3">
+        <p class="mb-1">公司</p>
+        <p class="mb-1">關於我們</p>
+        <p class="mb-1">企業方案</p>
+      </div>
+      <div class="col-md-3">
+        <p class="mb-1">社群</p>
+        <p class="mb-1">Facebook</p>
+        <p class="mb-1">Twitter</p>
+      </div>
+      <div class="col-md-3">
+        <p class="mb-1">聯絡我們</p>
+        <p class="mb-1">地址：台北市信義區</p>
+        <p class="mb-1">TEL: (02)1234-5678</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
