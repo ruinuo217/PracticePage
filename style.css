@@ -42,6 +42,23 @@ body {
     position: fixed;
     display: flex;
     flex-direction: column;
+    
+    /* 🌟 關鍵修復：當內容超出螢幕高度時，允許垂直滾動 */
+    overflow-y: auto; 
+}
+
+/* 🌟 進階優化：自訂側邊欄的滾動條外觀 (限 Webkit 瀏覽器如 Chrome/Edge) */
+.sidebar::-webkit-scrollbar {
+    width: 6px; /* 滾動條寬度變細 */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* 滾動條的顏色 (柔和的灰藍色) */
+    border-radius: 10px;       /* 滾動條變成圓角 */
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;   /* 滾動條的軌道背景透明 */
 }
 
 .brand {
