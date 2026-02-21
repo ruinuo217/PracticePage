@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 07: Bootstrap 框架｜Reyna Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            <a class="menu-item" href="lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            
+            <a class="menu-item active" href="lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            
+            <a class="menu-item" href="lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+        </nav>
+
+        <div class="bottom-info">
+            <p>© 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+
+        <header class="topbar">
+            <div class="title-section">
+                <h1>Module 07: Bootstrap 5 框架應用</h1>
+                <p>Grid System, Utilities, Components & Interactive Plugins</p>
+            </div>
+        </header>
+
+        <section class="page-section demo-section">
+            <h2 class="section-title"><i class="bi bi-laptop"></i> 課堂實作 Demo (Live Preview)</h2>
+            <div class="demo-links">
+                <a href="#" class="demo-btn"><i class="bi bi-layout-text-window-reverse"></i> Web 11: 公司 Landing Page 實作</a>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">網格系統與斷點 (Grid System & Breakpoints)</h2>
+            </div>
+        
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">容器與斷點基礎</h3>
+                    <ul class="tech-list">
+                        <li><strong>六個斷點：</strong> <code>X-Small</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>, <code>xxl</code>。響應式開發以行動版為優先。</li>
+                        <li><strong>容器 (Container)：</strong>
+                            <ul>
+                                <li><code>.container</code>：每個斷點會設置固定的 max-width。</li>
+                                <li><code>.container-fluid</code>：所有斷點寬度都是 100%。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">12 欄網格與間距 (Gutters)</h3>
+                    <p class="card-text">網格必須放在 <code>.container</code> 中，並使用 <code>.row</code> 創建列。每行最多 12 欄。</p>
+                    <ul class="tech-list">
+                        <li><strong>欄位：</strong> <code>.col-4</code> 代表跨越四欄。</li>
+                        <li><strong>Gutters (欄溝)：</strong> 控制 margin 和 padding 間隔。可用 <code>.gx-*</code> (水平)、<code>.gy-*</code> (垂直)、<code>.g-*</code> (全部)、<code>.g-0</code> (移除)。</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">偏移欄 (Offset)</h3>
+                    <p class="card-text">通過 <code>.offset-*-*</code> 把列往右推移。第一個 * 為設備斷點，第二個 * 為 1~11 的數字。</p>
+<pre class="code-block"><code>&lt;!-- 在 md 螢幕以上，佔 4 格，並向右位移 4 格 --&gt;
+&lt;div class="col-md-4 offset-md-4"&gt;置中文字或區塊&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">公用類別 (Utility Classes)</h2>
+            </div>
+
+            <div class="cards">
+<div class="card" style="grid-column: 1 / -1;">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="card-title">間隔命名規則 (Spacing)</h3>
+            <p class="card-text">格式為 <code>{property}{sides}-{size}</code>。</p>
+            <ul class="tech-list mb-0">
+                <li><strong>Property：</strong> <code>m</code> (margin), <code>p</code> (padding)</li>
+                <li><strong>Sides：</strong> <code>t</code>(top), <code>b</code>(bottom), <code>s</code>(start/左), <code>e</code>(end/右), <code>x</code>(左右), <code>y</code>(上下), <code>空白</code>(四邊)</li>
+                <li><strong>Size：</strong> <code>0</code> (0), <code>1</code> (0.25rem), <code>2</code> (0.5rem), <code>3</code> (1rem), <code>4</code> (1.5rem), <code>5</code> (3rem), <code>auto</code></li>
+            </ul>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h3 class="card-title">邊框與圓角 (Borders)</h3>
+            <p class="card-text">快速為元素添加邊框、設定色彩與調整圓角。</p>
+<pre class="code-block mb-0"><code>&lt;!-- 邊框顯示與移除 --&gt;
+&lt;span class="border"&gt;&lt;/span&gt;
+&lt;span class="border border-0"&gt;&lt;/span&gt; &lt;!-- 移除四邊邊框 --&gt;
+&lt;span class="border-top-0"&gt;&lt;/span&gt;
+
+&lt;!-- 邊框色彩 --&gt;
+&lt;span class="border border-primary"&gt;&lt;/span&gt;
+&lt;span class="border border-danger"&gt;&lt;/span&gt;
+
+&lt;!-- 圓角設定 --&gt;
+&lt;span class="rounded"&gt;&lt;/span&gt;
+&lt;span class="rounded-top"&gt;&lt;/span&gt;
+&lt;span class="rounded-circle"&gt;&lt;/span&gt; &lt;!-- 正圓形 --&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">寬高、浮動與居中對齊 (Sizing & Alignment)</h3>
+                    <div class="alert-box">
+                        <strong>💡 BS5 語法更新提醒：</strong> 左右浮動已從 <code>float-left / right</code> 變更為 <code>float-start / end</code>。
+                    </div>
+<pre class="code-block"><code>&lt;!-- 寬度與高度 (可用級別: 25, 50, 75, 100, auto) --&gt;
+&lt;div class="w-50 h-50"&gt;寬 50%，高 50%&lt;/div&gt;
+&lt;div class="mw-100 mh-100"&gt;最大寬度與高度 100%&lt;/div&gt;
+
+&lt;!-- 水平置中 (需有指定寬度) --&gt;
+&lt;div class="mx-auto" style="width:150px"&gt;置中顯示&lt;/div&gt;
+
+&lt;!-- 浮動與清除浮動 --&gt;
+&lt;div class="clearfix"&gt;
+    &lt;span class="float-start"&gt;靠左浮動&lt;/span&gt;
+    &lt;span class="float-end"&gt;靠右浮動&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">文字類別 (Text Utilities)</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-sm mt-2" style="font-size: 14px;">
+            <thead class="table-light">
+                <tr><th>類別名稱 (Class)</th><th>效果描述</th><th>類別名稱 (Class)</th><th>效果描述</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.text-start / .text-center / .text-end</code></td><td>靠左 / 置中 / 靠右</td>
+                    <td><code>.fs-*</code> (1~6)</td><td>設定文字大小</td>
+                </tr>
+                <tr>
+                    <td><code>.text-wrap / .text-nowrap</code></td><td>包覆換行 / 防止換行</td>
+                    <td><code>.fw-bold / .fw-italic</code></td><td>粗體 / 斜體</td>
+                </tr>
+                <tr>
+                    <td><code>.text-break</code></td><td>強制單字斷行</td>
+                    <td><code>.lh-*</code> (1, sm, base, lg)</td><td>設定行高</td>
+                </tr>
+                <tr>
+                    <td><code>.text-lowercase / .text-uppercase</code></td><td>全小寫 / 全大寫</td>
+                    <td><code>.text-decoration-none</code></td><td>移除裝飾(如底線)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">色彩類別 (Colors)</h3>
+    <div class="d-flex flex-wrap mt-2" style="gap: 15px; font-size: 15px;">
+        <div><code class="text-primary">.text-primary</code> (重要)</div>
+        <div><code class="text-secondary">.text-secondary</code> (副標題)</div>
+        <div><code class="text-success">.text-success</code> (成功)</div>
+        <div><code class="text-danger">.text-danger</code> (危險)</div>
+        <div><code class="text-warning">.text-warning</code> (警告)</div>
+        <div><code class="text-info">.text-info</code> (提示)</div>
+        <div><code class="text-dark">.text-dark</code> (深灰)</div>
+        <div><code class="text-light bg-dark px-1 rounded">.text-light</code> (淺灰)</div>
+        <div><code class="text-white bg-dark px-1 rounded">.text-white</code> (白色)</div>
+        <div><code class="text-muted">.text-muted</code> (柔和)</div>
+    </div>
+</div>
+            </div>
+        </section>
+        
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">內容與排版 (Content & Typography)</h2>
+            </div>
+
+            <div class="cards">
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">標題與 Display 標題</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold mt-2">⚫ 標題</h4>
+            <ul class="tech-list mb-0">
+                <li><code>&lt;h1&gt;&lt;/h1&gt;</code> 2.5rem = 40px</li>
+                <li><code>&lt;h2&gt;&lt;/h2&gt;</code> 2rem = 32px</li>
+                <li><code>&lt;h3&gt;&lt;/h3&gt;</code> 1.75rem = 28px</li>
+                <li><code>&lt;h4&gt;&lt;/h4&gt;</code> 1.5rem = 24px</li>
+                <li><code>&lt;h5&gt;&lt;/h5&gt;</code> 1.25rem = 20px</li>
+                <li><code>&lt;h6&gt;&lt;/h6&gt;</code> 1rem = 16px</li>
+            </ul>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold mt-2">⚫ Display 標題類</h4>
+            <p class="small text-muted mb-2">一般的標題元素能在頁面內容繁多時發揮最佳作用。當你需要突出一個標題時，請考慮使用 display heading 以獲得更大、更細、稍具有風格化的標題樣式：</p>
+            <ul class="tech-list mb-0">
+                <li><code>&lt;h1 class="display-1"&gt;Display 1&lt;/h1&gt;</code> = 80px</li>
+                <li><code>&lt;h1 class="display-2"&gt;Display 2&lt;/h1&gt;</code> = 72px</li>
+                <li><code>&lt;h1 class="display-3"&gt;Display 3&lt;/h1&gt;</code> = 64px</li>
+                <li><code>&lt;h1 class="display-4"&gt;Display 4&lt;/h1&gt;</code> = 56px</li>
+                <li><code>&lt;h1 class="display-5"&gt;Display 5&lt;/h1&gt;</code> = 48px</li>
+                <li><code>&lt;h1 class="display-6"&gt;Display 6&lt;/h1&gt;</code> = 40px</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">文字類</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-sm mt-2" style="font-size: 14px;">
+            <thead class="table-light">
+                <tr><th>類名 (Class)</th><th>描述</th><th>類名 (Class)</th><th>描述</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>.text-start</code></td><td>靠左對齊</td><td><code>.text-lowercase</code></td><td>設定文本小寫</td></tr>
+                <tr><td><code>.text-center</code></td><td>置中對齊</td><td><code>.text-uppercase</code></td><td>設定文本大寫</td></tr>
+                <tr><td><code>.text-end</code></td><td>靠右對齊</td><td><code>.text-capitalize</code></td><td>設定單詞首字母大寫</td></tr>
+                <tr><td><code>.text-wrap</code></td><td>包覆文字</td><td><code>.fs-*</code></td><td>設定文字大小(1~6)同標題大小無粗體</td></tr>
+                <tr><td><code>.text-nowrap</code></td><td>防止自動換行</td><td><code>.fw-bold</code></td><td>設定文字加粗</td></tr>
+                <tr><td><code>.text-break</code></td><td>文字強制自動換行</td><td><code>.fw-italic</code></td><td>設定文字斜體</td></tr>
+                <tr><td><code>.lh-*</code></td><td>設定行高(1, sm, base, lg)</td><td><code>.text-decoration-underline</code></td><td>設定文字加底線</td></tr>
+                <tr><td><code>.text-decoration-line-through</code></td><td>設定文字加刪除線</td><td><code>.text-decoration-none</code></td><td>移除文字裝飾</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">顏色</h3>
+    <p class="card-text small text-muted">Bootstrap 5 提供了一些有代表意義的顏色類：</p>
+    <div class="d-flex flex-wrap mt-2" style="gap: 15px; font-size: 15px;">
+        <div><code class="text-reset">.text-reset</code> (繼承父層的)</div>
+        <div><code class="text-muted">.text-muted</code> (柔和的)</div>
+        <div><code class="text-primary">.text-primary</code> (重要的)</div>
+        <div><code class="text-success">.text-success</code> (執行成功的)</div>
+        <div><code class="text-info">.text-info</code> (提示資訊的)</div>
+        <div><code class="text-warning">.text-warning</code> (警告的)</div>
+        <div><code class="text-danger">.text-danger</code> (危險的)</div>
+        <div><code class="text-secondary">.text-secondary</code> (副標題)</div>
+        <div><code class="text-dark">.text-dark</code> (深灰色)</div>
+        <div><code class="text-light bg-dark px-1 rounded">.text-light</code> (淺灰色)</div>
+        <div><code class="text-white bg-dark px-1 rounded">.text-white</code> (白色)</div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">表格與表格色彩類</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold mt-2">⚫ 表格類</h4>
+            <ul class="tech-list mb-0">
+                <li><strong>基礎表格：</strong> <code>.table</code></li>
+                <li><strong>較小的表格：</strong> <code>.table</code> + <code>.table-sm</code></li>
+                <li><strong>條紋行：</strong> <code>.table</code> + <code>.table-striped</code></li>
+                <li><strong>表格邊框：</strong> <code>.table</code> + <code>.table-bordered</code></li>
+                <li><strong>表格邊框色彩：</strong> <code>.table</code> + <code>.table-bordered</code> + <code>border-color</code></li>
+                <li><strong>可滑入行：</strong> <code>.table</code> + <code>.table-hover</code></li>
+                <li><strong>黑色背景色彩：</strong> <code>.table</code> + <code>.table-dark</code></li>
+                <li><strong>表格啟用：</strong> <code>.table</code> + <code>.table-active</code></li>
+                <li><strong>無框表格：</strong> <code>.table</code> + <code>.table-borderless</code></li>
+                <li><strong>儲存格垂直對齊：</strong> <code>.table</code> + <code>.align-middle</code></li>
+                <li><strong>響應式表格：</strong> <code>.table</code> + <code>.table-responsive{-sm|-md|-lg|-xl|-xxl}</code></li>
+            </ul>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold mt-2">⚫ 表格色彩類</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm mt-2" style="font-size: 13px;">
+                    <thead class="table-light">
+                        <tr><th>類名</th><th>描述</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.table-primary</code></td><td>藍色: 指定這是一個重要的操作</td></tr>
+                        <tr><td><code>.table-success</code></td><td>綠色: 指定這是一個允許執行的操作</td></tr>
+                        <tr><td><code>.table-danger</code></td><td>紅色: 指定這是可以危險的操作</td></tr>
+                        <tr><td><code>.table-info</code></td><td>淺藍色: 表示內容已變更</td></tr>
+                        <tr><td><code>.table-warning</code></td><td>橘色: 表示需要注意的操作</td></tr>
+                        <tr><td><code>.table-active</code></td><td>灰色: 用於滑鼠懸停效果</td></tr>
+                        <tr><td><code>.table-secondary</code></td><td>灰色: 表示內容不怎麼重要</td></tr>
+                        <tr><td><code>.table-light</code></td><td>淺灰色, 可以是表格行的背景</td></tr>
+                        <tr><td><code>.table-dark</code></td><td>深灰色, 可以是表格行的背景</td></tr>
+                        <tr><td><code>.thead-dark</code></td><td>用於給表頭添加黑色背景</td></tr>
+                        <tr><td><code>.thead-light</code></td><td>用於給表頭添加灰色背景</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">響應式表格</h3>
+    <p class="card-text small text-muted">於表格外的 <code>&lt;div&gt;</code> 容器中加入下列格式即可創建響應式表格：在螢幕寬度小於指定斷點時會產生水平捲軸，如果可視區域寬度大於指定斷點則顯示不同效果(沒有捲軸)：</p>
+    <div class="table-responsive">
+        <table class="table table-bordered table-sm mt-2" style="font-size: 14px; max-width: 400px;">
+            <thead class="table-light">
+                <tr><th>類名</th><th>螢幕寬度 (觸發捲軸時機)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>.table-responsive-sm</code></td><td>&lt; 576px</td></tr>
+                <tr><td><code>.table-responsive-md</code></td><td>&lt; 768px</td></tr>
+                <tr><td><code>.table-responsive-lg</code></td><td>&lt; 992px</td></tr>
+                <tr><td><code>.table-responsive-xl</code></td><td>&lt; 1200px</td></tr>
+                <tr><td><code>.table-responsive-xxl</code></td><td>&lt; 1400px</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">基礎元件 (Basic Components)</h2>
+            </div>
+
+            <div class="cards">
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">按鈕 (Buttons) 與按鈕組</h3>
+    <p class="card-text small text-muted">Bootstrap 5 提供了不同樣式的按鈕，按鈕類可用於 <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, 或 <code>&lt;input&gt;</code> 元素上。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基本按鈕與框線樣式</h4>
+<pre class="code-block"><code>&lt;!-- 基本按鈕 --&gt;
+&lt;button type="button" class="btn"&gt;基本按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-primary"&gt;主要按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-secondary"&gt;次要按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-success"&gt;成功&lt;/button&gt;
+&lt;!-- 其他色彩依此類推: info, warning, danger, dark, light --&gt;
+
+&lt;!-- 框線樣式的按鈕 --&gt;
+&lt;button type="button" class="btn btn-outline-primary"&gt;主要按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-outline-secondary"&gt;次要按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-outline-success"&gt;成功&lt;/button&gt;
+&lt;!-- 其他色彩依此類推: info, warning, danger, dark, light --&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 不同大小、狀態與滿版按鈕</h4>
+            <div class="alert-box mb-2" style="font-size: 13px;">
+                <strong>💡 BS5 語法更新提醒：</strong> 已移除 <code>.btn-block</code>，滿版按鈕請直接加上 <code>.w-100</code>。
+            </div>
+<pre class="code-block"><code>&lt;!-- 大小控制 --&gt;
+&lt;button type="button" class="btn btn-primary btn-lg"&gt;大號按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-primary"&gt;預設按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-primary btn-sm"&gt;小號按鈕&lt;/button&gt;
+
+&lt;!-- 滿版按鈕 (BS5 寫法) --&gt;
+&lt;button type="button" class="btn btn-primary w-100"&gt;按鈕&lt;/button&gt;
+
+&lt;!-- 點擊與禁用狀態 --&gt;
+&lt;button type="button" class="btn btn-primary active"&gt;點擊後的按鈕&lt;/button&gt;
+&lt;button type="button" class="btn btn-primary" disabled&gt;禁止點擊的按鈕&lt;/button&gt;</code></pre>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 水平與垂直按鈕組</h4>
+            <p class="small text-muted mb-1">在 <code>&lt;div&gt;</code> 添加 <code>.btn-group</code>。可使用 <code>.btn-group-lg/sm</code> 控制大小，或 <code>.btn-group-vertical</code> 轉為垂直。</p>
+<pre class="code-block"><code>&lt;!-- 基礎按鈕組 --&gt;
+&lt;div class="btn-group"&gt;
+    &lt;button type="button" class="btn btn-primary"&gt;Apple&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary"&gt;Samsung&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary"&gt;Sony&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- 垂直按鈕組 --&gt;
+&lt;div class="btn-group-vertical"&gt;
+    &lt;button type="button" class="btn btn-primary"&gt;Apple&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary"&gt;Samsung&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary"&gt;Sony&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 內嵌下拉選單按鈕組</h4>
+            <div class="alert-box mb-2" style="font-size: 13px;">
+                <strong>💡 BS5 語法更新提醒：</strong> 觸發屬性需加上 bs，改為 <code>data-bs-toggle="dropdown"</code>。
+            </div>
+<pre class="code-block"><code>&lt;div class="btn-group"&gt;
+    &lt;!-- 下拉觸發按鈕 --&gt;
+    &lt;button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"&gt;
+        Sony
+    &lt;/button&gt;
+    
+    &lt;!-- 下拉選單內容 (BS5 建議使用 ul li) --&gt;
+    &lt;ul class="dropdown-menu"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Tablet&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Smartphone&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+            <div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">徽章 (Badges)</h3>
+    <p class="card-text small text-muted">主要用於突出顯示新的或未讀的項目。如需使用徽章，只需要將 <code>.badge</code> 類搭配帶有指定意義的背景色彩類 (如 <code>.bg-primary</code>) 添加到 <code>&lt;span&gt;</code> 元素上即可。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 BS5 語法更新提醒：</strong> BS5 已經移除了 <code>.badge-*</code> 色彩類別與 <code>.badge-pill</code>。現在設定顏色需直接使用 <code>.bg-*</code> (背景公用類別)，藥丸形狀則改用 <code>.rounded-pill</code>。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎與各種顏色的徽章</h4>
+<pre class="code-block"><code>&lt;!-- BS5 使用 bg-* 來設定徽章顏色 --&gt;
+&lt;span class="badge bg-primary"&gt;主要&lt;/span&gt;
+&lt;span class="badge bg-secondary"&gt;次要&lt;/span&gt;
+&lt;span class="badge bg-success"&gt;成功&lt;/span&gt;
+&lt;span class="badge bg-danger"&gt;危險&lt;/span&gt;
+&lt;!-- 淺色背景建議加上 text-dark 以免文字看不清楚 --&gt;
+&lt;span class="badge bg-warning text-dark"&gt;警告&lt;/span&gt;
+&lt;span class="badge bg-info text-dark"&gt;信息&lt;/span&gt;
+&lt;span class="badge bg-light text-dark"&gt;淺色&lt;/span&gt;
+&lt;span class="badge bg-dark"&gt;深色&lt;/span&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 藥丸形狀與內嵌徽章</h4>
+<pre class="code-block"><code>&lt;!-- 藥丸形狀徽章：使用 .rounded-pill --&gt;
+&lt;span class="badge rounded-pill bg-secondary"&gt;默認&lt;/span&gt;
+&lt;span class="badge rounded-pill bg-primary"&gt;主要&lt;/span&gt;
+&lt;span class="badge rounded-pill bg-success"&gt;成功&lt;/span&gt;
+&lt;span class="badge rounded-pill bg-info text-dark"&gt;信息&lt;/span&gt;
+&lt;span class="badge rounded-pill bg-warning text-dark"&gt;警告&lt;/span&gt;
+&lt;span class="badge rounded-pill bg-danger"&gt;危險&lt;/span&gt;
+
+&lt;!-- 徽章插入到按鈕元素內 --&gt;
+&lt;button type="button" class="btn btn-primary"&gt;
+    Messages &lt;span class="badge bg-light text-dark"&gt;4&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">分頁導航 (Pagination)</h3>
+    <p class="card-text small text-muted">要創建一個基本的分頁，可以在 <code>&lt;ul&gt;</code> 元素上添加 <code>.pagination</code> 類。然後在 <code>&lt;li&gt;</code> 元素上添加 <code>.page-item</code> 類，連結元素則加上 <code>.page-link</code> 類。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎分頁與當前頁面 (Active)</h4>
+            <p class="small text-muted mb-1">當前頁可以使用 <code>.active</code> 類來高亮顯示：</p>
+<pre class="code-block"><code>&lt;ul class="pagination"&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;Previous&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;!-- 當前高亮顯示 --&gt;
+    &lt;li class="page-item active"&gt;&lt;a class="page-link" href="#"&gt;2&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;Next&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 不可點擊的分頁連結 (Disabled)</h4>
+            <p class="small text-muted mb-1"><code>.disabled</code> 類可以設置分頁連結為不可點擊狀態：</p>
+<pre class="code-block"><code>&lt;ul class="pagination"&gt;
+    &lt;!-- 禁用狀態 --&gt;
+    &lt;li class="page-item disabled"&gt;&lt;a class="page-link" href="#"&gt;Previous&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;2&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="page-item"&gt;&lt;a class="page-link" href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;!-- 另一端禁用 --&gt;
+    &lt;li class="page-item disabled"&gt;&lt;a class="page-link" href="#"&gt;Next&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">列表群組 (List Group)</h3>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎列表與連結列表</h4>
+            <p class="small text-muted mb-1">在 <code>&lt;ul&gt;</code> 添加 <code>.list-group</code>，<code>&lt;li&gt;</code> 添加 <code>.list-group-item</code>。若要建立可點擊的連結清單，改用 <code>&lt;div&gt;</code> 與 <code>&lt;a&gt;</code>，並加上 <code>.list-group-item-action</code> 實現懸停顯示灰色背景的效果。</p>
+<pre class="code-block"><code>&lt;!-- 基礎列表 --&gt;
+&lt;ul class="list-group"&gt;
+    &lt;li class="list-group-item"&gt;First item&lt;/li&gt;
+    &lt;li class="list-group-item"&gt;Second item&lt;/li&gt;
+    &lt;li class="list-group-item"&gt;Third item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 連結互動列表 --&gt;
+&lt;div class="list-group mt-3"&gt;
+    &lt;a href="#" class="list-group-item list-group-item-action"&gt;First item&lt;/a&gt;
+    &lt;a href="#" class="list-group-item list-group-item-action"&gt;Second item&lt;/a&gt;
+    &lt;a href="#" class="list-group-item list-group-item-action"&gt;Third item&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 列表色彩</h4>
+            <p class="small text-muted mb-1">為 <code>.list-group-item</code> 加上帶有指定意義的情境色彩類別來改變背景顏色。</p>
+<pre class="code-block"><code>&lt;ul class="list-group"&gt;
+    &lt;li class="list-group-item list-group-item-success"&gt;成功列表項&lt;/li&gt;
+    &lt;li class="list-group-item list-group-item-secondary"&gt;次要列表項&lt;/li&gt;
+    &lt;li class="list-group-item list-group-item-info"&gt;信息清單項&lt;/li&gt;
+    &lt;li class="list-group-item list-group-item-warning"&gt;警告列表項&lt;/li&gt;
+    &lt;li class="list-group-item list-group-item-danger"&gt;危險列表項&lt;/li&gt;
+    &lt;li class="list-group-item list-group-item-primary"&gt;主要列表項&lt;/li&gt;
+    &lt;li class="list-group-item list-group-item-dark"&gt;深灰色列表項&lt;/li&gt;
+    &lt;li class="list-group-item list-group-item-light"&gt;淺色列表項&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">卡片進階結構 (Card Header & Footer)</h3>
+                    <p class="card-text">卡片可以包含頭部 (<code>.card-header</code>)、主體 (<code>.card-body</code>) 與底部 (<code>.card-footer</code>)。</p>
+<pre class="code-block"><code>&lt;!-- 包含頭尾的完整卡片 --&gt;
+&lt;div class="card"&gt;
+    &lt;div class="card-header"&gt;卡片頭部&lt;/div&gt;
+    &lt;div class="card-body"&gt;
+        &lt;h4 class="card-title"&gt;標題&lt;/h4&gt;
+        &lt;p class="card-text"&gt;卡片正文內容。&lt;/p&gt;
+        &lt;a href="#" class="card-link"&gt;卡片連結 1&lt;/a&gt;
+        &lt;a href="#" class="card-link"&gt;卡片連結 2&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="card-footer text-muted"&gt;卡片底部資訊&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 帶有上方圖片的卡片 --&gt;
+&lt;div class="card mt-3" style="width: 400px;"&gt;
+    &lt;img class="card-img-top" src="avatar.png" alt="Card image"&gt;
+    &lt;div class="card-body"&gt;
+        &lt;h4 class="card-title"&gt;John Doe&lt;/h4&gt;
+        &lt;p class="card-text"&gt;個人簡介文字...&lt;/p&gt;
+        &lt;a href="#" class="btn btn-primary"&gt;查看個人檔案&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">訊息提示 (Alert) & Jumbotron</h3>
+                    <div class="alert-box">
+                        <strong>💡 BS5 觀念：</strong> Bootstrap 5 已移除 <code>.jumbotron</code> 類別，現在官方建議直接使用 <strong>公用類別</strong> 來拼裝出超大螢幕區塊。
+                    </div>
+<pre class="code-block"><code>&lt;!-- 可關閉的訊息提示框 --&gt;
+&lt;div class="alert alert-warning alert-dismissible"&gt;
+    警告訊息！ 
+    &lt;button type="button" class="btn-close" data-bs-dismiss="alert"&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- 自製超大螢幕 (Jumbotron 替代方案) --&gt;
+&lt;div class="p-5 mb-4 bg-light rounded-3"&gt;
+    &lt;div class="container-fluid py-5"&gt;
+        &lt;h1 class="display-5 fw-bold"&gt;自製超大屏幕&lt;/h1&gt;
+        &lt;p class="fs-4"&gt;使用一系列實用程序，創建專屬的焦點區塊。&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">導航元件 (Navigation Components)</h2>
+            </div>
+
+            <div class="cards">
+
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">1. 基礎導航 (Navs) 與對齊方式</h3>
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 BS5 語法更新提醒：</strong> 靠右對齊的 <code>.ml-auto</code> 已經被廢除，請改用 <code>.ms-auto</code> (margin-start auto)。
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 水平與垂直導航</h4>
+            <p class="small text-muted mb-1">在 <code>&lt;ul&gt;</code> 添加 <code>.nav</code>，選項添加 <code>.nav-item</code>，連結添加 <code>.nav-link</code>。加入 <code>.flex-column</code> 可轉為垂直導航。</p>
+<pre class="code-block"><code>&lt;!-- 基礎水平導航 --&gt;
+&lt;ul class="nav"&gt;
+    &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="nav-item"&gt;&lt;a class="nav-link disabled" href="#"&gt;Disabled&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 垂直導航 --&gt;
+&lt;ul class="nav flex-column"&gt;...&lt;/ul&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 導航對齊方式</h4>
+            <ul class="tech-list mb-1">
+                <li><code>.justify-content-center</code>：置中顯示</li>
+                <li><code>.justify-content-end</code>：靠右對齊</li>
+                <li><code>.ms-auto</code>：(BS5 語法) 自動推擠靠右</li>
+            </ul>
+<pre class="code-block"><code>&lt;!-- 導航置中 --&gt;
+&lt;ul class="nav justify-content-center"&gt;...&lt;/ul&gt;
+&lt;!-- 導航靠右 --&gt;
+&lt;ul class="nav justify-content-end"&gt;...&lt;/ul&gt;
+&lt;!-- 導航自動對齊 (BS5) --&gt;
+&lt;ul class="nav ms-auto"&gt;...&lt;/ul&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">2. 選項卡導航 (Tabs & Pills) 與動態切換</h3>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 選項卡與等寬顯示</h4>
+            <p class="small text-muted mb-1">使用 <code>.nav-tabs</code> (標籤頁) 或 <code>.nav-pills</code> (膠囊)。加入 <code>.nav-justified</code> 可設置齊行等寬顯示。</p>
+<pre class="code-block"><code>&lt;!-- 選項卡導航 --&gt;
+&lt;ul class="nav nav-tabs"&gt;...&lt;/ul&gt;
+
+&lt;!-- 等寬膠囊導航 --&gt;
+&lt;ul class="nav nav-pills nav-justified"&gt;...&lt;/ul&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 動態選項卡切換</h4>
+            <p class="small text-muted mb-1">連結添加 <code>data-bs-toggle="tab"</code>，對應內容區塊添加 <code>.tab-pane</code>。加入 <code>.fade</code> 可實現淡入效果。</p>
+<pre class="code-block"><code>&lt;!-- 切換連結 --&gt;
+&lt;a class="nav-link active" data-bs-toggle="tab" href="#home"&gt;Home&lt;/a&gt;
+
+&lt;!-- 對應的內容區塊 --&gt;
+&lt;div class="tab-content"&gt;
+    &lt;div class="tab-pane fade show active container" id="home"&gt;...&lt;/div&gt;
+    &lt;div class="tab-pane fade container" id="menu1"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">3. 導覽列基礎與外觀 (Navbar)</h3>
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 標準與垂直導覽列</h4>
+            <p class="small text-muted mb-1"><code>.navbar</code> 為基礎，搭配 <code>.navbar-expand-{sm|md|lg|xl|xxl}</code> 決定在哪個斷點展開為水平。若不加 expand 類別則永遠為垂直堆疊。</p>
+<pre class="code-block"><code>&lt;!-- 在 sm 斷點以上水平展開的導覽列 --&gt;
+&lt;nav class="navbar navbar-expand-sm bg-light"&gt;
+    &lt;ul class="navbar-nav"&gt;
+        &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 色彩與 Logo (Brand)</h4>
+            <p class="small text-muted mb-1">使用 <code>.bg-*</code> 設定背景，搭配 <code>.navbar-dark</code> (白字) 或 <code>.navbar-light</code> (黑字)。使用 <code>.navbar-brand</code> 放置文字或圖片 Logo。</p>
+<pre class="code-block"><code>&lt;!-- 黑底白字導覽列，帶有 Logo 圖片與文字 --&gt;
+&lt;nav class="navbar navbar-expand-sm bg-dark navbar-dark"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;
+        &lt;img src="logo.jpg" alt="Logo" style="width:40px;"&gt; 品牌名稱
+    &lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">4. 響應式折疊導覽列 (Navbar Collapse)</h3>
+    <p class="card-text small text-muted">在小螢幕上折疊選單，透過點擊漢堡按鈕顯示內容。需設置 <code>.navbar-toggler</code> 按鈕並綁定 <code>data-bs-target</code>。</p>
+<pre class="code-block"><code>&lt;nav class="navbar navbar-expand-md bg-dark navbar-dark"&gt;
+    &lt;!-- Logo --&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Navbar&lt;/a&gt;
+    
+    &lt;!-- 折疊觸發按鈕 (漢堡選單) --&gt;
+    &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar"&gt;
+        &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    
+    &lt;!-- 折疊的導航內容區塊 --&gt;
+    &lt;div class="collapse navbar-collapse" id="collapsibleNavbar"&gt;
+        &lt;ul class="navbar-nav"&gt;
+            &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Link 2&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">5. 導覽列進階：表單、文本與固定定位</h3>
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 BS5 語法更新提醒：</strong> 導覽列表單的 <code>.form-inline</code> 類別已被移除，請改用公用類別 <code>.d-flex</code> 來實現同行排版。
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 導覽列內的表單與純文本</h4>
+            <p class="small text-muted mb-1">使用 <code>.d-flex</code> 排版表單。若要放置非連結文本，使用 <code>.navbar-text</code> 以保持垂直對齊與內距。</p>
+<pre class="code-block"><code>&lt;!-- 導覽列表單 (BS5 使用 d-flex) --&gt;
+&lt;form class="d-flex"&gt;
+    &lt;input type="text" class="form-control me-2" placeholder="Search"&gt;
+    &lt;button class="btn btn-success" type="button"&gt;Search&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;!-- 導覽列純文本 --&gt;
+&lt;span class="navbar-text"&gt;Navbar text&lt;/span&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 固定導覽列定位</h4>
+            <p class="small text-muted mb-1">使用 <code>.fixed-top</code> 可固定在畫面頂部，<code>.fixed-bottom</code> 則固定在底部。</p>
+<pre class="code-block"><code>&lt;!-- 固定在頂部的導覽列 --&gt;
+&lt;nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top"&gt;
+    ...
+&lt;/nav&gt;
+
+&lt;!-- 固定在底部的導覽列 --&gt;
+&lt;nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom"&gt;
+    ...
+&lt;/nav&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">6. 導航下拉選單與麵包屑導航</h3>
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 BS5 語法更新提醒：</strong> 麵包屑導航官方建議使用 <code>&lt;ol&gt;</code> 與 <code>&lt;li&gt;</code> 標籤結構以符合無障礙規範。下拉觸發需加上 <code>data-bs-toggle</code>。
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 導航帶下拉選單</h4>
+<pre class="code-block"><code>&lt;ul class="nav nav-pills"&gt;
+    &lt;li class="nav-item dropdown"&gt;
+        &lt;a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"&gt;
+            Dropdown
+        &lt;/a&gt;
+        &lt;div class="dropdown-menu"&gt;
+            &lt;a class="dropdown-item" href="#"&gt;Link 1&lt;/a&gt;
+            &lt;a class="dropdown-item" href="#"&gt;Link 2&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 麵包屑導航 (Breadcrumb)</h4>
+            <p class="small text-muted mb-1">顯示當前頁面在導航層次結構內的位置。</p>
+<pre class="code-block"><code>&lt;!-- BS5 官方標準結構 --&gt;
+&lt;nav aria-label="breadcrumb"&gt;
+    &lt;ol class="breadcrumb"&gt;
+        &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;Library&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="breadcrumb-item active" aria-current="page"&gt;Data&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">動態互動元件 (Interactive Components)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">模態框 (Modal)</h3>
+                    <p class="card-text">覆蓋在父頁面上的彈出視窗。需使用 <code>data-bs-toggle="modal"</code> 觸發。</p>
+<pre class="code-block"><code>&lt;!-- 觸發按鈕 --&gt;
+&lt;button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"&gt;
+    打開模態框
+&lt;/button&gt;
+
+&lt;!-- 模態框結構 --&gt;
+&lt;div class="modal fade" id="myModal"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;!-- 頭部 --&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h4 class="modal-title"&gt;標題&lt;/h4&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;!-- 內容 --&gt;
+            &lt;div class="modal-body"&gt;模態框內容..&lt;/div&gt;
+            &lt;!-- 底部 --&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;關閉&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">折疊面板 (Collapse & Accordion)</h3>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 BS5 語法更新提醒：</strong> 觸發屬性皆需加上 <code>-bs-</code> 前綴 (如 <code>data-bs-toggle</code>)。此外，BS5 的手風琴已不再依賴卡片 (Card) 結構，改為使用專屬的 <code>.accordion</code> 相關類別。
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 簡單折疊面板 (Collapse)</h4>
+            <p class="small text-muted mb-1"><code>.collapse</code> 類用於指定一個折疊元素，點擊按鈕後會在隱藏與顯示之間切換，需要在 <code>&lt;a&gt;</code> 或 <code>&lt;button&gt;</code> 元素上添加 <code>data-bs-toggle="collapse"</code> 屬性。可使用 <code>data-bs-target="#id"</code> 或 <code>href="#id"</code> 來指定目標。</p>
+<pre class="code-block"><code>&lt;!-- 簡單的折疊 --&gt;
+&lt;a href="#demo" class="btn btn-primary" data-bs-toggle="collapse"&gt;
+    簡單的折疊
+&lt;/a&gt;
+
+&lt;div id="demo" class="collapse mt-2"&gt;
+    &lt;div class="card card-body"&gt;
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit...
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 手風琴折疊面板 (Accordion)</h4>
+            <p class="small text-muted mb-1">利用 <code>data-bs-parent</code> 屬性來確保所有的折疊元素在指定的父元素下，這樣就能實現在展開一個面板時，其他的面板會自動收合隱藏。</p>
+<pre class="code-block"><code>&lt;!-- 手風琴結構 (BS5 語法) --&gt;
+&lt;div class="accordion" id="myAccordion"&gt;
+    &lt;div class="accordion-item"&gt;
+        &lt;h2 class="accordion-header"&gt;
+            &lt;button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panel1"&gt;
+                選項一
+            &lt;/button&gt;
+        &lt;/h2&gt;
+        &lt;!-- 加上 data-bs-parent 實現手風琴效果 --&gt;
+        &lt;div id="panel1" class="accordion-collapse collapse show" data-bs-parent="#myAccordion"&gt;
+            &lt;div class="accordion-body"&gt;內容 1&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </div>
+
+</div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">圖片輪播 (Carousel)</h3>
+                    <p class="card-text">使用 <code>data-bs-ride="carousel"</code> 自動播放。包含指示點 (Indicators)、圖片內容與左右切換控制。</p>
+<pre class="code-block"><code>&lt;div id="demo" class="carousel slide" data-bs-ride="carousel"&gt;
+    &lt;!-- 指示符 --&gt;
+    &lt;div class="carousel-indicators"&gt;
+        &lt;button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"&gt;&lt;/button&gt;
+        &lt;button type="button" data-bs-target="#demo" data-bs-slide-to="1"&gt;&lt;/button&gt;
+        &lt;button type="button" data-bs-target="#demo" data-bs-slide-to="2"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;!-- 輪播圖片 --&gt;
+    &lt;div class="carousel-inner"&gt;
+        &lt;div class="carousel-item active"&gt;&lt;img src="img1.jpg" class="d-block w-100"&gt;&lt;/div&gt;
+        &lt;div class="carousel-item"&gt;&lt;img src="img2.jpg" class="d-block w-100"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 左右切換按鈕 --&gt;
+    &lt;button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev"&gt;
+        &lt;span class="carousel-control-prev-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next"&gt;
+        &lt;span class="carousel-control-next-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">提示框 (Tooltip) & 滾動監聽 (Scrollspy)</h3>
+                    <p class="card-text">Tooltip 在 BS5 需透過 JS 初始化；Scrollspy 會根據捲軸位置自動更新導航目標的 <code>.active</code> 狀態。</p>
+<pre class="code-block"><code>&lt;!-- 提示框 (Tooltip) --&gt;
+&lt;a href="#" data-bs-toggle="tooltip" title="我是提示內容!"&gt;滑鼠移動到我這&lt;/a&gt;
+&lt;script&gt;
+    // BS5 現代 Vanilla JS 啟動方式
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+&lt;/script&gt;
+
+&lt;!-- 滾動監聽 (Scrollspy) 寫在 body 標籤上 --&gt;
+&lt;body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50"&gt;...&lt;/body&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+<section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">外觀與佈局 (Appearance & Layout Utilities)</h2>
+            </div>
+            
+            
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">邊框與邊框色彩 (Borders)</h3>
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 BS5 語法更新提醒：</strong> 移除左右邊框的類別已從 <code>border-left-0 / right-0</code> 改為 <code>border-start-0 / end-0</code>。
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 邊框顯示與移除</h4>
+                            <p class="small text-muted mb-1">使用 <code>.border</code> 類別可以添加或移除特定方向的邊框：</p>
+<pre class="code-block"><code>&lt;span class="border"&gt;&lt;/span&gt;
+&lt;span class="border border-0"&gt;&lt;/span&gt;
+&lt;span class="border border-top-0"&gt;&lt;/span&gt;
+&lt;span class="border border-end-0"&gt;&lt;/span&gt; &lt;!-- BS5 語法: 移除右邊框 --&gt;
+&lt;span class="border border-bottom-0"&gt;&lt;/span&gt;
+&lt;span class="border border-start-0"&gt;&lt;/span&gt; &lt;!-- BS5 語法: 移除左邊框 --&gt;</code></pre>
+                        </div>
+                        
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 邊框色彩</h4>
+                            <p class="small text-muted mb-1">搭配情境色彩類別來改變邊框顏色：</p>
+<pre class="code-block"><code>&lt;span class="border border-primary"&gt;&lt;/span&gt;
+&lt;span class="border border-secondary"&gt;&lt;/span&gt;
+&lt;span class="border border-success"&gt;&lt;/span&gt;
+&lt;span class="border border-danger"&gt;&lt;/span&gt;
+&lt;span class="border border-warning"&gt;&lt;/span&gt;
+&lt;span class="border border-info"&gt;&lt;/span&gt;
+&lt;span class="border border-light"&gt;&lt;/span&gt;
+&lt;span class="border border-dark"&gt;&lt;/span&gt;
+&lt;span class="border border-white"&gt;&lt;/span&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">佈局：浮動、置中與寬高 (Layout & Sizing)</h3>
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 BS5 語法更新提醒：</strong> 左右浮動的類別已從 <code>float-left / right</code> 徹底改為 <code>float-start / end</code>。
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 浮動與居中對齊</h4>
+                            <p class="small text-muted mb-1"><code>.clearfix</code> 用於清除浮動；<code>.mx-auto</code> 設置水平居中對齊 (元素本身需有寬度)。</p>
+<pre class="code-block"><code>&lt;!-- 浮動與清除浮動 --&gt;
+&lt;div class="clearfix"&gt;
+    &lt;span class="float-start"&gt;左浮動&lt;/span&gt;
+    &lt;span class="float-end"&gt;右浮動&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- 居中對齊 --&gt;
+&lt;div class="mx-auto bg-warning" style="width:150px"&gt;
+    置中顯示
+&lt;/div&gt;</code></pre>
+                        </div>
+                        
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 寬度與高度</h4>
+                            <p class="small text-muted mb-1">使用 <code>w-*</code> 與 <code>h-*</code> 類別 (數值為 25, 50, 75, 100) 或最大寬高 <code>mw-100</code>、<code>mh-100</code>。</p>
+<pre class="code-block"><code>&lt;!-- 寬度 --&gt;
+&lt;div class="w-25 bg-warning"&gt;寬度 25%&lt;/div&gt;
+&lt;div class="w-50 bg-warning"&gt;寬度 50%&lt;/div&gt;
+&lt;div class="w-75 bg-warning"&gt;寬度 75%&lt;/div&gt;
+&lt;div class="w-100 bg-warning"&gt;寬度 100%&lt;/div&gt;
+&lt;div class="mw-100 bg-warning"&gt;最大寬度 100%&lt;/div&gt;
+
+&lt;!-- 高度 (父元素需有高度基準) --&gt;
+&lt;div style="height:200px;background-color:#ddd"&gt;
+    &lt;div class="h-25 bg-warning"&gt;高度 25%&lt;/div&gt;
+    &lt;div class="h-50 bg-warning"&gt;高度 50%&lt;/div&gt;
+    &lt;div class="h-75 bg-warning"&gt;高度 75%&lt;/div&gt;
+    &lt;div class="h-100 bg-warning"&gt;高度 100%&lt;/div&gt;
+    &lt;div class="mh-100 bg-warning" style="height:500px"&gt;最大高度 100%&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    </main>
+</div>
+
+</body>
+</html>

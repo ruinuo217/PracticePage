@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 08: PHP 後端基礎｜Reyna Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            <a class="menu-item" href="lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            
+            <a class="menu-item active" href="lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            
+            <a class="menu-item" href="lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+        </nav>
+
+        <div class="bottom-info">
+            <p>© 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+
+        <header class="topbar">
+            <div class="title-section">
+                <h1>Module 08: PHP 後端基礎</h1>
+                <p>Server-side Scripting, Logic Control, Arrays & File Uploads</p>
+            </div>
+        </header>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">PHP 簡介與變數字串 (Introduction & Strings)</h2>
+            </div>
+            
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">什麼是 PHP？</h3>
+                    <ul class="tech-list">
+                        <li><strong>伺服器端腳本：</strong> 代碼在伺服器上執行，最終以純 HTML 形式返回給瀏覽器。</li>
+                        <li><strong>動態能力：</strong> 能生成動態頁面內容、收集表單資料，以及與資料庫互動。</li>
+                        <li><strong>副檔名：</strong> 預設為 <code>.php</code>。</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">變數、常數與字串</h3>
+                    <p class="card-text">使用 <code>$</code> 宣告變數，<code>define()</code> 宣告常數，並用 <code>.</code> 符號串接字串。</p>
+<pre class="code-block"><code>&lt;?php
+    // 變數宣告與常數
+    $userName = "Reyna"; 
+    define("URL", "http://localhost/php/"); 
+
+    // 字串串接 (使用 .)
+    $greeting = "Hello " . $userName;
+    echo $greeting;
+
+    // 計算字串長度
+    echo strlen("Hello World"); // 回傳 11
+?&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">邏輯判斷與迴圈控制 (Logic & Loops)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">條件判斷 (If & Switch)</h3>
+                    <p class="card-text">透過條件判斷來控制程式走向。簡易判斷可使用三元運算子 <code>?:</code>。</p>
+<pre class="code-block"><code>&lt;?php
+    $t = date("H");
+
+    // if...elseif...else 判斷式
+    if ($t &lt; 10) {
+        echo "Good morning!";
+    } elseif ($t &lt; 20) {
+        echo "Good day!";
+    } else {
+        echo "Good night!";
+    }
+
+    // Switch 判斷式
+    $favcolor = "red";
+    switch($favcolor) {
+        case "red":
+            echo "你喜歡紅色";
+            break;
+        default:
+            echo "你喜歡其他顏色";
+    }
+
+    // 三元運算子
+    $sex = '男';
+    echo ($sex == '女') ? '小姐' : '先生';
+?&gt;</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">迴圈控制 (For, While, Do...While)</h3>
+                    <p class="card-text">讓相同的代碼區塊重複運行。依據是否已知執行次數來選擇合適的迴圈。</p>
+<pre class="code-block"><code>&lt;?php
+    // for 迴圈 (執行指定次數)
+    for( $i = 1 ; $i &lt;= 5 ; $i++ ) {
+        echo "數字為 " . $i . "&lt;br&gt;";
+    }
+
+    // while 迴圈 (條件成立時執行)
+    $j = 1;
+    while($j &lt;= 5) {
+        echo "The number is " . $j . "&lt;br&gt;";
+        $j++;
+    }
+
+    // do...while 迴圈 (至少執行一次)
+    $k = 1;
+    do {
+        echo "Do Loop: " . $k;
+        $k++;
+    } while($k &lt;= 5);
+?&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">陣列操作 (Arrays)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">數值、關聯與多維陣列</h3>
+                    <p class="card-text">PHP 陣列支援數字索引、自訂鍵值 (Key)，甚至可以在陣列中包覆陣列 (多維陣列)。</p>
+<pre class="code-block"><code>&lt;?php
+    // 1. 數值陣列
+    $cars = array("Volvo", "BMW", "Toyota");
+
+    // 2. 關聯陣列 (指定鍵值)
+    $age = array("Peter"=&gt;"35", "Ben"=&gt;"37");
+    echo $age['Peter']; // 輸出 35
+
+    // 3. 多維陣列 (陣列中的陣列)
+    $stock = array (
+        array("Volvo", 100, 96),
+        array("BMW", 60, 59)
+    );
+?&gt;</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">foreach 陣列遍歷</h3>
+                    <p class="card-text"><code>foreach</code> 是專門用來處理陣列的迴圈。處理多維陣列時可使用雙層巢狀結構。</p>
+<pre class="code-block"><code>&lt;?php
+    $cars = array("Volvo", "BMW", "Toyota");
+
+    // 遍歷單維陣列
+    foreach($cars as $value) {
+        echo $value . "&lt;br&gt;";
+    }
+
+    // 遍歷多維陣列 (巢狀 foreach)
+    $multi_cars = array(
+        array("Volvo", 100),
+        array("BMW", 60)
+    );
+    foreach($multi_cars as $x) {
+        foreach($x as $y) {
+            echo $y . ' ';
+        }
+        echo '&lt;br&gt;';
+    }
+?&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">表單處理與檔案上傳 (Forms & Uploads)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">GET 與 POST 變數</h3>
+                    <div class="alert-box">
+                        <strong>💡 重點：</strong><br>
+                        <code>$_GET</code> 參數顯示在網址列，有長度限制。<br>
+                        <code>$_POST</code> 不顯示於網址列，較安全且無長度限制。
+                    </div>
+<pre class="code-block"><code>&lt;?php
+    // 取得網址列參數 (?username=...)
+    $user = $_GET["username"];
+
+    // 取得隱藏傳遞的表單資料
+    $pwd = $_POST["userpassword"];
+?&gt;</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">實戰：檔案上傳處理</h3>
+                    <p class="card-text">前端需設定 <code>enctype="multipart/form-data"</code>。後端透過 <code>$_FILES</code> 接收並移動檔案。</p>
+<pre class="code-block"><code>&lt;!-- 1. 前端 HTML 表單 --&gt;
+&lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="file" id="file"&gt;
+    &lt;input type="submit" name="submit" value="提交"&gt;
+&lt;/form&gt;
+
+&lt;!-- 2. 後端 PHP 處理 (upload.php) --&gt;
+&lt;?php
+    if ($_FILES["file"]["error"] &gt; 0) {
+        echo "錯誤: " . $_FILES["file"]["error"];
+    } else {
+        echo "檔案名稱: " . $_FILES["file"]["name"];
+        echo "檔案大小: " . ($_FILES["file"]["size"] / 1024) . " kB";
+        
+        // 將檔案從暫存區移動到指定目錄
+        move_uploaded_file(
+            $_FILES["file"]["tmp_name"], 
+            "upload/" . $_FILES["file"]["name"]
+        );
+    }
+?&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>

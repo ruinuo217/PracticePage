@@ -1,3 +1,15 @@
+:root {
+    --primary-color: #4A90E2;
+    --primary-light: #eff6ff;
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --sidebar-width: 260px;
+    --transition-speed: 0.3s;
+}
+
 /* 基礎設定 */
 * {
     margin: 0;
@@ -6,101 +18,160 @@
 }
 
 body {
-    font-family: "Microsoft JhengHei", sans-serif;
-    background-color: #f3f4f6;
-    color: #333;
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.6;
 }
 
-/* 整體 Layout：左側 sidebar + 右側內容 */
+/* 整體 Layout */
 .layout {
     display: flex;
+    min-height: 100vh;
 }
 
 /* ------------------------- */
 /* 左側側邊欄 Sidebar */
 /* ------------------------- */
 .sidebar {
-    width: 240px;
-    background: #ffffff;
+    width: var(--sidebar-width);
+    background: var(--bg-card);
     height: 100vh;
-    padding: 24px 20px;
-    border-right: 1px solid #e5e7eb;
+    padding: 40px 24px;
+    border-right: 1px solid var(--border-color);
     position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    margin-bottom: 40px;
 }
 
 .logo {
-    font-size: 22px;
-    margin-bottom: 5px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: 1px;
 }
 
 .sub {
-    font-size: 13px;
-    color: #777;
-    margin-bottom: 30px;
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-top: 4px;
 }
 
 /* 選單 */
+.menu-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    flex-grow: 1;
 }
 
 .menu-item {
-    display: block;
-    padding: 10px 14px;
-    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
     text-decoration: none;
-    color: #333;
+    color: var(--text-main);
     font-size: 15px;
-    transition: 0.2s;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+}
+
+.menu-item i {
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: all var(--transition-speed) ease;
 }
 
 .menu-item:hover {
-    background: #f0f7ff;
+    background: var(--primary-light);
+    transform: translateX(5px);
 }
 
 .menu-item.active {
-    background: #e8f3ff;
-    color: #0d6efd;
-    font-weight: bold;
-    border-left: 4px solid #0d6efd;
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.menu-item.active i {
+    color: #fff;
 }
 
 /* 底部訊息 */
 .bottom-info {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    font-size: 14px;
-    color: #666;
+    font-size: 13px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
 }
 
 /* ------------------------- */
 /* 右側內容 Content */
 /* ------------------------- */
 .content {
-    margin-left: 240px;
-    padding: 40px 60px;
-    width: 100%;
+    margin-left: var(--sidebar-width);
+    padding: 60px 80px;
+    flex: 1;
+    min-width: 0;
+}
+
+.page-section {
+    margin-bottom: 60px;
 }
 
 /* 頂部標題 */
+.topbar {
+    margin-bottom: 50px;
+}
+
 .topbar h1 {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .topbar p {
-    color: #777;
-    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 18px;
+    margin-top: 8px;
 }
 
 /* 區塊標題 */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
 .section-title {
-    margin-top: 40px;
-    font-size: 22px;
-    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.badge {
+    background: var(--primary-light);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
 }
 
 /* ------------------------- */
@@ -108,25 +179,182 @@ body {
 /* ------------------------- */
 .cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 兩欄 */
-    gap: 20px; /* 卡片間距 */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .card {
-    flex: 1;
-    background: #fff;
-    padding: 20px 24px;
-    border-radius: 14px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    min-width: 0; 
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+}
+
+.card-icon {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 16px;
 }
 
 .card-title {
     margin-bottom: 12px;
-    font-size: 18px;
-    color: #0d6efd;
+    font-size: 20px;
+    color: var(--text-main);
 }
 
-.card ul {
-    margin-left: 18px;
+.card-text {
+    color: var(--text-muted);
+    font-size: 15px;
     line-height: 1.8;
+}
+
+/* ------------------------- */
+/* 🌟 修復後的清單排版 🌟 */
+/* ------------------------- */
+.tech-list {
+    list-style: none;
+    color: var(--text-muted);
+    font-size: 15px;
+    padding-left: 0;
+}
+
+.tech-list li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px; /* 給偽元素箭頭預留空間 */
+    line-height: 1.6;
+}
+
+/* 使用絕對定位將箭頭固定在左上角，不受內部元素干擾 */
+.tech-list li::before {
+    content: '▹';
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* 處理巢狀清單的排版，取消箭頭並加上縮排 */
+.tech-list li ul {
+    list-style: disc; /* 內層改用預設圓點 */
+    padding-left: 20px;
+    margin-top: 6px;
+    color: var(--text-muted);
+}
+.tech-list li ul li {
+    padding-left: 0;
+}
+.tech-list li ul li::before {
+    display: none; /* 隱藏內層清單的箭頭 */
+}
+
+
+/* ------------------------- */
+/* RWD 響應式設定 (平板與手機) */
+/* ------------------------- */
+@media (max-width: 992px) {
+    .content {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 24px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 30px 24px;
+    }
+    
+    .menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+/* ------------------------- */
+/* 實作 Demo 按鈕區塊 */
+/* ------------------------- */
+.demo-section {
+    background: #ffffff;
+    padding: 24px 32px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    border: 1px dashed var(--primary-color);
+}
+
+.demo-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.demo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--primary-light);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.demo-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ------------------------- */
+/* 程式碼區塊 (Code Block) 美化 */
+/* ------------------------- */
+.code-block {
+    background: #1e1e1e; 
+    color: #d4d4d4;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: auto; 
+    margin-top: 16px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 小提示框 (Alert Box) */
+.alert-box {
+    background: #fff3cd;
+    color: #856404;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid #ffeeba;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }

@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第四堂課｜Reyna 作品集</title>
+    <title>Module 04: JavaScript 核心｜Reyna Portfolio</title>
 
-    <!-- Bootstrap Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="style.css">
@@ -14,195 +16,165 @@
 
 <div class="layout">
 
-    <!-- 左側側邊欄 -->
     <aside class="sidebar">
-        <h2 class="logo">Reyna</h2>
-        <p class="sub">Web Design Portfolio</p>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
 
         <nav class="menu">
-            <a class="menu-item" href="index.html">Opening Page</a>
-            <a class="menu-item" href="lesson1.html">第一堂課</a>
-            <a class="menu-item" href="lesson2.html">第二堂課</a>
-            <a class="menu-item" href="lesson3.html">第三堂課</a>
-            <a class="menu-item active" href="lesson4.html">第四堂課</a>
-            <a class="menu-item" href="#">第五堂課</a>
-            <a class="menu-item" href="#">第六堂課</a>
-            <a class="menu-item" href="#">第七堂課</a>
-            <a class="menu-item" href="#">第八堂課</a>
-            <a class="menu-item" href="#">第九堂課</a>
-            <a class="menu-item" href="#">第十堂課</a>
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            <a class="menu-item" href="lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            
+            <a class="menu-item active" href="lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            
+            <a class="menu-item" href="lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階應用</a>
+            <a class="menu-item" href="lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
         </nav>
 
         <div class="bottom-info">
-            課堂練習的資料
+            <p>© 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
         </div>
     </aside>
 
-    <!-- 右側內容 -->
     <main class="content">
 
         <header class="topbar">
             <div class="title-section">
-                <h1>第四堂課內容</h1>
-                <p>認識 CSS Selector、套用方式、樣式與盒模型概念</p>
-                <p>課堂實際練習：</p>
-                <a href="https://ruinuo217.github.io/PracticePage/web8/index.html" target="_blank">web8</a>
-                <a href="https://ruinuo217.github.io/PracticePage/web9/index.html" target="_blank">web9</a>
-                <a href="https://ruinuo217.github.io/PracticePage/web10/index.html" target="_blank">web10</a>
+                <h1>Module 04: JavaScript 核心邏輯</h1>
+                <p>ES6+ Syntax, DOM Manipulation, Functions & Data Structures</p>
             </div>
         </header>
 
         <section class="page-section">
-            <h2 class="section-title">課程介紹</h2>
+            <div class="section-header">
+                <h2 class="section-title">變數與基礎邏輯 (Variables & Logic)</h2>
+            </div>
 
             <div class="cards">
-
-                <!-- Card 1 -->
                 <div class="card">
-                    <h3 class="card-title">簡介</h3>
-                    <ul>
-                        <li>CSS 樣式規則</li>
-                        <li>CSS 選擇器</li>
-                        <li>CSS 盒模型</li>
-                        <li>CSS 定位方式</li>
-                    </ul>
+                    <h3 class="card-title">變數宣告與資料型別</h3>
+                    <div class="alert-box">
+                        <strong>💡 Modern JS 觀念：</strong><br>
+                        現代前端已棄用 <code>var</code>。請一律使用 <code>let</code>（宣告可變更的變數）與 <code>const</code>（宣告不可變更的常數），以避免區域變數污染的問題。
+                    </div>
+<pre class="code-block"><code>// 現代變數宣告方式
+let age = 25;      // 數字 (Number)
+const name = "Reyna"; // 字串 (String) - 宣告後不可修改
+let isDeveloper = true; // 布林值 (Boolean)
+
+// typeof 運算子：用來檢查資料型別
+console.log(typeof age); // 回傳 "number"</code></pre>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="card">
-                    <h3 class="card-title">CSS 規則組成</h3>
-                    <p>CSS 由 <strong>選擇器 (selector)</strong> 和 <strong>宣告區塊 (declaration)</strong> 組成。</p>
-<pre>
-selector {
-   property: value;
-   property2: value2;
+                    <h3 class="card-title">運算子與條件判斷</h3>
+                    <p class="card-text">除了基本的 <code>+ - * / %</code> 算數運算子，邏輯判斷在實務上極為重要。強烈建議使用 <code>===</code>（全等）取代 <code>==</code>。</p>
+<pre class="code-block"><code>let time = new Date().getHours();
+let greeting = "";
+
+// If...else if...else 判斷式
+if (time < 12) {
+    greeting = "Good morning";
+} else if (time < 18) {
+    greeting = "Good afternoon";
+} else {
+    greeting = "Good evening";
+}</code></pre>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">迴圈控制 (Loops)</h3>
+                    <p class="card-text">用來重複執行代碼。常見有 <code>for</code> (已知次數)、<code>while</code> (未知次數，依條件執行)。</p>
+<pre class="code-block"><code>// 基礎 For 迴圈
+for (let i = 0; i < 5; i++) {
+    if (i === 3) break; // 跳出整個迴圈
+    console.log("當前數字：" + i);
 }
-</pre>
+
+// 搭配陣列使用
+const cars = ["BMW", "Volvo", "Ford"];
+for (let i = 0; i < cars.length; i++) {
+    console.log(cars[i]);
+}</code></pre>
                 </div>
+            </div>
+        </section>
 
-                <!-- Card 3 -->
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">資料結構與函數 (Data & Functions)</h2>
+            </div>
+
+            <div class="cards">
                 <div class="card">
-                    <h3 class="card-title">CSS 套用方式</h3>
-                    <ul>
-                        <li><strong>行內樣式 Inline</strong>：寫在標籤內</li>
-                    </ul>
-<pre>&lt;p style="font-size:16px"&gt;文字內容&lt;/p&gt;</pre>
-
-                    <ul>
-                        <li><strong>內嵌樣式 Embedded</strong>：寫在 &lt;style&gt; 內</li>
-                    </ul>
-<pre>&lt;style&gt;
-p { background-color: red; }
-&lt;/style&gt;</pre>
-
-                    <ul>
-                        <li><strong>外部樣式 External</strong>：連結 CSS</li>
-                    </ul>
-<pre>&lt;link rel="stylesheet" href="style.css"&gt;</pre>
-
-                    <ul>
-                        <li><strong>匯入樣式 Import</strong></li>
-                    </ul>
-<pre>&lt;style&gt;
-@import url("style.css");
-&lt;/style&gt;</pre>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="card">
-                    <h3 class="card-title">媒體類別（Media Types）</h3>
-                    <p>不同裝置可使用不同 CSS。</p>
-<pre>
-&lt;link rel="stylesheet" href="style.css" media="print"&gt;
-&lt;style media="screen"&gt; ... &lt;/style&gt;
-</pre>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="card">
-                    <h3 class="card-title">CSS 選擇器</h3>
-
-                    <p><strong>1. 群組選擇器</strong></p>
-<pre>h1, h2, h3 { color: green; }</pre>
-
-                    <p><strong>2. 後代選擇器</strong></p>
-<pre>
-li strong {
-   font-style: italic;
+                    <h3 class="card-title">函數 (Functions)</h3>
+                    <p class="card-text">函數是可重複使用的代碼區塊，可以帶入參數 (Parameters) 並回傳值 (Return)。</p>
+<pre class="code-block"><code>// 帶有參數與回傳值的函數
+function calculateArea(width, height) {
+    let area = width * height;
+    return area; // 將計算結果回傳
 }
-</pre>
 
-                    <p><strong>3. Class 選擇器</strong></p>
-<pre>.center { text-align: center; }</pre>
-
-                    <p><strong>4. ID 選擇器</strong></p>
-<pre>
-#red { color: red; }
-#green { color: green; }
-</pre>
-
-                    <p><strong>5. 屬性選擇器</strong></p>
-<pre>
-[title] { color: red; }
-[title="Hello"] { border: 5px solid blue; }
-</pre>
+// 呼叫函數並將結果存入變數
+const myArea = calculateArea(10, 5); 
+console.log(myArea); // 輸出 50</code></pre>
                 </div>
 
-                <!-- Card 6 -->
                 <div class="card">
-                    <h3 class="card-title">CSS 樣式：背景</h3>
+                    <h3 class="card-title">陣列 (Array) & 物件 (Object)</h3>
+                    <p class="card-text">陣列用來儲存有序清單；物件用來儲存具備「屬性」與「方法」的實體資料。</p>
+<pre class="code-block"><code>// 陣列 (Array) 與常用方法
+const skills = ["HTML", "CSS", "JS"];
+skills.push("React"); // 在結尾新增元素
+console.log(skills.length); // 取得陣列長度
 
-                    <p><strong>背景顏色：</strong></p>
-<pre>p { background-color: gray; }</pre>
-
-                    <p><strong>背景圖片：</strong></p>
-<pre>p { background-image: url(bg.jpg); }</pre>
-
-                    <p><strong>背景重複：</strong></p>
-<pre>
-body {
-   background-image: url(pic.png);
-   background-repeat: repeat-y;
-}
-</pre>
-
-                    <p><strong>背景定位：</strong></p>
-<pre>
-body {
-   background-position: center top;
-}
-</pre>
+// 物件 (Object) 定義
+const person = {
+    firstName: "Reyna",
+    role: "Frontend Developer",
+    // 物件內的方法
+    greet: function() {
+        return "Hi, I am " + this.firstName;
+    }
+};
+console.log(person.role); // 存取物件屬性</code></pre>
                 </div>
 
-                <!-- Card 7 -->
                 <div class="card">
-                    <h3 class="card-title">CSS 盒模型（Box Model）</h3>
-                    <p>每個元素包含：</p>
-                    <ul>
-                        <li>內容 content</li>
-                        <li>內距 padding</li>
-                        <li>邊框 border</li>
-                        <li>外距 margin</li>
-                    </ul>
-                </div>
+                    <h3 class="card-title">DOM 操作與事件聆聽</h3>
+                    <p class="card-text">JavaScript 核心應用：操作網頁上的 HTML 元素並產生互動。</p>
+<pre class="code-block"><code>&lt;!-- HTML 元素 --&gt;
+&lt;p id="demo"&gt;原始文字&lt;/p&gt;
+&lt;button id="myBtn"&gt;點擊更改&lt;/button&gt;
 
-                <!-- Card 8 -->
-                <div class="card">
-                    <h3 class="card-title">CSS 定位（Position）</h3>
-                    <ul>
-                        <li><strong>static</strong></li>
-                        <li><strong>relative</strong></li>
-                        <li><strong>absolute</strong></li>
-                        <li><strong>fixed</strong></li>
-                        <li><strong>sticky</strong></li>
-                    </ul>
-                </div>
+&lt;script&gt;
+// 1. 選取 DOM 元素
+const demoText = document.getElementById("demo");
+const btn = document.getElementById("myBtn");
 
+// 2. 註冊點擊事件 (現代寫法)
+btn.addEventListener("click", function() {
+    demoText.innerHTML = "&lt;strong&gt;JavaScript 成功修改了內容！&lt;/strong&gt;";
+    demoText.style.color = "blue"; // 動態修改 CSS
+});
+&lt;/script&gt;</code></pre>
+                </div>
             </div>
         </section>
 
     </main>
-
 </div>
 
 </body>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 10: Web API 串接｜Reyna Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            <a class="menu-item" href="lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            
+            <a class="menu-item active" href="lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+        </nav>
+
+        <div class="bottom-info">
+            <p>© 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+
+        <header class="topbar">
+            <div class="title-section">
+                <h1>Module 10: Web API 串接與資料交換</h1>
+                <p>RESTful API, JSON Data Format, AJAX Requests & PHP Endpoints</p>
+            </div>
+        </header>
+
+        <section class="page-section demo-section">
+            <h2 class="section-title"><i class="bi bi-laptop"></i> 課堂實作 Demo (Live Preview)</h2>
+            <div class="demo-links">
+                <a href="#" class="demo-btn"><i class="bi bi-cloud-arrow-up"></i> Web 13: AJAX 非同步資料加載實作</a>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">API 概念與應用場景 (Concepts)</h2>
+            </div>
+            
+
+[Image of RESTful API client server architecture]
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">何謂 Web API？</h3>
+                    <ul class="tech-list">
+                        <li><strong>API (應用程式介面)：</strong> 就像是餐廳的服務生（信差），接收前端的要求，傳遞給後端廚房，再把資料（餐點）送回前端。能大幅減少開發成本。</li>
+                        <li><strong>Web API：</strong> 藉由 HTTP 通訊協定，進行請求、運算、回應的 API。通常提供 JSON 或 XML 兩種傳輸格式，是現代網頁交換資訊的基礎。</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">常見 Web API 應用場景</h3>
+                    <p class="card-text">透過串接第三方或自己建立的 API，能為網站擴充強大的功能：</p>
+                    <ul class="tech-list">
+                        <li><strong>會員認證：</strong> 串接 Google、Facebook 社群帳號快速登入。</li>
+                        <li><strong>社群嵌入：</strong> 臉書分享、按讚按鈕整合。</li>
+                        <li><strong>資料嵌入：</strong> Google Maps 地圖、天氣資訊、即時匯率等。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">資料傳輸格式 (XML vs JSON)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">舊式標準：XML 格式</h3>
+                    <p class="card-text">使用類似 HTML 的標籤包覆資料，缺點是較為冗長，增加傳輸體積。</p>
+<pre class="code-block"><code>&lt;robot&gt;
+    &lt;name&gt;多拉A夢&lt;/name&gt;
+    &lt;height&gt;129.3&lt;/height&gt;
+    &lt;weight&gt;129.3&lt;/weight&gt;
+    &lt;hobby&gt;
+        &lt;food&gt;銅鑼燒、機油&lt;/food&gt;
+        &lt;relationship&gt;和小咪約會&lt;/relationship&gt;
+    &lt;/hobby&gt;
+&lt;/robot&gt;</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">現代主流：JSON 格式</h3>
+                    <p class="card-text">JSON 更輕量、靈活且可讀性極高。它幾乎與所有網頁語言相容，是目前 Web API 最普遍的格式。</p>
+<pre class="code-block"><code>{
+    "name": "多拉A夢",
+    "height": 129.3,
+    "weight": 129.3,
+    "hobby": {
+        "food": "銅鑼燒、機油",
+        "relationship": "和小咪約會"
+    }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">前後端串接實作 (AJAX & PHP Endpoints)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">前端：使用 jQuery AJAX 請求資料</h3>
+                    <div class="alert-box">
+                        <strong>💡 非同步傳輸：</strong><br>
+                        使用 AJAX 可以在「不重新整理網頁」的情況下，與伺服器交換資料並更新部分網頁內容。
+                    </div>
+<pre class="code-block"><code>// 1. 簡易的 GET 請求 (取得資料)
+$.get("demo.json", function(result) {
+    console.log(result);
+});
+
+// 2. 完整的 POST 請求 (傳送表單與上傳檔案)
+let formData = new FormData();
+formData.append('guest', $('#guest').val());
+formData.append('photo', $('#photo')[0].files[0]);
+
+$.ajax({
+    url: 'api_url.php',
+    type: 'POST',
+    data: formData,
+    contentType: false, // 必須為 false 才能傳送檔案
+    processData: false, // 必須為 false 避免資料被轉換
+    success: function(returnData) {
+        console.log(returnData);
+    }
+});</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">後端：使用 PHP 製作 Web API</h3>
+                    <p class="card-text">PHP 接收請求、操作資料庫後，最重要的步驟就是將陣列使用 <code>json_encode()</code> 轉換成 JSON 字串輸出。</p>
+<pre class="code-block"><code>&lt;?php
+    // --- 實作：新增資料並回傳 JSON 結果 ---
+    $sql = "INSERT INTO table VALUES('$user', '$file')";
+    
+    // 初始化回傳陣列
+    $arr = array(); 
+
+    if (mysqli_query($conn, $sql)) {
+        $arr['success'] = true;
+        $arr['message'] = '資料傳送成功';
+    } else {
+        $arr['success'] = false;
+        $arr['message'] = '資料傳送失敗';
+    }
+
+    // 將陣列轉為 JSON 格式 (保留中文不轉譯)
+    $api = json_encode($arr, JSON_UNESCAPED_UNICODE);
+    
+    // 輸出 API 回應給前端
+    echo $api;
+?&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>

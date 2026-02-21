@@ -3,67 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening Page｜Reyna 作品集</title>
-
-    <!-- Bootstrap Icons -->
+    <title>Reyna Gao | Frontend Developer Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="layout">
 
-    <!-- 左側側邊欄 -->
     <aside class="sidebar">
-        <h2 class="logo">Reyna</h2>
-        <p class="sub">Web Design Portfolio</p>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
 
         <nav class="menu">
-            <a class="menu-item active" href="index.html">Opening Page</a>
-            <a class="menu-item" href="lesson1.html">第一堂課</a>
-            <a class="menu-item" href="lesson2.html">第二堂課</a>
-            <a class="menu-item" href="lesson3.html">第三堂課</a>
-            <a class="menu-item" href="lesson4.html">第四堂課</a>
-            <a class="menu-item" href="#">第五堂課</a>
-            <a class="menu-item" href="#">第六堂課</a>
-            <a class="menu-item" href="#">第七堂課</a>
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item active" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
             
-            <a class="menu-item" href="#">第八堂課</a>
-            <a class="menu-item" href="#">第九堂課</a>
-            <a class="menu-item" href="#">第十堂課</a>
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
         </nav>
 
         <div class="bottom-info">
-            課堂練習的資料
+            <p>© 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
         </div>
     </aside>
 
-    <!-- 右側內容 -->
     <main class="content">
-
         <header class="topbar">
             <div class="title-section">
-                <h1>Reyna 新手練習頁面</h1>
-                <p>Welcome</p>
+                <h1>Hello, I'm Reyna Gao 👋</h1>
+                <p>專注於前端開發與 UI/UX 體驗</p>
             </div>
         </header>
 
         <section class="page-section">
-
-            <h2 class="section-title">歡迎頁</h2>
-
-            <div class="cards only-one">
-                <div class="card">
-                    <h3 class="card-title">Opening</h3>
-                    <p style="font-size: 1.1rem; line-height: 1.8;">
-                        這是一個 HTML/CSS 新手練習網站<br>
-                        歡迎來到 Reyna 的新手網站<br><br>
-                        2025 年 11 月
-                    </p>
-                </div>
+            <div class="section-header">
+                <h2 class="section-title">About & Skills</h2>
+                <span class="badge">Ready to Work</span>
             </div>
 
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon"><i class="bi bi-person-workspace"></i></div>
+                    <h3 class="card-title">My Journey</h3>
+                    <p class="card-text">
+                        這是一個紀錄我完整全端學習軌跡的技術筆記與實作專案庫。從基礎的語意化 HTML、CSS3 現代排版，到深度的 JavaScript DOM 操作，並延伸至 PHP 後端與 Web API 串接。我致力於寫出乾淨、具備響應式且易於維護的程式碼。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="bi bi-tools"></i></div>
+                    <h3 class="card-title">Tech Stack</h3>
+                    <ul class="tech-list">
+                        <li><strong>Frontend:</strong> HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6+), jQuery</li>
+                        <li><strong>Framework:</strong> Bootstrap 5</li>
+                        <li><strong>Backend & DB:</strong> PHP, MySQL, RESTful API (JSON/AJAX)</li>
+                        <li><strong>Design & Tools:</strong> UI/UX Thinking, VS Code, Git</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
     </main>

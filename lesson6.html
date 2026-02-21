@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 06: jQuery 實戰應用｜Reyna Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+            <a class="menu-item" href="lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            
+            <a class="menu-item active" href="lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            
+            <a class="menu-item" href="lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+        </nav>
+
+        <div class="bottom-info">
+            <p>© 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+
+        <header class="topbar">
+            <div class="title-section">
+                <h1>Module 06: jQuery 實戰應用</h1>
+                <p>jQuery Selectors, DOM Traversal, Events & Animations</p>
+            </div>
+        </header>
+
+        <section class="page-section demo-section">
+            <h2 class="section-title"><i class="bi bi-laptop"></i> 課堂實作 Demo (Live Preview)</h2>
+            <div class="demo-links">
+                <a href="#" class="demo-btn"><i class="bi bi-images"></i> jQuery Album: 動態相簿功能</a>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">jQuery 基礎語法與選取器</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">起手式與文檔就緒</h3>
+                    <p class="card-text">為了確保 DOM 元素都已經完全載入，所有的 jQuery 代碼都應該包裝在 <code>ready()</code> 函數中。</p>
+<pre class="code-block"><code>// 基礎語法結構：$(selector).action()
+
+// 確保文檔完全加載 (文檔就緒函數)
+$(document).ready(function() {
+    
+    // 你的 jQuery 代碼寫在這裡
+    console.log("jQuery is ready!");
+    
+});</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">強大的選擇器 (Selectors)</h3>
+                    <p class="card-text">利用 <code>$()</code> 包裹 CSS 選擇器，就能輕鬆抓取網頁元素。</p>
+<pre class="code-block"><code>// 基本選擇器
+$("p")        // 標籤選擇器
+$(".intro")   // Class 選擇器
+$("#demo")    // ID 選擇器
+
+// 屬性選擇器
+$("[href]")   // 帶有 href 屬性的元素
+$("[href$='.jpg']") // href 值以 .jpg 結尾的元素</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">DOM 操作與事件綁定</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">內容、屬性與類別操作</h3>
+                    <p class="card-text">jQuery 提供極簡的方法來取得 (Get) 或設定 (Set) 元素的內容與樣式。</p>
+<pre class="code-block"><code>// 內容操作
+$("#text").text("Hello");       // 修改純文字
+$("#box").html("&lt;b&gt;Hi&lt;/b&gt;");  // 修改 HTML 結構
+$("#input").val("Reyna");       // 修改表單輸入值
+
+// 屬性與類別操作
+$("img").attr("src", "new.jpg"); // 修改屬性
+$("p").addClass("highlight");    // 新增 class
+$("p").removeClass("highlight"); // 移除 class</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">事件監聽 (Events)</h3>
+                    <div class="alert-box">
+                        <strong>💡 jQuery 的強項：</strong> 原生 JS 的 <code>querySelectorAll</code> 抓到多個元素後必須使用迴圈才能綁定事件，但在 jQuery 裡，它會自動幫所有符合的元素綁定事件！
+                    </div>
+<pre class="code-block"><code>// 滑鼠點擊事件
+$("button").click(function() {
+    $("p").hide(); // 隱藏所有段落
+});
+
+// 使用 on() 綁定多個事件或未來動態產生的元素
+$(document).on("click", "li", function() {
+    $(this).remove(); // 點擊列表項目即刪除自己
+});</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">動畫特效 (Effects & Animations)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">基礎特效 (淡入淡出 / 滑動)</h3>
+                    <p class="card-text">能快速製作 UI 互動效果。參數可填入速度 (<code>"slow"</code>, <code>"fast"</code> 或毫秒)。</p>
+<pre class="code-block"><code>// 顯示與隱藏
+$("#panel").toggle("fast");
+
+// 淡入與淡出
+$("#box").fadeToggle(1000); // 1秒內切換淡入/淡出
+$("#box").fadeTo("slow", 0.5); // 透明度漸變至 50%
+
+// 上下滑動 (常應用於手風琴選單)
+$(".menu").slideDown();</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">自訂動畫與鍊式寫法 (Chaining)</h3>
+                    <p class="card-text">使用 <code>animate()</code> 改變 CSS 屬性，並使用鍊式寫法將多個動作串接起來，依序執行。</p>
+<pre class="code-block"><code>// 自訂動畫 (屬性名需改用駝峰式)
+$("div").animate({
+    left: '250px',
+    opacity: '0.5',
+    width: '150px'
+});
+
+// 🌟 鍊式寫法 (Chaining)：一個元素執行多道指令
+$("#p1").css("color", "red")
+        .slideUp(2000)
+        .slideDown(2000);</code></pre>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>
