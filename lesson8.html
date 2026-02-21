@@ -862,31 +862,142 @@
     </div>
 </div>
 
-                <div class="card">
-                    <h3 class="card-title">實戰：檔案上傳處理</h3>
-                    <p class="card-text">前端需設定 <code>enctype="multipart/form-data"</code>。後端透過 <code>$_FILES</code> 接收並移動檔案。</p>
-<pre class="code-block"><code>&lt;!-- 1. 前端 HTML 表單 --&gt;
-&lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;
-    &lt;input type="file" name="file" id="file"&gt;
-    &lt;input type="submit" name="submit" value="提交"&gt;
-&lt;/form&gt;
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">表單設定與 $_FILES 陣列 (Form & $_FILES)</h3>
+    <p class="card-text small text-muted">要透過 PHP 接收檔案，前端表單必須具備特定屬性，而後端則透過 <code>$_FILES</code> 這個超級全域變數 (二維陣列) 來接收。</p>
 
-&lt;!-- 2. 後端 PHP 處理 (upload.php) --&gt;
-&lt;?php
-    if ($_FILES["file"]["error"] &gt; 0) {
-        echo "錯誤: " . $_FILES["file"]["error"];
-    } else {
-        echo "檔案名稱: " . $_FILES["file"]["name"];
-        echo "檔案大小: " . ($_FILES["file"]["size"] / 1024) . " kB";
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 前端表單的硬性規定：</strong><br>
+        要上傳檔案，表單的 <code>method</code> 必須是 <code>POST</code>，而且<strong>必須加上 <code>enctype="multipart/form-data"</code></strong>，否則 PHP 完全收不到檔案實體！
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 前端 HTML 表單</h4>
+<pre class="code-block mb-0"><code>&lt;!-- enctype 屬性絕對不能漏掉！ --&gt;
+&lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;
+    &lt;label for="file"&gt;選擇檔案：&lt;/label&gt;
+    &lt;!-- name 屬性決定了後端接收的鍵值 --&gt;
+    &lt;input type="file" name="myFile" id="file" required&gt;
+    &lt;button type="submit"&gt;上傳檔案&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        </div>
         
-        // 將檔案從暫存區移動到指定目錄
-        move_uploaded_file(
-            $_FILES["file"]["tmp_name"], 
-            "upload/" . $_FILES["file"]["name"]
-        );
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 後端 $_FILES 五大屬性</h4>
+            <ul class="tech-list mb-1">
+                <li><code>["name"]</code>：上傳檔案的原始名稱 (如 image.jpg)。</li>
+                <li><code>["type"]</code>：檔案的 MIME 類型 (如 image/jpeg)。</li>
+                <li><code>["size"]</code>：檔案大小 (單位為 bytes)。</li>
+                <li><code>["tmp_name"]</code>：檔案上傳後，暫存在伺服器上的臨時路徑與名稱。</li>
+                <li><code>["error"]</code>：錯誤代碼 (0 代表成功無錯誤)。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">基礎檔案上傳實作 (Basic Upload Logic)</h3>
+    <p class="card-text small text-muted">檔案上傳後會先放在伺服器的「暫存區」，我們必須使用 <code>move_uploaded_file()</code> 將它移動到指定的正式目錄中。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 檢查與讀取檔案資訊</h4>
+            <p class="small text-muted mb-1">現代寫法會使用 PHP 內建的常數 <code>UPLOAD_ERR_OK</code> (其值為 0) 來判斷是否上傳成功。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 先確認是否有收到名為 myFile 的檔案
+    if (isset($_FILES["myFile"])) {
+        
+        $file = $_FILES["myFile"];
+        
+        // 檢查是否有上傳錯誤
+        if ($file["error"] === UPLOAD_ERR_OK) {
+            $fileName = $file["name"];
+            $fileTmp  = $file["tmp_name"];
+            
+            // 換算為 KB 顯示
+            $fileSizeKB = round($file["size"] / 1024, 2);
+            echo "檔案 {$fileName} ({$fileSizeKB} KB) 已成功抵達暫存區。";
+            
+        } else {
+            echo "上傳發生錯誤，代碼：" . $file["error"];
+        }
     }
 ?&gt;</code></pre>
-                </div>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 移動檔案至指定目錄</h4>
+            <p class="small text-muted mb-1">暫存檔在 PHP 腳本執行結束後就會自動刪除，因此必須立刻移動。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ...接續左側的成功判斷邏輯...
+
+    // 設定要儲存的目標資料夾 (確保該資料夾已建立且有寫入權限)
+    $uploadDir = "uploads/";
+    
+    // 目標檔案的完整路徑 (資料夾路徑 + 檔名)
+    $destination = $uploadDir . $fileName;
+
+    // 將檔案從暫存區移動到目標位置
+    if (move_uploaded_file($fileTmp, $destination)) {
+        echo "檔案已成功儲存至：{$destination}";
+    } else {
+        echo "檔案移動失敗！";
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">💡 現代後端必備：檔案上傳安全防護 (Security Practices)</h3>
+    <p class="card-text small text-muted">絕對不能直接信任使用者的原始檔名 (可能包含惡意代碼或覆蓋現有檔案)。實戰中，我們必須自行檢查副檔名、限制大小，並給予亂數新檔名！</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 1. 限制大小與驗證副檔名</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    $file = $_FILES["myFile"];
+    $maxSize = 2 * 1024 * 1024; // 限制 2MB (2 * 1024KB * 1024Bytes)
+
+    // 檢查檔案大小
+    if ($file["size"] &gt; $maxSize) {
+        die("檔案太大，請上傳小於 2MB 的檔案！");
+    }
+
+    // 取得並檢查副檔名 (將檔名轉小寫並取得最後一個小數點後的值)
+    $fileExt = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+    $allowedExts = ["jpg", "jpeg", "png", "gif"];
+
+    // 判斷副檔名是否在白名單內
+    if (!in_array($fileExt, $allowedExts)) {
+        die("只允許上傳 JPG, PNG, GIF 圖片檔！");
+    }
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 2. 重新命名機制 (防止覆蓋與資安漏洞)</h4>
+            <p class="small text-muted mb-1">使用時間戳或 <code>uniqid()</code> 產生獨一無二的檔名，再接回原本安全的副檔名。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ...接續左側通過檢查後的邏輯...
+
+    // 產生唯一新檔名 (例如: 6512a3b9c7d8e.jpg)
+    $newFileName = uniqid() . "." . $fileExt;
+    
+    // 設定新的儲存路徑
+    $uploadDir = "uploads/";
+    $destination = $uploadDir . $newFileName;
+
+    // 安全地移動檔案
+    if (move_uploaded_file($file["tmp_name"], $destination)) {
+        echo "上傳成功！新檔名為：{$newFileName}";
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
 

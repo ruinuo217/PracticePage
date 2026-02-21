@@ -72,42 +72,117 @@
             </div>
         </section>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
-                <h2 class="section-title">API 概念與應用場景 (Concepts)</h2>
+                <h2 class="section-title">API 概念與應用場景 (Concepts & Scenarios)</h2>
             </div>
             
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">何謂 Web API？</h3>
-                    <ul class="tech-list">
-                        <li><strong>API (應用程式介面)：</strong> 就像是餐廳的服務生（信差），接收前端的要求，傳遞給後端廚房，再把資料（餐點）送回前端。能大幅減少開發成本。</li>
-                        <li><strong>Web API：</strong> 藉由 HTTP 通訊協定，進行請求、運算、回應的 API。通常提供 JSON 或 XML 兩種傳輸格式，是現代網頁交換資訊的基礎。</li>
-                    </ul>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">何謂 API？(Application Programming Interface)</h3>
+                    <p class="card-text small text-muted">API 中文為「應用程式介面」。它是串接兩端裝置或應用程式的橋樑，實現資訊或技術的交換與溝通。使用 API 能大幅減少開發成本，因為你不需要知道對方底層怎麼寫的，只需「傳送需求」，就能「取得結果」。</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 業界最經典的比喻：餐廳的服務生</strong><br>
+                        把你（Client 端）當作客人，廚房（Server 端後端系統）當作廚師。你不需要親自進廚房炒菜，你只需要把菜單交給<strong>服務生（API）</strong>；服務生會把你的點單翻譯給廚房聽，等廚房做好菜後，服務生再把餐點（Data）端回你的桌上。
+                    </div>
+
+                    
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">常見 Web API 應用場景</h3>
-                    <p class="card-text">透過串接第三方或自己建立的 API，能為網站擴充強大的功能：</p>
-                    <ul class="tech-list">
-                        <li><strong>會員認證：</strong> 串接 Google、Facebook 社群帳號快速登入。</li>
-                        <li><strong>社群嵌入：</strong> 臉書分享、按讚按鈕整合。</li>
-                        <li><strong>資料嵌入：</strong> Google Maps 地圖、天氣資訊、即時匯率等。</li>
-                    </ul>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">現代網頁骨幹：Web API 與 RESTful 概念</h3>
+                    <p class="card-text small text-muted">Web API 是指專門藉由 <strong>HTTP 通訊協定</strong>，透過「網路」進行請求與回應的 API。現代 Web API 通常提供 JSON 傳輸格式，並且強烈建議遵循 RESTful 設計風格。</p>
+
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ Web API 的兩大傳輸格式</h4>
+                            <ul class="tech-list mb-1">
+                                <li><strong>JSON (現代主流)：</strong> 輕量、易讀，JavaScript 原生支援，解析速度極快。</li>
+                                <li><strong>XML (傳統標準)：</strong> 使用標籤包覆資料，結構嚴謹但較為冗長，多見於舊型企業系統（如銀行、政府老舊 API）。</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ RESTful API 基礎動詞</h4>
+                            <p class="small text-muted mb-1">現代 Web API 會利用 HTTP 的「動詞」來對應資料庫的 CRUD 操作：</p>
+                            <ul class="tech-list mb-1">
+                                <li><strong>GET：</strong> 讀取資料 (Read)</li>
+                                <li><strong>POST：</strong> 新增資料 (Create)</li>
+                                <li><strong>PUT / PATCH：</strong> 更新資料 (Update)</li>
+                                <li><strong>DELETE：</strong> 刪除資料 (Delete)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 常見 Web API 實戰應用場景</h3>
+                    <p class="card-text small text-muted">現代網站很少從零開始自己做所有功能，多數強大且複雜的服務都是透過串接第三方 Web API 來實現的。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 身分驗證與社群整合 (OAuth)</h4>
+                            <ul class="tech-list mb-1">
+                                <li><strong>第三方快速登入：</strong> 網站常見的「使用 Google、LINE 或 Facebook 帳號登入」，就是串接該平台的認證 API。</li>
+                                <li><strong>社群行為嵌入：</strong> 分享文章到臉書、讀取 Instagram 的貼文牆。</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 數據獲取與第三方服務</h4>
+                            <ul class="tech-list mb-1">
+                                <li><strong>公開資料嵌入：</strong> 呼叫氣象局 API 顯示天氣、呼叫金融 API 獲取美股/台股即時報價、Google Maps 地圖嵌入。</li>
+                                <li><strong>電子商務服務：</strong> 串接「綠界科技」或「LINE Pay」API 來處理信用卡結帳；串接超商物流 API 選擇取貨門市。</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
                 <h2 class="section-title">資料傳輸格式 (XML vs JSON)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">舊式標準：XML 格式</h3>
-                    <p class="card-text">使用類似 HTML 的標籤包覆資料，缺點是較為冗長，增加傳輸體積。</p>
-<pre class="code-block"><code>&lt;robot&gt;
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">為什麼 JSON 會成為現代 API 的霸主？</h3>
+                    <p class="card-text small text-muted">Web API 在傳輸資料時，需要一種前後端都「看得懂」的共通格式。早期流行 XML，但現在已經是 JSON 的天下。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 舊式標準：XML 格式</h4>
+                            <p class="small text-muted mb-1">全名為「可延伸標記式語言」。</p>
+                            <ul class="tech-list mb-1">
+                                <li><strong>缺點 1：冗長笨重。</strong> 每一筆資料都要用開頭與結尾的標籤包覆，導致傳輸檔案變得很大。</li>
+                                <li><strong>缺點 2：解析麻煩。</strong> 在前端需要透過複雜的 DOM 操作才能把 XML 裡面的資料抽出來。</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 現代主流：JSON 格式</h4>
+                            <p class="small text-muted mb-1">全名為「JavaScript 物件表示法」。</p>
+                            <ul class="tech-list mb-1">
+                                <li><strong>優點 1：輕量快速。</strong> 只保留單純的鍵值對 (Key-Value) 和陣列符號，檔案極小。</li>
+                                <li><strong>優點 2：原生相容。</strong> 格式幾乎等同於 JavaScript 的物件，前端接手後可以「無縫接軌」直接使用。</li>
+                                <li><strong>優點 3：跨語言支援。</strong> PHP、Python、Java 都有極度完善的函式庫可一鍵解析 JSON。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">實戰對照：XML 與 JSON 的語法差異</h3>
+                    <p class="card-text small text-muted">我們用同一筆「多拉A夢」的資料，來看看兩種格式在寫法上的差異。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ XML 寫法 (像 HTML 一樣)</h4>
+<pre class="code-block mb-0"><code>&lt;robot&gt;
     &lt;name&gt;多拉A夢&lt;/name&gt;
     &lt;height&gt;129.3&lt;/height&gt;
     &lt;weight&gt;129.3&lt;/weight&gt;
@@ -116,12 +191,14 @@
         &lt;relationship&gt;和小咪約會&lt;/relationship&gt;
     &lt;/hobby&gt;
 &lt;/robot&gt;</code></pre>
-                </div>
+                        </div>
 
-                <div class="card">
-                    <h3 class="card-title">現代主流：JSON 格式</h3>
-                    <p class="card-text">JSON 更輕量、靈活且可讀性極高。它幾乎與所有網頁語言相容，是目前 Web API 最普遍的格式。</p>
-<pre class="code-block"><code>{
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 🌟 JSON 寫法 (極度簡潔)</h4>
+                            <div class="alert-box mb-2" style="font-size: 13px;">
+                                <strong>💡 語法限制：</strong> JSON 的 Key (鍵名) <strong>必須使用雙引號 <code>""</code></strong> 包覆，且最後一筆資料後面不能有逗號。
+                            </div>
+<pre class="code-block mb-0"><code>{
     "name": "多拉A夢",
     "height": 129.3,
     "weight": 129.3,
@@ -130,68 +207,200 @@
         "relationship": "和小咪約會"
     }
 }</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 現代實戰：前端如何請求 JSON 資料？</h3>
+                    <p class="card-text small text-muted">前端要向後端 (或 API 端點) 要資料，我們稱為發送「非同步請求」。除了使用 jQuery 之外，現代開發更推崇原生內建的寫法。</p>
+
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 使用 jQuery AJAX (傳統經典)</h4>
+                            <p class="small text-muted mb-1">透過 jQuery 幫我們處理掉底層複雜的 XMLHttpRequest。</p>
+<pre class="code-block mb-0"><code>// 簡易版 GET 請求 (取得 demo.json 的資料)
+$.get("demo.json", function(result) {
+    // jQuery 非常聰明，通常會自動幫你把 JSON 轉成 JS 物件
+    console.log("jQuery 取得結果：", result);
+    console.log("身高是：", result.height);
+});</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 🌟 使用原生 Fetch API (現代標準)</h4>
+                            <p class="small text-muted mb-1">現代前端開發（不依賴 jQuery 時）絕對必學的寫法！基於 Promise 架構，處理非同步極度優雅。</p>
+<pre class="code-block mb-0"><code>// 現代瀏覽器內建的 fetch 寫法
+fetch("demo.json")
+    .then(response =&gt; response.json()) // 1. 將回應解析為 JSON
+    .then(data =&gt; {
+        // 2. 順利拿到 JS 物件資料
+        console.log("Fetch 取得結果：", data);
+        console.log("最愛食物：", data.hobby.food);
+    })
+    .catch(error =&gt; {
+        console.error("請求發生錯誤：", error);
+    });</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
                 <h2 class="section-title">前後端串接實作 (AJAX & PHP Endpoints)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">前端：使用 jQuery AJAX 請求資料</h3>
-                    <div class="alert-box">
-                        <strong>💡 非同步傳輸：</strong><br>
-                        使用 AJAX 可以在「不重新整理網頁」的情況下，與伺服器交換資料並更新部分網頁內容。
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">後端實作：打造 GET 讀取 API (Read Data)</h3>
+                    <p class="card-text small text-muted">從資料庫撈出資料後，將它打包成 JSON 格式輸出給前端。這是製作 API 最基礎的流程。</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 現代 API 必備起手式：宣告 Header</strong><br>
+                        瀏覽器預設會把 PHP 輸出的內容當作「HTML 網頁」來解析。如果我們要輸出真正的 API，必須在程式最上方加上 <code>header('Content-Type: application/json; charset=utf-8');</code>，明確告訴前端這是一包 JSON 格式的數據。
                     </div>
-<pre class="code-block"><code>// 1. 簡易的 GET 請求 (取得資料)
-$.get("demo.json", function(result) {
-    console.log(result);
-});
 
-// 2. 完整的 POST 請求 (傳送表單與上傳檔案)
-let formData = new FormData();
-formData.append('guest', $('#guest').val());
-formData.append('photo', $('#photo')[0].files[0]);
-
-$.ajax({
-    url: 'api_url.php',
-    type: 'POST',
-    data: formData,
-    contentType: false, // 必須為 false 才能傳送檔案
-    processData: false, // 必須為 false 避免資料被轉換
-    success: function(returnData) {
-        console.log(returnData);
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 舊式寫法 (冗長且易錯)</h4>
+                            <p class="small text-muted mb-1">過去常需要宣告一個計數器 <code>$i</code>，然後一行一行地把欄位塞進陣列裡。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ⚠️ 傳統繁瑣的組裝方式
+    $i = 0;
+    while ($row = $result-&gt;fetch_assoc()) {
+        $data[$i]['id'] = $row['id'];
+        $data[$i]['title'] = $row['title'];
+        $data[$i]['content'] = $row['content'];
+        $i++;
     }
-});</code></pre>
+?&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 現代 PHP 寫法 (極度簡潔)</h4>
+                            <p class="small text-muted mb-1">直接把抓出來的一整列關聯陣列，推入結果陣列中。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 1. 宣告這是一個 JSON API
+    header('Content-Type: application/json; charset=utf-8');
+    require_once("db.php");
+
+    $sql = "SELECT id, title, content FROM my_table";
+    $result = mysqli_query($conn, $sql);
+    
+    $data = []; // 初始化空陣列
+    
+    // 2. 🌟 現代寫法：直接將整列資料推入陣列中
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row; 
+    }
+
+    // 3. 組合最終回應格式
+    $response = [
+        "success" =&gt; true,
+        "data"    =&gt; $data
+    ];
+
+    // 4. 輸出 JSON
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+?&gt;</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">後端：使用 PHP 製作 Web API</h3>
-                    <p class="card-text">PHP 接收請求、操作資料庫後，最重要的步驟就是將陣列使用 <code>json_encode()</code> 轉換成 JSON 字串輸出。</p>
-<pre class="code-block"><code>&lt;?php
-    // --- 實作：新增資料並回傳 JSON 結果 ---
-    $sql = "INSERT INTO table VALUES('$user', '$file')";
-    
-    // 初始化回傳陣列
-    $arr = array(); 
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">後端實作：打造 POST 寫入 API (Insert Data)</h3>
+                    <p class="card-text small text-muted">接收前端傳來的表單或檔案資料，寫入資料庫後，回傳「成功」或「失敗」的狀態訊息給前端。</p>
 
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 執行寫入與狀態回傳</h4>
+                            <p class="small text-muted mb-1">根據 <code>mysqli_query</code> 的執行結果，動態改變要回傳的陣列內容。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    header('Content-Type: application/json; charset=utf-8');
+    require_once("db.php");
+
+    // 接收前端資料 (實務上請務必使用 Prepared Statements 防護)
+    $user = $_POST['user'] ?? '';
+    $file = $_FILES['photo']['name'] ?? '';
+
+    $sql = "INSERT INTO my_table (user, photo) VALUES ('$user', '$file')";
+    
+    $response = []; // 準備回傳的陣列
+
+    // 判斷是否寫入成功
     if (mysqli_query($conn, $sql)) {
-        $arr['success'] = true;
-        $arr['message'] = '資料傳送成功';
+        $response['success'] = true;
+        $response['message'] = '資料傳送成功';
     } else {
-        $arr['success'] = false;
-        $arr['message'] = '資料傳送失敗';
+        $response['success'] = false;
+        $response['message'] = '資料傳送失敗';
     }
-
-    // 將陣列轉為 JSON 格式 (保留中文不轉譯)
-    $api = json_encode($arr, JSON_UNESCAPED_UNICODE);
-    
-    // 輸出 API 回應給前端
-    echo $api;
 ?&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 解決中文亂碼：JSON_UNESCAPED_UNICODE</h4>
+                            <p class="small text-muted mb-1">預設情況下，<code>json_encode</code> 會把中文字轉成類似 <code>\u8cc7\u6599</code> 的 Unicode 編碼。加入這個常數參數就能保留原生中文！</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ...接續左側邏輯...
+
+    // 🌟 轉換為 JSON 字串，並保留原生中文
+    $api_result = json_encode($response, JSON_UNESCAPED_UNICODE);
+    
+    // 輸出最終結果
+    echo $api_result;
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 前端實作：AJAX 非同步請求與檔案上傳 (FormData)</h3>
+                    <p class="card-text small text-muted">如果表單內含有「圖片/檔案」需要上傳，我們就不能只傳送純文字 JSON，必須利用 JavaScript 內建的 <code>FormData</code> 物件來打包資料！</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 1. 使用 FormData 打包資料</h4>
+                            <p class="small text-muted mb-1">這個寫法可以完美模擬傳統 HTML 表單 <code>enctype="multipart/form-data"</code> 的行為。</p>
+<pre class="code-block mb-0"><code>// 建立一個空的表單資料物件
+let formData = new FormData();
+
+// 加入純文字資料
+// 第一個參數是 Key (等同於 input 的 name)
+formData.append('user', $('#guest').val());
+
+// 🌟 加入檔案資料
+// $('#photo')[0] 取得原生的 DOM 元素
+// .files[0] 取得使用者選擇的第一個檔案實體
+formData.append('photo', $('#photo')[0].files[0]);</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 2. jQuery AJAX 關鍵參數設定</h4>
+                            <p class="small text-muted mb-1">用 AJAX 傳送 FormData 時，有兩個參數「絕對必須」設為 <code>false</code>，否則會發生錯誤！</p>
+<pre class="code-block mb-0"><code>$.ajax({
+    url: 'api_insert.php',
+    type: 'POST',
+    data: formData,
+    // 🛡️ 檔案上傳必備的兩個 false：
+    // 取消預設的內容編碼，讓瀏覽器自動加上 multipart 邊界
+    contentType: false, 
+    // 禁止 jQuery 把檔案轉換成查詢字串 (Query String)
+    processData: false, 
+    
+    success: function(returnData) {
+        // 如果後端有設 Header，這裡的 returnData 就會是 JS 物件
+        if (returnData.success) {
+            alert(returnData.message); // 顯示：資料傳送成功
+        }
+    }
+});</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

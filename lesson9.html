@@ -77,32 +77,102 @@
             <div class="section-header">
                 <h2 class="section-title">PHP 與 MySQL 連線 (Connection)</h2>
             </div>
-            
+  
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">建立與關閉連線</h3>
-                    <p class="card-text">MySQL 是與 PHP 搭配最流行的開源資料庫。在執行任何操作前，必須先透過 <code>mysqli_connect</code> 建立連線。</p>
-<pre class="code-block"><code>&lt;?php
-    $server = "localhost"; // 主機名稱
-    $user = "root";        // 用戶名稱
-    $pw = "password";      // 密碼
-    $db = "my_database";   // 資料庫名稱
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">建立與關閉連線 (mysqli_connect)</h3>
+    <p class="card-text small text-muted">在訪問 MySQL 資料庫前，我們必須先透過 PHP 建立到資料庫伺服器的連線。PHP 與 MySQL 的結合是跨平台的。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎連線實作</h4>
+            <p class="small text-muted mb-1">使用 <code>mysqli_connect()</code> 函式，並傳入主機、帳號、密碼與資料庫名稱。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $server = "localhost"; // 主機名稱 (本機開發通常為 localhost)
+    $user = "root";        // 用戶名稱 (XAMPP 預設為 root)
+    $pw = "password";      // 密碼 (XAMPP 預設為空字串 "")
+    $db = "my_database";   // 你要操作的資料庫名稱
 
     // 1. 建立連線
     $conn = mysqli_connect($server, $user, $pw, $db);
 
     // 2. 檢查連線狀態
     if (!$conn) {
+        // 如果失敗，die() 會停止腳本執行並印出錯誤訊息
         die("連線失敗: " . mysqli_connect_error());
     } else {
         echo "連線成功！";
     }
+?&gt;</code></pre>
+        </div>
 
-    // 3. 關閉連線 (腳本結束通常會自動關閉，但手動關閉是好習慣)
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 設定編碼與關閉連線</h4>
+            <p class="small text-muted mb-1">連線成功後，通常會馬上設定編碼以防中文亂碼。腳本執行完畢後連線會自動關閉，但手動關閉是好習慣。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ...接續左側連線成功的邏輯...
+    
+    // 🌟 極度重要：設定連線編碼為 utf8，防止抓出資料變亂碼
+    mysqli_query($conn, "SET NAMES utf8");
+    // 現代寫法也可使用：mysqli_set_charset($conn, "utf8mb4");
+
+    // 執行一連串的資料庫查詢與操作...
+    // ...
+
+    // 3. 手動關閉連線釋放資源
     mysqli_close($conn);
 ?&gt;</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">💡 現代實戰：連線檔抽離 (include / require)</h3>
+    <p class="card-text small text-muted">實務上，我們不可能在每一個需要連線的頁面都重複寫一次連線代碼。標準做法是將連線邏輯獨立成一個檔案（例如 <code>db.php</code>），然後在需要的頁面引入它。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ Step 1: 建立獨立的 db.php</h4>
+            <p class="small text-muted mb-1">這個檔案只負責建立連線與設定編碼，不輸出任何 HTML。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 檔案名稱：db.php
+    $server = "localhost";
+    $user = "root";
+    $pw = "";
+    $db = "my_database";
+
+    $conn = mysqli_connect($server, $user, $pw, $db);
+
+    if (!$conn) {
+        die("連線失敗: " . mysqli_connect_error());
+    }
+    
+    // 設定編碼
+    mysqli_set_charset($conn, "utf8mb4");
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Step 2: 在其他頁面引入連線檔</h4>
+            <p class="small text-muted mb-1">使用 <code>require_once</code> 確保檔案只會被載入一次，且如果載入失敗（例如找不到 db.php）會直接停止執行程式，避免發生嚴重錯誤。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 檔案名稱：index.php
+    
+    // 在最頂部引入連線檔，底下就可以直接使用 $conn 變數了
+    require_once("db.php");
+
+    // 開始執行查詢...
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($conn, $sql);
+    
+    // ...
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
             </div>
+
         </section>
 
         <section class="page-section">
@@ -111,68 +181,537 @@
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">新增 (INSERT) 與資安觀念</h3>
-                    <div class="alert-box">
-                        <strong>🛡️ 資安面試必考：</strong><br>
-                        實務上應避免直接將變數寫入 SQL 語法（易遭受 SQL 注入攻擊），建議使用 <strong>Prepared Statements</strong>。密碼也應使用 PHP 內建的 <code>password_hash()</code> 進行單向加密，而非舊版的 <code>password()</code>。
-                    </div>
-<pre class="code-block"><code>&lt;?php
-    // 基礎新增語法
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">新增記錄與密碼加密 (INSERT & Hashing)</h3>
+    <p class="card-text small text-muted">將前端表單收集到的資料寫入資料庫。在寫入之前，對於「密碼」等敏感資訊必須進行不可逆的加密處理。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern PHP 觀念：捨棄 MySQL 舊版密碼函式</strong><br>
+        傳統講義會使用 SQL 語法 <code>password($mpw)</code> 來加密，這在現代 MySQL 中已被<strong>徹底棄用</strong>。現代標準是一律在 PHP 端使用 <code>password_hash()</code> 進行單向加密（Bcrypt 演算法），未來登入時再用 <code>password_verify()</code> 來驗證！
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 現代 PHP 密碼加密處理</h4>
+            <p class="small text-muted mb-1">每一次加密出來的字串都不一樣，極大程度增加了駭客破解的難度。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 假設這是從表單 $_POST 收到的明文密碼
+    $raw_password = "mySecretPassword123";
+
+    // 🌟 現代寫法：使用 PHP 內建函式進行單向加密
+    // PASSWORD_DEFAULT 目前預設使用強大的 Bcrypt 演算法
+    $hashed_pw = password_hash($raw_password, PASSWORD_DEFAULT);
+    
+    // 印出看看：會是一串長達 60 個字元的亂碼
+    // (資料庫的密碼欄位 VARCHAR 長度建議設為 255)
+    echo $hashed_pw; 
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 基礎 INSERT INTO 結構</h4>
+            <p class="small text-muted mb-1">基本的 SQL 新增語法結構如下，但<strong>實務上嚴禁直接將變數塞入字串中</strong>（請見下方說明）。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ⚠️ 危險的傳統寫法示範 (容易遭受 SQL 注入攻擊)
+    $mid = $_POST['mid'];
+    $mname = $_POST['mname'];
+
+    // 將變數直接串接進 SQL 字串中 (極度危險！)
     $sql = "INSERT INTO member (mid, mpw, mname) 
-            VALUES ('$mid', '$mpw', '$mname')";
+            VALUES ('$mid', '$hashed_pw', '$mname')";
             
     if (mysqli_query($conn, $sql)) {
-        echo "資料新增成功";
-    } else {
-        echo "錯誤: " . mysqli_error($conn);
+        echo "insert done";
     }
 ?&gt;</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
 
-                <div class="card">
-                    <h3 class="card-title">讀取 (SELECT)</h3>
-                    <p class="card-text">使用 <code>mysqli_fetch_assoc</code> 將取得的資料轉換為關聯陣列，並搭配 <code>while</code> 迴圈逐筆印出。</p>
-<pre class="code-block"><code>&lt;?php
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title text-danger">致命危機：SQL 注入攻擊 (SQL Injection)</h3>
+    <p class="card-text small text-muted">為什麼不能直接把變數塞進 SQL 字串裡？因為駭客可以在表單輸入惡意程式碼，直接破壞你的資料庫！</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 駭客是如何攻擊的？</h4>
+            <p class="small text-muted mb-1">如果駭客在帳號欄位 (<code>$mid</code>) 輸入：<code>admin', '123', '駭客') -- </code></p>
+<pre class="code-block mb-0"><code>// 原本預期的 SQL：
+INSERT INTO member (mid, mpw, mname) 
+VALUES ('輸入的帳號', '密碼', '名字')
+
+// 遭竄改後，實際在資料庫執行的 SQL：
+// 駭客利用單引號提早閉合了語法，並用 -- 註解掉後面的程式！
+INSERT INTO member (mid, mpw, mname) 
+VALUES ('admin', '123', '駭客') -- ', '密碼', '名字')</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 帶來的災難性後果</h4>
+            <ul class="tech-list mb-1">
+                <li><strong>偽造身分：</strong> 駭客可以輕易繞過登入驗證（常見的 <code>' OR 1=1 --</code> 手法）。</li>
+                <li><strong>資料外洩：</strong> 竊取整個會員資料庫的帳號密碼。</li>
+                <li><strong>破壞資料：</strong> 甚至可以在欄位輸入 <code>'; DROP TABLE member; --</code> 直接把你的資料表刪除！</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">🛡️ 現代實戰：預處理語句 (Prepared Statements)</h3>
+    <p class="card-text small text-muted">業界標準的防禦方式！把 SQL 語法的「結構」跟「資料」徹底分開。我們用問號 <code>?</code> 當作佔位符，資料庫會把傳入的變數純粹當作「字串」處理，即使裡面有單引號或 SQL 指令也會失效。</p>
+
+    
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ Step 1: 準備 SQL 與綁定參數</h4>
+            <p class="small text-muted mb-1">使用 <code>mysqli_prepare</code> 準備語法，並用 <code>mysqli_stmt_bind_param</code> 綁定變數。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 1. 寫 SQL 結構，變數的地方一律用問號 ? 取代
+    $sql = "INSERT INTO member (mid, mpw, mname) VALUES (?, ?, ?)";
+    
+    // 2. 準備語句 (如果 SQL 語法有錯，這步會回傳 false)
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // 3. 綁定參數 (Bind Parameters)
+        // 第一個參數 "sss" 代表後面三個變數都是 String 字串型態
+        // (i:整數, d:浮點數, s:字串, b:二進位)
+        mysqli_stmt_bind_param($stmt, "sss", $mid, $hashed_pw, $mname);
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Step 2: 執行並關閉語句</h4>
+            <p class="small text-muted mb-1">執行完畢後，記得關閉 statement 釋放記憶體資源。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+        // 4. 正式執行寫入動作
+        if (mysqli_stmt_execute($stmt)) {
+            echo "資料新增成功，且非常安全！";
+        } else {
+            // 執行失敗的錯誤訊息
+            echo "錯誤: " . mysqli_stmt_error($stmt);
+        }
+
+        // 5. 關閉 statement 資源
+        mysqli_stmt_close($stmt);
+        
+    } else {
+        echo "SQL 語法準備失敗！";
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">讀取全部記錄 (Basic SELECT & Fetch)</h3>
+    <p class="card-text small text-muted">使用 SELECT 語句從資料表中讀取多筆記錄，並將結果集 (Result Set) 轉換為 PHP 可以操作的陣列。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 核心觀念：mysqli_fetch_assoc()</strong><br>
+        這個函式每次只會從結果集中「抓取一筆」資料，並轉換成<strong>關聯陣列</strong>（欄位名稱就是 Key）。抓完後指標會自動往下移，因此常搭配 <code>while</code> 迴圈，直到抓不到資料回傳 <code>false</code> 為止。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 執行查詢與檢查筆數</h4>
+            <p class="small text-muted mb-1">使用 <code>mysqli_num_rows()</code> 確認是否有找到資料。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 撰寫 SQL 語法 (實務上盡量不要用 SELECT *，請明確寫出欄位)
+    $sql = "SELECT mid, mname FROM member";
+    
+    // 執行查詢，回傳的 $result 是一個結果集物件
+    $result = mysqli_query($conn, $sql);
+
+    // 檢查資料筆數是否大於 0
+    if (mysqli_num_rows($result) &gt; 0) {
+        // 進入下方右側的 while 迴圈處理...
+    } else {
+        echo "資料庫目前沒有任何記錄。";
+    }
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 使用 While 逐筆解析</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ...接續左側...
+    
+    // 逐筆抓取資料，並轉換為關聯陣列 $row
+    while ($row = mysqli_fetch_assoc($result)) {
+        // 使用雙引號變數解析
+        echo "ID: {$row['mid']} &lt;br&gt;";
+        
+        // 🛡️ 輸出資料時務必使用 htmlspecialchars 防護 XSS
+        $safeName = htmlspecialchars($row['mname'], ENT_QUOTES);
+        echo "NAME: {$safeName} &lt;hr&gt;";
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">🛡️ 條件讀取與安全防護 (SELECT ... WHERE)</h3>
+    <p class="card-text small text-muted">當讀取資料需要加上 <code>WHERE</code> 條件，且條件來自於使用者的輸入（如搜尋關鍵字、網址帶的 ID）時，<strong>絕對必須使用預處理語句 (Prepared Statements)</strong> 防禦 SQL 注入！</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 預處理查詢實作</h4>
+            <p class="small text-muted mb-1">使用 <code>?</code> 佔位符，並搭配現代函式 <code>mysqli_stmt_get_result()</code> 來獲取結果集。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 假設從網址列收到要查詢的會員 ID (?id=5)
+    $target_id = $_GET['id'] ?? 1; 
+
+    // 1. 使用 ? 佔位符
+    $sql = "SELECT mid, mname FROM member WHERE mid = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // 2. 綁定參數 ("i" 代表 integer 整數)
+        mysqli_stmt_bind_param($stmt, "i", $target_id);
+        
+        // 3. 執行語句
+        mysqli_stmt_execute($stmt);
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 獲取預處理結果</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+        // 4. 取得結果集 (Result Set)
+        $result = mysqli_stmt_get_result($stmt);
+
+        // 5. 解析資料 (因為 ID 通常是唯一的，用 if 即可，不需要 while)
+        if ($row = mysqli_fetch_assoc($result)) {
+            $safeName = htmlspecialchars($row['mname']);
+            echo "找到了！會員名稱是：{$safeName}";
+        } else {
+            echo "找不到指定 ID 的會員。";
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">💡 現代實戰：邏輯與視圖分離 (MVC 雛形)</h3>
+    <p class="card-text small text-muted">實務上，我們不會在 <code>while</code> 迴圈裡直接 <code>echo</code> HTML 標籤。標準作法是：在 PHP 區塊把資料全部抓出來存成一個「大陣列」，然後在下方的 HTML 區塊中使用 <code>foreach</code> 渲染畫面。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ PHP 區塊 (負責抓資料)</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    require_once("db.php");
     $sql = "SELECT mid, mname FROM member";
     $result = mysqli_query($conn, $sql);
 
-    // 檢查是否有資料
+    // 準備一個空陣列來存放所有會員資料
+    $members = [];
+
     if (mysqli_num_rows($result) &gt; 0) {
-        // 逐筆抓取資料並轉換為關聯陣列
-        while($row = mysqli_fetch_assoc($result)) {
-            echo "ID : " . $row["mid"] . "&lt;br&gt;";
-            echo "NAME : " . $row["mname"] . "&lt;hr&gt;";
+        // 🌟 現代寫法：直接一次把所有資料抓出來變成多維關聯陣列！
+        $members = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ HTML 區塊 (負責呈現畫面)</h4>
+            <p class="small text-muted mb-1">搭配 PHP 替代語法，HTML 結構乾淨又好維護。</p>
+<pre class="code-block mb-0"><code>&lt;!-- 離開 PHP 模式，進入 HTML 模式 --&gt;
+&lt;div class="member-list"&gt;
+    &lt;h3&gt;會員列表&lt;/h3&gt;
+
+    &lt;?php if (empty($members)): ?&gt;
+        &lt;p&gt;目前沒有會員資料。&lt;/p&gt;
+    &lt;?php else: ?&gt;
+        &lt;ul&gt;
+            &lt;!-- 使用 foreach 遍歷剛才存好的陣列 --&gt;
+            &lt;?php foreach ($members as $user): ?&gt;
+                &lt;li&gt;
+                    ID: &lt;?= $user['mid']; ?&gt; - 
+                    NAME: &lt;?= htmlspecialchars($user['mname']); ?&gt;
+                &lt;/li&gt;
+            &lt;?php endforeach; ?&gt;
+        &lt;/ul&gt;
+    &lt;?php endif; ?&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title text-warning">資料更新與致命陷阱 (UPDATE & The WHERE Clause)</h3>
+    <p class="card-text small text-muted">使用 UPDATE 語句可以修改資料表中已經存在的記錄。在實務操作上，這是一個需要非常謹慎的動作。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>⚠️ 業界災難警告：絕對不能忘記 WHERE！</strong><br>
+        UPDATE 語句的預設行為是更新「所有符合條件」的資料。如果你忘記寫 <code>WHERE</code> 條件（例如直接執行 <code>UPDATE member SET mname='Reyna'</code>），整個資料表所有會員的名字都會瞬間變成 Reyna！這在真實專案中是不可挽回的災難。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎 SQL 更新語法</h4>
+            <p class="small text-muted mb-1">使用 <code>SET</code> 指定要更改的欄位與新值，使用 <code>WHERE</code> 鎖定特定對象。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ⚠️ 傳統危險寫法 (易受 SQL 注入攻擊)
+    $uname = $_POST['uname'];
+    $uid = $_POST['uid'];
+
+    // 將變數直接寫入字串，且如果 $uid 為空，可能引發非預期行為
+    $sql = "UPDATE member 
+            SET mname = '$uname' 
+            WHERE mid = '$uid'";
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 現代化安全防護準備</h4>
+            <p class="small text-muted mb-1">既然條件 <code>WHERE mid = ?</code> 來自於使用者的輸入（通常是表單或網址），我們就必須堅持使用「預處理語句」來防禦駭客竄改條件。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 🌟 現代安全寫法：結構與資料分離
+    // 我們需要更新「名字」，並以「ID」作為尋找條件
+    $sql = "UPDATE member SET mname = ? WHERE mid = ?";
+    
+    // 進入下一步的 mysqli_prepare...
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">🛡️ 現代實戰：安全執行更新 (Prepared UPDATE)</h3>
+    <p class="card-text small text-muted">結合前面的連線檔與安全觀念，這才是後端工程師真正在寫的更新邏輯。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ Step 1: 綁定多個參數</h4>
+            <p class="small text-muted mb-1">注意綁定時的型態字串，例如字串加上整數就是 <code>"si"</code>。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    require_once("db.php");
+
+    // 接收表單傳來的資料 (務必做基礎檢查)
+    $uid = $_POST['uid'] ?? '';
+    $uname = $_POST['uname'] ?? '';
+
+    // 1. 準備語句
+    $sql = "UPDATE member SET mname = ? WHERE mid = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // 2. 綁定參數 (s:字串 mname, i:整數 mid)
+        // 注意順序必須與 SQL 語句中的 ? 完全對應！
+        mysqli_stmt_bind_param($stmt, "si", $uname, $uid);
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Step 2: 執行並判斷受影響的行數</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+        // 3. 執行語句
+        if (mysqli_stmt_execute($stmt)) {
+            // 💡 進階檢查：看看實際上到底有幾筆資料被更新了
+            // 如果是 0，代表 SQL 沒錯，但是找不到這個 ID！
+            if (mysqli_stmt_affected_rows($stmt) &gt; 0) {
+                echo "更新成功！";
+                // 進入下一步的頁面導向...
+            } else {
+                echo "沒有資料被更新 (可能 ID 不存在或名字沒變)";
+            }
+        } else {
+            echo "系統錯誤：" . mysqli_stmt_error($stmt);
         }
-    } else {
-        echo "沒有找到記錄";
+        mysqli_stmt_close($stmt);
     }
 ?&gt;</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
 
-                <div class="card">
-                    <h3 class="card-title">更新 (UPDATE) 與 刪除 (DELETE)</h3>
-                    <p class="card-text">執行完更新或刪除後，常搭配 <code>header('location:...')</code> 進行頁面重新導向。</p>
-<pre class="code-block"><code>&lt;?php
-    // --- 1. 更新記錄 ---
-    $sql_update = "UPDATE member SET mname='$uname' WHERE mid='$uid'";
-    
-    if(mysqli_query($conn, $sql_update)) {
-        header('location: select.php'); // 成功後導向列表頁
-    } else {
-        die('更新失敗');
-    }
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">網頁重新導向與錯誤處理 (Redirection & exit)</h3>
+    <p class="card-text small text-muted">在執行完寫入、更新或刪除操作後，我們通常不會讓使用者停留在執行邏輯的白畫面上，而是會把它「導向」回列表頁面。</p>
 
-    // --- 2. 刪除記錄 ---
-    $sql_delete = "DELETE FROM member WHERE mid='$uid'";
-    
-    if(mysqli_query($conn, $sql_delete)) {
-        header('location: select.php');
-    } else {
-        die('刪除失敗');
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern PHP 觀念：header() 之後必加 exit</strong><br>
+        <code>header('Location: URL')</code> 只是送出一個標頭告訴瀏覽器去哪裡，<strong>它並不會中斷 PHP 程式碼的執行</strong>！如果後面還有其他的寫入邏輯或敏感資料輸出，駭客只要忽略你的 header 就能繼續執行。因此，呼叫 header 重新導向後，請務必緊跟著 <code>exit;</code> 或 <code>die();</code>！
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 成功的重新導向</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 假設上面的更新成功了
+    if (mysqli_stmt_affected_rows($stmt) &gt; 0) {
+        
+        // 將使用者導向回查詢頁面
+        header('Location: select.php');
+        
+        // 🛡️ 絕對不能漏掉這一行！立即停止後續所有代碼的執行
+        exit; 
     }
 ?&gt;</code></pre>
-                </div>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 失敗的處理 (die 函式)</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 當發生嚴重錯誤 (如連線失敗、SQL 語法錯誤) 時
+    } else {
+        // die() 其實就是 echo 加上 exit 的縮寫組合
+        // 它會印出括號內的文字，然後立刻終止腳本
+        die('Update Error: 系統發生錯誤，請聯絡管理員。');
+        
+        // 下面的程式碼永遠不會被執行
+        echo "駭客看不到這裡";
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title text-danger">資料刪除與毀滅性陷阱 (DELETE & The WHERE Clause)</h3>
+    <p class="card-text small text-muted">使用 DELETE 語句可以刪除資料表中的記錄。這是一個不可逆的操作，請務必謹慎處理。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>⚠️ 業界災難警告：千萬別漏掉 WHERE！</strong><br>
+        如果你執行了 <code>DELETE FROM member</code>（沒有加 WHERE 條件），資料庫會毫不猶豫地<strong>把整張 member 表的所有會員資料全部刪光</strong>！這絕對是工程師的惡夢。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎 SQL 刪除語法</h4>
+            <p class="small text-muted mb-1">鎖定特定的唯一鍵值（例如 ID）來進行精準刪除。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ⚠️ 傳統危險寫法 (易受 SQL 注入攻擊)
+    $uid = $_POST['uid'];
+
+    // 將變數直接寫入字串。如果 $uid 遭到惡意竄改
+    // 例如傳入 '1 OR 1=1'，會導致整張表被清空！
+    $sql = "DELETE FROM member WHERE mid = '$uid'";
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 現代化安全防護準備</h4>
+            <p class="small text-muted mb-1">為了確保安全，我們依然必須使用「預處理語句 (Prepared Statement)」來將語法結構與變數徹底分離。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 🌟 現代安全寫法：使用 ? 佔位符
+    $sql = "DELETE FROM member WHERE mid = ?";
+    
+    // 進入下一步的 mysqli_prepare 執行刪除...
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">🛡️ 現代實戰：安全執行刪除 (Prepared DELETE)</h3>
+    <p class="card-text small text-muted">結合前面的連線檔與安全觀念，嚴格防堵 SQL Injection，並確認資料是否真的被刪除。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 綁定參數與執行</h4>
+            <p class="small text-muted mb-1">準備語句並綁定要刪除的目標 ID。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    require_once("db.php");
+
+    // 接收要刪除的 ID (通常來自隱藏表單或 POST 請求)
+    $uid = $_POST['uid'] ?? '';
+
+    // 1. 準備語句
+    $sql = "DELETE FROM member WHERE mid = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt) {
+        // 2. 綁定參數 (i 代表整數型態 integer)
+        mysqli_stmt_bind_param($stmt, "i", $uid);
+        
+        // 3. 執行語句
+        mysqli_stmt_execute($stmt);
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 驗證結果與安全導向</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+        // 4. 檢查是否有資料真的被刪除
+        // 若受影響行數大於 0，代表刪除成功
+        if (mysqli_stmt_affected_rows($stmt) &gt; 0) {
+            
+            // 重新導向回列表頁面
+            header('Location: select.php?msg=deleted');
+            
+            // 🛡️ 導向後立刻終止程式執行！
+            exit; 
+            
+        } else {
+            die('刪除失敗：找不到該筆資料。');
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">💡 業界進階：前端防呆與「軟刪除」觀念</h3>
+    <p class="card-text small text-muted">在真實的商業專案中，刪除是一個非常敏感的動作。我們必須在前端做二次確認，並在後端採用「軟刪除」來保留歷史紀錄。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 前端 JS 防呆確認</h4>
+            <p class="small text-muted mb-1">在送出刪除請求前，彈出警告視窗。如果使用者按取消，就阻止表單送出。</p>
+<pre class="code-block mb-0"><code>&lt;!-- HTML 刪除按鈕與表單 --&gt;
+&lt;form action="delete.php" method="POST" id="delForm"&gt;
+    &lt;input type="hidden" name="uid" value="5"&gt;
+    &lt;button type="submit" class="delete-btn"&gt;刪除會員&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    // 使用現代 JS 監聽表單送出事件
+    document.querySelector('#delForm').addEventListener('submit', function(e) {
+        // confirm 會跳出對話框，回傳 true/false
+        if (!confirm('你確定要刪除這筆資料嗎？此動作無法復原！')) {
+            e.preventDefault(); // 阻止表單送出
+        }
+    });
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 後端「軟刪除 (Soft Delete)」</h4>
+            <p class="small text-muted mb-1">實務上很少直接下 <code>DELETE</code> 指令，而是透過 <code>UPDATE</code> 改變資料狀態，這樣日後才能還原或供數據分析使用。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    /*
+     * 軟刪除邏輯 (並非真的刪除資料)：
+     * 在資料表多加一個欄位，例如 is_deleted (0=正常, 1=已刪除)
+     */
+     
+    // 🌟 將刪除動作改為更新狀態的動作
+    $sql = "UPDATE member SET is_deleted = 1 WHERE mid = ?";
+    
+    // ...之後的預處理流程完全一樣...
+    
+    /* * 這樣一來，讀取資料時只要加上條件：
+     * SELECT * FROM member WHERE is_deleted = 0
+     * 就能只顯示「未刪除」的資料了！
+     */
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+
             </div>
         </section>
 
@@ -182,38 +721,257 @@
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">Cookie (客戶端儲存)</h3>
-                    <p class="card-text">Cookie 是伺服器留在<strong>用戶瀏覽器</strong>上的小檔案，適合儲存不敏感的偏好設定（如：記住帳號）。</p>
-<pre class="code-block"><code>&lt;?php
-    // 設定 Cookie (名稱, 值, 存活時間：目前時間+3600秒)
-    setcookie("userName", "Reyna", time() + 3600);
 
-    // 取得 Cookie
-    if(isset($_COOKIE["userName"])) {
-        echo "歡迎回來, " . $_COOKIE["userName"];
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">Cookie 基礎觀念與讀取 (Client-Side Storage)</h3>
+    <p class="card-text small text-muted">Cookie 是伺服器請「瀏覽器」幫忙記住的小檔案 (最大約 4KB)。每當瀏覽器再次發送請求時，會自動把 Cookie 帶上送回伺服器。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>⚠️ 核心警告：永遠不要在 Cookie 存敏感資料！</strong><br>
+        因為 Cookie 儲存在使用者的電腦裡，使用者可以輕易按 F12 打開開發者工具來<strong>查看甚至竄改</strong>它的值。因此，Cookie 只適合存「不敏感的偏好設定」（例如：深色模式、語言設定、記住帳號的"帳號名"），絕對不能存密碼或餘額！
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 讀取 Cookie ($_COOKIE)</h4>
+            <p class="small text-muted mb-1">PHP 透過超全域陣列 <code>$_COOKIE</code> 來接收瀏覽器傳來的 Cookie。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ⚠️ 傳統寫法：使用 isset 檢查
+    if (isset($_COOKIE["theme"])) {
+        echo "你的主題顏色是：" . $_COOKIE["theme"];
     }
+
+    // 🌟 現代寫法：使用 Null 合併運算子 (??)
+    // 如果找不到 theme 這個 Cookie，就預設為 'light'
+    $userTheme = $_COOKIE["theme"] ?? "light";
+    
+    echo "目前網站主題：{$userTheme}";
 ?&gt;</code></pre>
-                </div>
+        </div>
 
-                <div class="card">
-                    <h3 class="card-title">Session (伺服器端儲存)</h3>
-                    <p class="card-text">Session 儲存在<strong>伺服器端</strong>，安全性較高，適合儲存敏感的臨時訊息（如：會員登入狀態）。使用者關閉瀏覽器即失效。</p>
-<pre class="code-block"><code>&lt;?php
-    // ⚠️ 必須在任何 HTML 輸出前呼叫！
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Cookie 的運作時序陷阱</h4>
+            <p class="small text-muted mb-1">設定 Cookie 後，無法在「當下的頁面」立刻用 <code>$_COOKIE</code> 讀到它！</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 1. 伺服器告訴瀏覽器：「請幫我記住這個 Cookie」
+    setcookie("test", "hello");
+    
+    // 2. ⚠️ 此時印出 $_COOKIE['test'] 會報錯或沒資料！
+    // 因為 $_COOKIE 是裝著「這次請求帶來的」Cookie，
+    // 剛設定好的 Cookie 必須等瀏覽器「下一次」發送請求時才會帶過來。
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">設定與刪除 Cookie (Set & Delete)</h3>
+    <p class="card-text small text-muted">使用 <code>setcookie()</code> 函式。這個函式必須在任何 HTML 標籤輸出到畫面「之前」呼叫，否則會發生 Headers already sent 錯誤。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 設定 Cookie 與存活時間</h4>
+            <p class="small text-muted mb-1">如果不設定時間（或設為 0），Cookie 會在「瀏覽器關閉時」自動失效（稱為 Session Cookie）。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $cookieName = "userName";
+    $cookieValue = "Reyna";
+    
+    // 計算存活時間：time() 是現在的秒數
+    // 現在時間 + 3600 秒 = 存活 1 小時
+    $expireTime = time() + 3600;
+
+    // 基礎設定語法
+    setcookie($cookieName, $cookieValue, $expireTime);
+    
+    echo "Cookie 已設定，將於 1 小時後過期。";
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 如何刪除 Cookie？</h4>
+            <p class="small text-muted mb-1">PHP 沒有內建的 delete_cookie() 函式。刪除 Cookie 的標準作法是：<strong>把它覆蓋掉，並把過期時間設定到「過去」</strong>。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $cookieName = "userName";
+    
+    // 將值設為空字串，時間設為 time() - 3600 (一小時前)
+    // 瀏覽器收到後發現已經過期，就會立刻把它刪除
+    setcookie($cookieName, "", time() - 3600);
+    
+    echo "Cookie 已被成功刪除。";
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">💡 現代資安實戰：Cookie 安全選項 (Modern Security)</h3>
+    <p class="card-text small text-muted">防止駭客透過 JavaScript 偷取 Cookie (XSS) 或偽造跨站請求 (CSRF)。在 PHP 7.3 之後，支援以「陣列」的方式來設定這些安全屬性。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 三大護城河屬性</h4>
+            <ul class="tech-list mb-1">
+                <li><code>HttpOnly</code>：(極重要) 設定為 true 後，前端的 JavaScript (<code>document.cookie</code>) 將<strong>無法讀取</strong>這個 Cookie，直接封殺 XSS 竊取！</li>
+                <li><code>Secure</code>：限制只有在 HTTPS 加密連線時，瀏覽器才會傳送這個 Cookie。</li>
+                <li><code>SameSite</code>：防禦 CSRF 攻擊。可設為 <code>Lax</code> 或 <code>Strict</code>，限制 Cookie 不能跨網域傳送。</li>
+            </ul>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ PHP 7.3+ 現代陣列寫法</h4>
+            <p class="small text-muted mb-1">取代以前要傳入一長串參數的舊寫法，陣列寫法清晰易懂。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 🌟 現代安全設定陣列
+    $options = [
+        'expires'  =&gt; time() + 3600, // 存活 1 小時
+        'path'     =&gt; '/',           // 全站有效
+        'domain'   =&gt; '',            // 預設當前網域
+        'secure'   =&gt; true,          // 僅限 HTTPS (本機開發若沒 SSL 可先設 false)
+        'httponly' =&gt; true,          // 禁止 JS 讀取 (防 XSS)
+        'samesite' =&gt; 'Lax'          // 防跨站請求偽造 (防 CSRF)
+    ];
+
+    // 使用 PHP 7.3+ 支援的選項陣列語法
+    setcookie("safeToken", "abc123xyz", $options);
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">Session 運作原理與起手式 (Server-Side Storage)</h3>
+    <p class="card-text small text-muted">Session 將使用者的資料（如登入狀態、購物車內容）安全地儲存在「伺服器端」，並配發一把鑰匙 (通常是名為 PHPSESSID 的 Cookie) 給瀏覽器，藉此辨識不同的使用者。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>⚠️ 新手最常犯的致命錯誤：Headers already sent！</strong><br>
+        因為 Session 必須透過 HTTP 標頭 (Header) 發送 Cookie 鑰匙給瀏覽器，所以 <strong><code>session_start()</code> 必須寫在整個檔案的最頂端</strong>！在它之前，絕對不能有任何 HTML 標籤、<code>echo</code> 輸出，甚至連「全形空白」或「換行」都不行，否則程式會直接報錯崩潰。
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 正確的 Session 宣告位置</h4>
+            <p class="small text-muted mb-1">養成好習慣，將它放在 <code>&lt;?php</code> 的第一行。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 🌟 正確示範：在任何輸出前啟用 Session
+    session_start();
+
+    // 接下來才能開始寫其他邏輯或引入檔案
+    require_once("db.php");
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;...</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 導致崩潰的錯誤示範</h4>
+            <p class="small text-muted mb-1">只要伺服器已經開始輸出網頁內容，就無法再啟動 Session。</p>
+<pre class="code-block mb-0"><code>&lt;!-- ⚠️ 錯誤示範 1：前面有 HTML --&gt;
+&lt;h1&gt;哈囉&lt;/h1&gt;
+&lt;?php session_start(); ?&gt;
+
+&lt;!-- ⚠️ 錯誤示範 2：前面有空白或換行 --&gt;
+ 
+&lt;?php session_start(); ?&gt;
+
+&lt;?php 
+    // ⚠️ 錯誤示範 3：前面有 echo 輸出
+    echo "測試";
     session_start(); 
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
 
-    // 儲存 Session 訊息
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">Session 的讀寫與生命週期管理 (CRUD & Destroy)</h3>
+    <p class="card-text small text-muted">使用者只要一關閉瀏覽器，Session 通常就會失效。在程式中，我們透過 <code>$_SESSION</code> 這個超全域陣列來操作狀態。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 寫入與安全讀取</h4>
+            <p class="small text-muted mb-1">與 Cookie 一樣，讀取時強烈建議使用 Null 合併運算子 <code>??</code> 防範未定義錯誤。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    session_start();
+
+    // 1. 寫入 Session 變數
     $_SESSION["isLogin"] = true;
+    $_SESSION["userName"] = "Reyna";
     $_SESSION["role"] = "admin";
 
-    // 取得 Session 訊息
-    echo "目前的權限是: " . $_SESSION["role"];
+    // 2. 🌟 現代安全讀取 (如果沒登入，預設為訪客)
+    $currentUser = $_SESSION["userName"] ?? "訪客";
+    $role = $_SESSION["role"] ?? "guest";
     
-    // 清除 Session (登出時使用)
-    // session_destroy(); 
+    echo "你好，{$currentUser} (權限: {$role})";
 ?&gt;</code></pre>
-                </div>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 清除變數 vs 徹底登出銷毀</h4>
+            <p class="small text-muted mb-1"><code>unset()</code> 用來刪除單一變數；<code>session_destroy()</code> 則用來摧毀整個會話 (常應用於登出系統)。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    session_start();
+
+    // 情境 A：清空購物車，但保留登入狀態
+    // 針對單一 Key 進行刪除
+    unset($_SESSION["cart_items"]);
+
+    // 情境 B：使用者點擊「登出」
+    // 1. 先清空所有的 Session 陣列變數
+    $_SESSION = [];
+    
+    // 2. 徹底摧毀伺服器上的 Session 檔案
+    session_destroy();
+    
+    // 3. 導向回首頁或登入頁
+    header("Location: login.php");
+    exit;
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">💡 現代資安實戰：防禦 Session 固定攻擊 (Session Fixation)</h3>
+    <p class="card-text small text-muted">駭客可能會誘騙使用者使用一個「駭客已知的 Session ID」來登入網站。當使用者登入後，駭客就能用同一把鑰匙直接進入使用者的帳號！</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 什麼時候會發生危險？</h4>
+            <p class="small text-muted mb-1">當使用者的權限發生重大改變時（例如：從「訪客」變成「已登入會員」），如果 Session ID 沒有更換，就存在被劫持的風險。</p>
+            <div class="alert-box mb-2" style="font-size: 13px;">
+                <strong>🛡️ 解決方案：重新產生 ID</strong><br>
+                PHP 提供了 <code>session_regenerate_id(true)</code> 函式。它會立刻作廢舊的 Session ID，並配發一個全新的 ID 給瀏覽器，徹底斬斷駭客的連線！
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 業界標準的登入邏輯寫法</h4>
+            <p class="small text-muted mb-1">在驗證帳號密碼成功後，寫入 Session 前，務必呼叫此函式。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    session_start();
+    
+    // 假設已經透過資料庫驗證了帳號與密碼...
+    $isPasswordCorrect = true; 
+
+    if ($isPasswordCorrect) {
+        
+        // 🌟 資安防禦：登入成功時，強制換發一把新的 Session 鑰匙！
+        // 傳入 true 代表同時刪除舊的 Session 檔案
+        session_regenerate_id(true);
+
+        // 接著才將登入狀態寫入新的 Session 中
+        $_SESSION["isLogin"] = true;
+        $_SESSION["userID"] = $user['id'];
+        
+        header("Location: dashboard.php");
+        exit;
+    }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
 
