@@ -107,43 +107,151 @@ const allButtons = document.querySelectorAll("button");</code></pre>
             </div>
         </section>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
                 <h2 class="section-title">操作內容與樣式 (Manipulation)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">改變 HTML 內容與屬性</h3>
-                    <p class="card-text">利用 JS 抓到元素後，可以直接動態修改文字、HTML 結構，甚至替換圖片來源。</p>
-<pre class="code-block"><code>const title = document.querySelector(".title");
-const myImage = document.querySelector("#hero-img");
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">查找 HTML 元素 (Finding Elements)</h3>
+                    <p class="card-text small text-muted">要操作網頁，首先必須在 DOM 樹中「找到」目標元素。以下整理了傳統與現代的選取方法對比：</p>
 
-// 改變純文字 (比較安全，防 XSS 攻擊)
-title.textContent = "New Header Title";
+                    
 
-// 改變 HTML 結構 (可渲染標籤)
-title.innerHTML = "&lt;span&gt;New Header&lt;/span&gt;";
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 傳統查找方式</h4>
+                            <p class="small text-muted mb-1">過去常透過特定的 ID、標籤名稱或 Class 名稱來單獨尋找元素。</p>
+<pre class="code-block mb-0"><code>// 1. 通過 id 找到 HTML 元素 (回傳單一物件)
+const intro = document.getElementById("intro");
 
-// 改變元素屬性 (例如替換圖片 src)
-myImage.src = "new-landscape.jpg";
-myImage.alt = "新的風景圖";</code></pre>
+// 2. 通過 tagname (標籤名) 找到 HTML 元素 (回傳集合)
+const divs = document.getElementsByTagName("div");
+// 也能在特定元素內繼續尋找
+const paras = intro.getElementsByTagName("p");
+
+// 3. 通過 class 找到 HTML 元素 (回傳集合)
+const examples = document.getElementsByClassName("example");</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 現代寫法：querySelector (推薦)</h4>
+                            <p class="small text-muted mb-1">現代開發強烈建議統一使用 CSS 選擇器語法，更加直覺，且方便組合條件尋找。</p>
+<pre class="code-block mb-0"><code>// 1. 通過 id 尋找 (前方加上 #)
+const introModern = document.querySelector("#intro");
+
+// 2. 通過 tagname 尋找「所有」符合的標籤
+const allDivs = document.querySelectorAll("div");
+
+// 3. 通過 class 尋找「所有」符合的元素 (前方加上 .)
+const allExamples = document.querySelectorAll(".example");
+
+// 💡 強大優勢：可以直接使用複合型 CSS 選擇器！
+// 例如：尋找 id 為 intro 裡面的所有 p 標籤
+const introParas = document.querySelectorAll("#intro p");</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">動態操作 CSS 樣式</h3>
-                    <p class="card-text">可以直接修改 <code>style</code>，但實務上更推薦透過 <code>classList</code> 來切換預先寫好的 CSS 類別，好維護且乾淨。</p>
-<pre class="code-block"><code>const box = document.querySelector(".box");
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">改變 HTML 內容與屬性 (Content & Attributes)</h3>
+    <p class="card-text small text-muted">HTML DOM 允許 JavaScript 動態改變 HTML 元素的內容與各種屬性。</p>
 
-// 方法 1：直接修改行內樣式 (Inline Style)
-box.style.color = "blue";
-box.style.backgroundColor = "red"; // 注意：要用駝峰命名法
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        1. <strong>嚴禁濫用 <code>document.write()</code></strong>：如果在網頁載入完成後才呼叫它，它會將整個 HTML 頁面覆蓋掉（包含你的腳本與樣式）。<br>
+        2. <strong>防範 XSS 攻擊</strong>：若只是要修改「純文字」，現代強烈推薦使用 <code>textContent</code>；只有在明確需要解析 HTML 標籤時，才使用 <code>innerHTML</code>。
+    </div>
 
-// 方法 2：現代推薦做法 (切換 Class)
-box.classList.add("active");    // 新增 class
-box.classList.remove("hide");   // 移除 class
-box.classList.toggle("dark");   // 切換 class (有則刪，無則加)</code></pre>
-                </div>
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 改變 HTML 輸出流與內容</h4>
+<pre class="code-block mb-0"><code>// ⚠️ 傳統危險寫法：改變 HTML 輸出流
+// document.write(Date()); // 載入後執行會覆蓋整個網頁
+
+// 🌟 現代寫法：改變 HTML 內容
+const header = document.querySelector("#header");
+
+// 方法 A：只改變純文字 (推薦，安全且效能好)
+header.textContent = "New Header Text";
+
+// 方法 B：改變結構，會解析 HTML 標籤
+header.innerHTML = "&lt;span style='color:red'&gt;New Header&lt;/span&gt;";</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 改變 HTML 屬性 (Attributes)</h4>
+            <p class="small text-muted mb-1">可以透過「點 <code>.</code> 語法」直接修改，或是使用 <code>setAttribute()</code> 方法。</p>
+<pre class="code-block mb-0"><code>const myImage = document.querySelector("#image");
+const myLink = document.querySelector(".custom-link");
+
+// 方法 A：直接透過屬性修改
+myImage.src = "landscape.jpg";
+myImage.alt = "優美的風景圖";
+myLink.href = "https://google.com";
+
+// 方法 B：使用 setAttribute (適合處理自訂的 data-* 屬性)
+myImage.setAttribute("src", "landscape.jpg");
+myImage.setAttribute("data-status", "loaded");</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">動態操作 CSS 樣式 (CSS Styles)</h3>
+    <p class="card-text small text-muted">HTML DOM 允許 JavaScript 改變 HTML 元素的行內樣式，或是透過事件動態切換外觀。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        1. <strong>樣式屬性命名</strong>：在 CSS 中的 <code>background-color</code>，在 JS 中必須改用駝峰式命名 <code>backgroundColor</code>。<br>
+        2. <strong>職責分離</strong>：盡量避免在 HTML 中寫 <code>onclick</code> 屬性。現代作法是使用 <code>addEventListener</code> 監聽點擊，並且優先使用 <code>classList.toggle</code> 來切換預先寫好的 CSS，而非直接修改行內 <code>style</code>。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 改變 HTML 行內樣式 (Inline Style)</h4>
+            <p class="small text-muted mb-1">直接存取 DOM 的 <code>style</code> 物件，適合用在需要動態計算數值（例如隨鼠標移動的 X/Y 座標）的情境。</p>
+<pre class="code-block mb-0"><code>const p2 = document.querySelector("#p2");
+
+// 修改文字顏色與字體大小
+p2.style.color = "blue";
+p2.style.fontSize = "24px";
+
+// 修改背景顏色 (駝峰命名)
+p2.style.backgroundColor = "#f4f4f4";
+
+// 隱藏元素
+p2.style.display = "none";</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 透過事件動態改變樣式</h4>
+            <p class="small text-muted mb-1">將傳統寫法分離，改用現代的事件監聽與 <code>classList</code>。</p>
+<pre class="code-block mb-0"><code>&lt;!-- ⚠️ 傳統寫法：HTML 綁定點擊事件 --&gt;
+&lt;button onclick="document.getElementById('id1').style.color='red'"&gt;
+    傳統點擊變色
+&lt;/button&gt;
+
+&lt;!-- 🌟 現代寫法：HTML 只負責結構 --&gt;
+&lt;button id="colorBtn"&gt;現代點擊變色&lt;/button&gt;
+
+&lt;script&gt;
+const colorBtn = document.querySelector("#colorBtn");
+const targetText = document.querySelector("#id1");
+
+// JS 負責行為：監聽點擊事件
+colorBtn.addEventListener("click", () =&gt; {
+    // 推薦：透過 classList 切換 CSS 寫好的 .text-red 類別
+    targetText.classList.toggle("text-red");
+});
+&lt;/script&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
 
@@ -153,36 +261,120 @@ box.classList.toggle("dark");   // 切換 class (有則刪，無則加)</code></
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">事件監聽器 (addEventListener)</h3>
-                    <div class="alert-box">
-                        <strong>💡 </strong> 不要再把 <code>onclick</code> 寫在 HTML 裡！使用 <code>addEventListener</code> 可以綁定多個事件，且讓結構與行為徹底分離。
-                    </div>
-<pre class="code-block"><code>const btn = document.querySelector("#submit-btn");
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">DOM 事件與監聽器 (Events & addEventListener)</h3>
+    <p class="card-text small text-muted">我們可以在特定「事件」發生時執行 JavaScript，例如使用者點擊、輸入或滑鼠移動。</p>
 
-// 常見事件：click, mouseover, mouseout, input, submit
-btn.addEventListener("click", function(event) {
-    // 阻止表單預設的重整行為 (極重要！)
-    event.preventDefault(); 
-    
-    alert("按鈕被點擊了！");
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        1. <strong>行為與結構分離</strong>：不要再把 <code>onclick="doSomething()"</code> 寫在 HTML 標籤裡！現代強烈推薦使用 <code>addEventListener</code> 來綁定事件，這能對同一個元素綁定多個事件，且程式碼更好維護。<br>
+        2. <strong>捨棄 on 前綴</strong>：使用 <code>addEventListener</code> 時，事件名稱<strong>不需要加上 <code>on</code> 前綴</strong>（例如 <code>onclick</code> 要改寫成單純的 <code>click</code>）。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 常見 HTML 事件對照表</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm mt-2" style="font-size: 13px;">
+                    <thead class="table-light">
+                        <tr><th>傳統 HTML 屬性</th><th>現代 JS 監聽名稱</th><th>觸發時機</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>onclick</code></td><td><code>click</code></td><td>當用戶完成點擊時</td></tr>
+                        <tr><td><code>onmousedown</code></td><td><code>mousedown</code></td><td>當用戶按下鼠標按鍵時</td></tr>
+                        <tr><td><code>onmouseup</code></td><td><code>mouseup</code></td><td>當用戶放開鼠標按鍵時</td></tr>
+                        <tr><td><code>onmouseover</code></td><td><code>mouseover</code></td><td>當鼠標移動到元素上方時</td></tr>
+                        <tr><td><code>onmouseout</code></td><td><code>mouseout</code></td><td>當鼠標移出元素時</td></tr>
+                        <tr><td><code>onchange</code></td><td><code>change</code> / <code>input</code></td><td>當輸入欄位內容改變時</td></tr>
+                        <tr><td><code>onsubmit</code></td><td><code>submit</code></td><td>當提交 HTML 表單時</td></tr>
+                        <tr><td><code>onload</code></td><td><code>load</code></td><td>當圖片或整個頁面加載完成時</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 現代事件監聽實作</h4>
+            <p class="small text-muted mb-1">透過 <code>event</code> (或縮寫為 <code>e</code>) 參數，我們可以取得觸發事件的詳細資訊（如輸入的值、滑鼠座標等）。</p>
+<pre class="code-block mb-0"><code>const btn = document.querySelector("#myBtn");
+const form = document.querySelector("#myForm");
+const inputField = document.querySelector("#myInput");
+
+// 1. 滑鼠事件：滑鼠移入時改變背景色
+btn.addEventListener("mouseover", () =&gt; {
+    btn.style.backgroundColor = "yellow";
+});
+
+// 2. 表單事件：阻止預設送出並執行自訂邏輯
+form.addEventListener("submit", (e) =&gt; {
+    e.preventDefault(); // 🛑 極重要：阻止表單重整網頁
+    console.log("表單已攔截，可在此執行 AJAX/Fetch 傳送資料！");
+});
+
+// 3. 輸入事件：即時取得輸入框的值
+// 註：現代常用 input 事件取代 change，因為 input 是每打一個字就觸發
+inputField.addEventListener("input", (e) =&gt; {
+    console.log("目前輸入內容：", e.target.value);
 });</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
 
-                <div class="card">
-                    <h3 class="card-title">動態建立新 HTML 元素</h3>
-                    <p class="card-text">這是在做「待辦事項 (To-Do List)」或「無盡滾動文章」時絕對會用到的技巧。</p>
-<pre class="code-block"><code>// 1. 創建一個新的 &lt;p&gt; 元素
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">動態建立與插入 HTML 元素 (Create & Append Nodes)</h3>
+    <p class="card-text small text-muted">如需向 HTML DOM 添加新元素，必須先「創建」該元素節點，然後將它「插入」到頁面上已存在的元素中。這是在做「待辦事項 (To-Do List)」或「無盡滾動文章」時的必備技巧。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        1. <strong>捨棄 <code>createTextNode</code></strong>：現代開發直接使用 <code>textContent</code> 賦值，語法更簡潔直覺。<br>
+        2. <strong>使用 <code>append()</code> 取代 <code>appendChild()</code></strong>：<code>append()</code> 支援一次插入多個節點或純文字，且語法更具彈性。<br>
+        3. <strong>複雜結構推薦 <code>insertAdjacentHTML</code></strong>：如果新元素包含大量巢狀標籤，使用樣板字面值搭配 <code>insertAdjacentHTML</code> 會比你一行一行寫 <code>createElement</code> 輕鬆非常多！
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 節點建立：傳統 vs 現代寫法</h4>
+<pre class="code-block mb-0"><code>// ⚠️ 傳統寫法：繁瑣的文字節點
+const paraOld = document.createElement("p");
+const nodeOld = document.createTextNode("這是舊寫法。");
+paraOld.appendChild(nodeOld);
+document.getElementById("div1").appendChild(paraOld);
+
+// 🌟 現代寫法：直接操作屬性與 append
 const newPara = document.createElement("p");
+newPara.textContent = "由 JavaScript 動態產生的新段落。";
+newPara.classList.add("text-highlight"); // 加入樣式
 
-// 2. 為它加入文字內容與樣式
-newPara.textContent = "這是由 JavaScript 動態產生的新段落。";
-newPara.classList.add("text-highlight");
-
-// 3. 找到要放入的父元素，並將新節點「附加」進去
 const container = document.querySelector("#div1");
-container.appendChild(newPara);</code></pre>
-                </div>
+container.append(newPara); // 現代推薦用 append</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 靈活的插入位置與進階技巧</h4>
+            <p class="small text-muted mb-1">現代 JS 提供了更多方位的方法，以及處理複雜 HTML 結構的技巧。</p>
+<pre class="code-block mb-0"><code>const list = document.querySelector("#myList");
+const newItem = document.createElement("li");
+newItem.textContent = "新項目";
+
+// 1. 多樣化的插入位置
+list.append(newItem);  // 插入到容器的「最後面」
+list.prepend(newItem); // 插入到容器的「最前面」
+// 註：還有 newItem.before() 與 newItem.after() 可安插在特定元素前後
+
+// 2. 🌟 複雜結構的終極殺手鐧：insertAdjacentHTML
+// 不用再寫一堆 createElement，直接寫 HTML 結構字串！
+const userName = "Reyna";
+const cardHTML = `
+    &lt;div class="user-card"&gt;
+        &lt;h4&gt;${userName}&lt;/h4&gt;
+        &lt;p&gt;Frontend Developer&lt;/p&gt;
+    &lt;/div&gt;
+`;
+// 'beforeend' 效果等同 append，但會直接解析 HTML 字串
+list.insertAdjacentHTML("beforeend", cardHTML);</code></pre>
+        </div>
+    </div>
+</div>
             </div>
         </section>
 

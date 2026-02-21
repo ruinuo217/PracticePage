@@ -72,30 +72,291 @@
             </div>
             
             <div class="cards">
+
+<div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">什麼是 PHP？它能做什麼？</h3>
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ PHP 簡介</h4>
+                            <ul class="tech-list mb-1">
+                                <li><strong>包含多元代碼：</strong> 檔案內可包含 HTML、JavaScript、以及 PHP 代碼。</li>
+                                <li><strong>伺服器端執行：</strong> 代碼在伺服器上執行，結果會以純 HTML 形式返回給瀏覽器（使用者看不到 PHP 原始碼）。</li>
+                                <li><strong>副檔名：</strong> 預設文件擴展名是 <code>.php</code>。</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ PHP 強大的能力</h4>
+                            <ul class="tech-list mb-1">
+                                <li>可以生成動態頁面內容。</li>
+                                <li>可以建立、開啟、讀取、寫入、關閉伺服器上的文件。</li>
+                                <li>可以收集表單資料，並發送和接收 cookie。</li>
+                                <li>可以新增、刪除、修改資料庫中的資料。</li>
+                                <li>可以限制用戶訪問網站上的某些頁面（權限控管）。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
-                    <h3 class="card-title">什麼是 PHP？</h3>
-                    <ul class="tech-list">
-                        <li><strong>伺服器端腳本：</strong> 代碼在伺服器上執行，最終以純 HTML 形式返回給瀏覽器。</li>
-                        <li><strong>動態能力：</strong> 能生成動態頁面內容、收集表單資料，以及與資料庫互動。</li>
-                        <li><strong>副檔名：</strong> 預設為 <code>.php</code>。</li>
+                    <h3 class="card-title">開發環境與 VSCode 外掛</h3>
+                    <ul class="tech-list mb-1">
+                        <li><strong>建立網站 (XAMPP)：</strong> 於 <code>c:\xampp\htdocs\</code> 內建立資料夾 (例如 <code>\php</code>)，即可透過 <code>http://localhost/php/</code> 訪問該網站。</li>
+                    </ul>
+                    <h4 class="fs-6 fw-bold mt-2">⚫ 推薦 VSCode 外掛</h4>
+                    <ul class="tech-list mb-1">
+                        <li><strong>PHP Intelephense：</strong> 提供強大的 PHP 代碼提示與自動完成功能。</li>
+                        <li><strong>Open PHP/HTML/JS In Browser：</strong> 方便在瀏覽器中開啟檔案。需設定伺服器主目錄「Document Root Folder」(例如 <code>c:\xampp\htdocs\</code>)。</li>
                     </ul>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title">變數、常數與字串</h3>
-                    <p class="card-text">使用 <code>$</code> 宣告變數，<code>define()</code> 宣告常數，並用 <code>.</code> 符號串接字串。</p>
-<pre class="code-block"><code>&lt;?php
-    // 變數宣告與常數
-    $userName = "Reyna"; 
-    define("URL", "http://localhost/php/"); 
+                    <h3 class="card-title">基本的 PHP 語法與註解</h3>
+                    <p class="card-text small text-muted mb-1">PHP 腳本可以放在 HTML 文檔中的任何位置，並以特定的標籤包覆。</p>
+<pre class="code-block mb-0"><code>&lt;!-- PHP 腳本範圍 --&gt;
+&lt;?php
+    // 這是 PHP 單行註解
 
-    // 字串串接 (使用 .)
-    $greeting = "Hello " . $userName;
-    echo $greeting;
+    /*
+       這是
+       PHP 多行註解
+    */
+?&gt;</code></pre>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">PHP 輸出字串 (Echo)</h3>
+                    <p class="card-text small text-muted mb-1"><code>echo</code> 是一個語言結構（非真正的函數），使用的時候可以不用加括號，也可以加上括號：<code>echo</code> 或 <code>echo()</code>。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 輸出字串 (可以包含 HTML 標籤)
+    echo "&lt;h1&gt; Hello World &lt;/h1&gt;";
+    
+    // 也可以輸出變數與字串的組合
+    $name = "Reyna";
+    echo "Welcome, " . $name . "!"; // 點 (.) 是 PHP 的字串連接符
+?&gt;</code></pre>
+                </div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">PHP 變數與資料型別 (Variables & Data Types)</h3>
+    <p class="card-text small text-muted">PHP 是一種「弱型別」語言，變數不需要事先宣告資料型別，給予什麼值就會自動轉換成什麼型別。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 變數宣告與命名規則</h4>
+            <ul class="tech-list mb-1">
+                <li>變數必須以 <code>$</code> 符號開始，後面跟著變數的名稱。</li>
+                <li>名稱必須以<strong>字母</strong>或<strong>底線</strong>開始。</li>
+                <li>只能包含字母、數字以及底線 (A-z、0-9 和 _ )，<strong>不能包含空格</strong>。</li>
+                <li><strong>區分大小寫</strong> (<code>$y</code> 和 <code>$Y</code> 是兩個不同的變數)。</li>
+            </ul>
+<pre class="code-block mb-0"><code>&lt;?php
+    $userName = "Reyna"; // 字串
+    $userAge = 25;       // 數字
+    $_isLogin = true;    // 底線開頭也是合法的
+    
+    // $1name = "Test";  // ❌ 錯誤：不能以數字開頭
+?&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 資料型別與 var_dump()</h4>
+            <p class="small text-muted mb-1">常見型別：整數 (支援16進位 <code>0x</code> 與8進位 <code>0</code>)、浮點數、布林 (<code>true</code>/<code>false</code>)、字串、物件、NULL。</p>
+            <div class="alert-box mb-2" style="font-size: 13px;">
+                <strong>💡 伺服器端除錯神器：</strong> <code>var_dump()</code> 函數會直接印出變數的「型別」與「長度/內容」，是後端開發找 Bug 必備的指令！
+            </div>
+            
+            
+            
+<pre class="code-block mb-0"><code>&lt;?php
+    $num = 25;
+    $hexNum = 0x1A; // 16進位的 26
+    $isReady = false;
+    $emptyValue = NULL;
+
+    // 檢視變數的詳細資訊
+    var_dump($num);      // 輸出: int(25)
+    var_dump($isReady);  // 輸出: bool(false)
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">常數宣告與字串操作 (Constants & Strings)</h3>
+    <p class="card-text small text-muted">常數用於儲存全站通用的設定，字串則用來處理文字輸出。</p>
+    
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 常數宣告 (define vs const)</h4>
+            <p class="small text-muted mb-1">常數一旦設定後就不能更改，且名稱前方<strong>不加</strong> <code>$</code> 符號。</p>
+            <div class="alert-box mb-2" style="font-size: 13px;">
+                <strong>💡 Modern PHP 觀念：</strong><br>
+                除了傳統的 <code>define()</code>，現代 PHP 開發（尤其是接觸物件導向或框架時）更強烈建議使用 <code>const</code> 關鍵字宣告，語法更簡潔易讀！
+            </div>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 傳統寫法：define(名稱, 值)
+    define("URL", "http://localhost/php/");
+    echo URL;
+
+    // 🌟 現代寫法：使用 const 關鍵字
+    const MAX_USERS = 100;
+    echo MAX_USERS;
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 字串串接與雙引號解析</h4>
+            <p class="small text-muted mb-1">計算長度使用 <code>strlen()</code>，字串相連使用點 <code>.</code> 符號。</p>
+            <div class="alert-box mb-2" style="font-size: 13px;">
+                <strong>💡 Modern PHP 觀念：字串插值 (Interpolation)</strong><br>
+                只要使用<strong>雙引號 (<code>""</code>)</strong>，就可以直接把變數寫在字串裡（建議加上大括號 <code>{}</code> 標示邊界），PHP 會自動解析它，不用再痛苦地寫一堆點和引號了！
+            </div>
+<pre class="code-block mb-0"><code>&lt;?php
+    $name = "Reyna";
+
+    // ⚠️ 傳統寫法：使用點 (.) 串接
+    $greet1 = "Hello, " . $name . "!"; 
+    
+    // 🌟 現代推薦寫法：雙引號直接解析變數
+    $greet2 = "Hello, {$name}!"; 
 
     // 計算字串長度
     echo strlen("Hello World"); // 回傳 11
 ?&gt;</code></pre>
+        </div>
+
+
+
+    </div>
+</div>
+
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">PHP 運算子 (Operators)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">賦值與遞增/遞減運算子 (Assignment & Increment)</h3>
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 賦值運算子</h4>
+                            <p class="small text-muted mb-1">用於把右側的值（或運算結果）寫入左側的變數中。特別注意字串串接是用 <code>.=</code>。</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm mt-2" style="font-size: 13px;">
+                                    <thead class="table-light">
+                                        <tr><th>運算子</th><th>等同於</th><th>描述</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td><code>=</code></td><td><code>x = y</code></td><td>將右側的值設定給左側</td></tr>
+                                        <tr><td><code>+=</code> / <code>-=</code></td><td><code>x = x + y</code></td><td>加 / 減</td></tr>
+                                        <tr><td><code>*=</code> / <code>/=</code></td><td><code>x = x * y</code></td><td>乘 / 除</td></tr>
+                                        <tr><td><code>%=</code></td><td><code>x = x % y</code></td><td>取餘數</td></tr>
+                                        <tr><td><code>.=</code></td><td><code>a = a . b</code></td><td>連接兩個字串</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 遞增與遞減運算子</h4>
+                            <p class="small text-muted mb-1">主要用於迴圈計數。<code>++x</code> (先加再傳) 和 <code>x++</code> (先傳再加) 在賦值時的結果會完全不同！</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $a = 5;
+    // 後遞增 (x++)：先回傳原來的值，然後才 +1
+    echo $a++; // 輸出 5，此時 $a 變成 6
+
+    $b = 5;
+    // 預遞增 (++x)：先 +1，然後才回傳新的值
+    echo ++$b; // 輸出 6，此時 $b 變成 6
+    
+    // 遞減 (--x 與 x--) 的邏輯完全相同
+?&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">比較運算子 (Comparison Operators)</h3>
+                    
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 Modern PHP 觀念：</strong><br>
+                        1. <strong>強烈建議使用 <code>===</code> (絕對等於)</strong>：PHP 會有奇妙的自動轉型，使用 <code>==</code> 容易產生 Bug（例如在舊版 PHP 中 <code>"0" == false</code> 會是 true）。<br>
+                        2. <strong>PHP 7 新增「太空船運算子 <code>&lt;=&gt;</code>」</strong>：非常適合用在陣列自訂排序上，取代繁瑣的 if/else 比對！
+                    </div>
+
+                    
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm mt-2" style="font-size: 13px;">
+                            <thead class="table-light">
+                                <tr><th>運算子</th><th>名稱</th><th>現代開發建議與描述</th><th>實例 (x=5)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>===</code></td><td>絕對等於</td><td><strong>(推薦)</strong> 類型與值都必須完全相同，返回 true</td><td><code>5 === "5"</code> ➔ false</td></tr>
+                                <tr><td><code>!==</code></td><td>絕對不等於</td><td><strong>(推薦)</strong> 值不相等，或類型不同，返回 true</td><td><code>5 !== "5"</code> ➔ true</td></tr>
+                                <tr><td><code>==</code></td><td>等於</td><td>(不推薦) 會自動轉換型別再比較</td><td><code>5 == "5"</code> ➔ true</td></tr>
+                                <tr><td><code>!=</code> / <code>&lt;&gt;</code></td><td>不等於</td><td>(不推薦) 會自動轉換型別再比較</td><td><code>5 != 8</code> ➔ true</td></tr>
+                                <tr><td><code>&gt;</code> / <code>&lt;</code></td><td>大於 / 小於</td><td>大於 / 小於對方時返回 true</td><td><code>5 &lt; 8</code> ➔ true</td></tr>
+                                <tr><td><code>&gt;=</code> / <code>&lt;=</code></td><td>大於(小於)等於</td><td>包含等於的條件判斷</td><td><code>5 &lt;= 8</code> ➔ true</td></tr>
+                                <tr><td class="text-primary fw-bold"><code>&lt;=&gt;</code></td><td>太空船運算子</td><td>(PHP 7+) 左邊大於右邊回傳 1，等於回傳 0，小於回傳 -1</td><td><code>5 &lt;=&gt; 8</code> ➔ -1</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">邏輯與三元運算子 (Logical & Ternary Operators)</h3>
+                    <p class="card-text small text-muted">結合多個條件判斷，以及精簡 <code>if...else</code> 語法結構的必備利器。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 邏輯運算子與優先權陷阱</h4>
+                            <p class="small text-muted mb-1">包含 <code>&&</code> (與)、<code>||</code> (或)、<code>!</code> (非)、<code>xor</code> (異或：僅有一個為true時才成立)。</p>
+                            <div class="alert-box mb-2" style="font-size: 13px;">
+                                <strong>⚠️ 避坑指南：<code>&&</code> vs <code>and</code> 的差異</strong><br>
+                                雖然 <code>&&</code> 和 <code>and</code> 都是「且」，但 <strong><code>&&</code> 的優先權高於 <code>=</code>，而 <code>and</code> 的優先權低於 <code>=</code></strong>。實務上請一律使用符號 <code>&&</code> 和 <code>||</code> 以避免指派錯誤。
+                            </div>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 正確的邏輯判斷使用符號
+    $x = 6;
+    $y = 3;
+    if ($x &lt; 10 && $y &gt; 1) {
+        echo "兩者皆成立！";
+    }
+
+    // 優先權陷阱示範
+    $a = true && false; // $a 為 false
+    $b = true and false; // $b 為 true (因為先執行了 $b = true)
+?&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 現代精簡條件判斷</h4>
+                            <p class="small text-muted mb-1">用來取代冗長的 <code>if...else</code>，現代 PHP 有三種超實用的縮寫方式：</p>
+                            
+                            
+
+<pre class="code-block mb-0"><code>&lt;?php
+    // 1. 三元運算子 (Ternary) - 基礎款
+    $sex = '男';
+    echo ($sex == '女') ? '小姐' : '先生'; // 輸出: 先生
+
+    // 2. 🌟 貓王運算子 (Elvis) - PHP 5.3+
+    // 如果左邊是 true (有值)，就用左邊；否則用右邊
+    $userName = $_GET['user'] ?: '訪客';
+
+    // 3. 🌟 Null 合併運算子 (Null Coalescing) - PHP 7+
+    // 專門對付未定義變數！如果左邊存在且不是 Null 就用左邊
+    // (現代實務上接 GET/POST 參數必用)
+    $page = $_GET['page'] ?? 1; 
+?&gt;</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -106,61 +367,232 @@
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">條件判斷 (If & Switch)</h3>
-                    <p class="card-text">透過條件判斷來控制程式走向。簡易判斷可使用三元運算子 <code>?:</code>。</p>
-<pre class="code-block"><code>&lt;?php
-    $t = date("H");
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">條件判斷：If / Else 判斷式</h3>
+    <p class="card-text small text-muted">當需要為不同的判斷執行不同的動作時，可以使用條件語句來控制程式的走向。</p>
 
-    // if...elseif...else 判斷式
-    if ($t &lt; 10) {
-        echo "Good morning!";
-    } elseif ($t &lt; 20) {
-        echo "Good day!";
-    } else {
-        echo "Good night!";
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern PHP 觀念：樣板替代語法</strong><br>
+        前端開發者在寫 PHP 視圖 (View) 時，經常需要把 HTML 和 PHP 混在一起寫。為了避免大括號 <code>{}</code> 造成閱讀困難，現代實務強烈推薦使用<strong>「替代語法」</strong>（以 <code>:</code> 取代 <code>{</code>，並以 <code>endif;</code> 結尾）。
+    </div>
+
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎 If 與 If...Else</h4>
+            <p class="small text-muted mb-1">條件成立時執行 A，不成立時執行 B。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $t = date("H"); // 取得目前的小時 (00~23)
+
+    // 1. 單一 if 判斷
+    if ($t &lt; 20) {
+        echo "Have a good day!&lt;br&gt;";
     }
 
-    // Switch 判斷式
+    // 2. if...else 判斷
+    if ($t &lt; 20) {
+        echo "目前還沒晚上 8 點喔！";
+    } else {
+        echo "Have a good night!";
+    }
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ If...Elseif...Else 與替代語法</h4>
+            <p class="small text-muted mb-1">用於多重條件判斷。下方示範實務上與 HTML 混寫的現代寫法。</p>
+<pre class="code-block mb-0"><code>&lt;!-- 🌟 現代實戰寫法：替代語法 (Alternative Syntax) --&gt;
+&lt;?php $t = date("H"); ?&gt;
+
+&lt;div class="greeting-box"&gt;
+    &lt;?php if ($t &lt; 10): ?&gt;
+        &lt;h2&gt;Have a good morning!&lt;/h2&gt;
+        
+    &lt;?php elseif ($t &lt; 20): ?&gt;
+        &lt;h2&gt;Have a good day!&lt;/h2&gt;
+        
+    &lt;?php else: ?&gt;
+        &lt;h2&gt;Have a good night!&lt;/h2&gt;
+        
+    &lt;?php endif; ?&gt; &lt;!-- 清楚標示判斷式結束 --&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">多重條件判斷：Switch 與 Match (PHP 8+)</h3>
+    <p class="card-text small text-muted">當遇到「單一變數」需要比對「多種特定值」時，這類語法比寫一長串的 if...elseif 更簡潔。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern PHP 觀念：擁抱 <code>match</code> 表達式</strong><br>
+        傳統的 <code>switch</code> 存在幾個痛點：比對時是鬆散比對 (<code>==</code>) 容易出錯，且忘記寫 <code>break</code> 會導致程式「穿透」繼續往下跑。<strong>PHP 8 引入了 <code>match</code></strong>，它預設嚴格比對 (<code>===</code>)、不用寫 break，而且可以直接把結果賦值給變數，是現代 PHP 開發的首選！
+    </div>
+
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 傳統 Switch 判斷式</h4>
+            <p class="small text-muted mb-1">注意每一個 <code>case</code> 結束都必須加上 <code>break;</code>。</p>
+<pre class="code-block mb-0"><code>&lt;?php
     $favcolor = "red";
+
     switch($favcolor) {
         case "red":
-            echo "你喜歡紅色";
+            echo "你喜歡的顏色是紅色！";
+            break;
+        case "blue":
+            echo "你喜歡的顏色是藍色！";
+            break;
+        case "green":
+            echo "你喜歡的顏色是綠色！";
             break;
         default:
-            echo "你喜歡其他顏色";
+            echo "你喜歡的顏色不是紅、藍或綠色！";
     }
-
-    // 三元運算子
-    $sex = '男';
-    echo ($sex == '女') ? '小姐' : '先生';
 ?&gt;</code></pre>
-                </div>
+        </div>
 
-                <div class="card">
-                    <h3 class="card-title">迴圈控制 (For, While, Do...While)</h3>
-                    <p class="card-text">讓相同的代碼區塊重複運行。依據是否已知執行次數來選擇合適的迴圈。</p>
-<pre class="code-block"><code>&lt;?php
-    // for 迴圈 (執行指定次數)
-    for( $i = 1 ; $i &lt;= 5 ; $i++ ) {
-        echo "數字為 " . $i . "&lt;br&gt;";
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 🌟 現代 PHP 8 Match 表達式</h4>
+            <p class="small text-muted mb-1">語法極度精簡，且比對安全。實務上大推！</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $favcolor = "red";
+
+    // match 會直接把結果「回傳」，所以可以直接賦值給變數
+    $result = match($favcolor) {
+        "red" =&gt; "你喜歡的顏色是紅色！",
+        "blue" =&gt; "你喜歡的顏色是藍色！",
+        "green" =&gt; "你喜歡的顏色是綠色！",
+        default =&gt; "你喜歡的顏色不是紅、藍或綠色！",
+    };
+
+    echo $result;
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">計次迴圈：For 與替代語法</h3>
+    <p class="card-text small text-muted">當你「已經知道」程式區塊需要重複執行的明確次數時，最適合使用 for 迴圈。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern PHP 觀念：樣板替代語法</strong><br>
+        與 if 判斷式一樣，迴圈在與 HTML 混寫時，也非常推薦使用<strong>「替代語法」</strong>（例如 <code>for...endfor;</code>），讓 HTML 結構維持乾淨清晰。同時記得多利用<strong>雙引號變數解析</strong>，取代傳統的字串相加。
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎 For 迴圈</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 括號內依序為：(初始值 ; 繼續執行的條件 ; 每次執行後的動作)
+    for ($i = 1; $i &lt;= 5; $i++) {
+        // 🌟 現代寫法：使用雙引號直接解析變數
+        echo "數字為 {$i} &lt;br&gt;";
+    }
+?&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ For 替代語法 (結合 HTML)</h4>
+            <p class="small text-muted mb-1">實戰常用：動態在網頁上印出多個 HTML 區塊。</p>
+<pre class="code-block mb-0"><code>&lt;div class="item-list"&gt;
+    &lt;!-- 使用冒號 : 開頭 --&gt;
+    &lt;?php for ($i = 1; $i &lt;= 3; $i++): ?&gt;
+        
+        &lt;div class="item"&gt;
+            這是第 &lt;?php echo $i; ?&gt; 個項目
+        &lt;/div&gt;
+        
+    &lt;?php endfor; ?&gt; &lt;!-- 使用 endfor; 結尾 --&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">條件迴圈：While 與 Do...While</h3>
+    <p class="card-text small text-muted">當你「不確定執行次數」，只要條件成立就一直跑時，使用 while 系列迴圈。</p>
+
+    
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ While 迴圈</h4>
+            <p class="small text-muted mb-1"><strong>「先檢查，後執行」</strong>：條件成立才執行代碼。如果一開始就不成立，可能一次都不會執行。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $i = 1;
+    while ($i &lt;= 5) {
+        echo "The number is {$i} &lt;br&gt;";
+        $i++; // ⚠️ 記得要遞增，否則會變成無限迴圈！
     }
 
-    // while 迴圈 (條件成立時執行)
+    // 🌟 While 的替代語法
+    /* while ($i &lt;= 5):
+        // 執行代碼
+    endwhile; 
+    */
+?&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Do...While 迴圈</h4>
+            <p class="small text-muted mb-1"><strong>「先執行，後檢查」</strong>：先執行一次代碼區塊，然後再檢查條件。因此無論如何至少會執行一次。</p>
+<pre class="code-block mb-0"><code>&lt;?php
     $j = 1;
-    while($j &lt;= 5) {
-        echo "The number is " . $j . "&lt;br&gt;";
-        $j++;
-    }
-
-    // do...while 迴圈 (至少執行一次)
-    $k = 1;
     do {
-        echo "Do Loop: " . $k;
-        $k++;
-    } while($k &lt;= 5);
+        // 先無條件執行一次
+        echo "The number is {$j} &lt;br&gt;";
+        $j++;
+    } while ($j &lt;= 5);
+    
+    // 測試：即使初始條件不成立
+    $k = 10;
+    do {
+        echo "條件不成立，但我還是會印出這行！";
+    } while ($k &lt;= 5);
 ?&gt;</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">迴圈進階控制：Break 與 Continue</h3>
+    <p class="card-text small text-muted">在迴圈執行過程中，我們經常需要根據特定條件「強制提早結束」或「跳過這回合」。</p>
+
+    
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ Break (中斷並跳出)</h4>
+            <p class="small text-muted mb-1">遇到 <code>break</code> 會直接中斷，並結束整個迴圈。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    for ($i = 1; $i &lt;= 10; $i++) {
+        if ($i == 4) {
+            break; // 遇到 4 時，直接跳出整個迴圈
+        }
+        echo "數字: {$i} | ";
+    }
+    // 結果只會印出：數字: 1 | 數字: 2 | 數字: 3 | 
+?&gt;</code></pre>
+        </div>
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Continue (跳過本次)</h4>
+            <p class="small text-muted mb-1">遇到 <code>continue</code> 會中斷「這一次」的迴圈，直接進入下一次的迴圈判斷。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    for ($i = 1; $i &lt;= 5; $i++) {
+        if ($i == 3) {
+            continue; // 遇到 3 時跳過，不往下執行
+        }
+        echo "數字: {$i} | ";
+    }
+    // 結果會印出：數字: 1 | 數字: 2 | 數字: 4 | 數字: 5 | 
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
 
@@ -170,49 +602,148 @@
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">數值、關聯與多維陣列</h3>
-                    <p class="card-text">PHP 陣列支援數字索引、自訂鍵值 (Key)，甚至可以在陣列中包覆陣列 (多維陣列)。</p>
-<pre class="code-block"><code>&lt;?php
-    // 1. 數值陣列
-    $cars = array("Volvo", "BMW", "Toyota");
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">PHP 陣列基礎與數值陣列 (Indexed Arrays)</h3>
+    <p class="card-text small text-muted">陣列能在一個變數中儲存多個值。PHP 有三種陣列：數值陣列 (以數字為索引)、關聯陣列 (自訂鍵值)、多維陣列 (陣列包陣列)。</p>
 
-    // 2. 關聯陣列 (指定鍵值)
-    $age = array("Peter"=&gt;"35", "Ben"=&gt;"37");
-    echo $age['Peter']; // 輸出 35
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern PHP 觀念：短陣列語法 (Short Array Syntax)</strong><br>
+        傳統講義會使用 <code>array()</code> 函數來創建陣列，但現代 PHP 開發已經全面改用更簡潔的<strong>中括號 <code>[]</code></strong>，強烈建議直接習慣現代寫法！
+    </div>
 
-    // 3. 多維陣列 (陣列中的陣列)
-    $stock = array (
-        array("Volvo", 100, 96),
-        array("BMW", 60, 59)
-    );
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 宣告陣列：傳統 vs 現代寫法</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    // ⚠️ 傳統寫法：使用 array()
+    $carsOld = array("Volvo", "BMW", "Toyota");
+
+    // 🌟 現代寫法：使用短陣列語法 []
+    $cars = ["Volvo", "BMW", "Toyota"];
+    
+    // 陣列可以混裝不同型別的資料
+    $mixedArray = ["Reyna", 25, true, 3.14];
 ?&gt;</code></pre>
-                </div>
+        </div>
 
-                <div class="card">
-                    <h3 class="card-title">foreach 陣列遍歷</h3>
-                    <p class="card-text"><code>foreach</code> 是專門用來處理陣列的迴圈。處理多維陣列時可使用雙層巢狀結構。</p>
-<pre class="code-block"><code>&lt;?php
-    $cars = array("Volvo", "BMW", "Toyota");
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 數值陣列 (Indexed Arrays)</h4>
+            <p class="small text-muted mb-1">帶有數字索引的陣列。索引值預設是從 <strong><code>0</code></strong> 開始計算。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $cars = ["Volvo", "BMW", "Toyota"];
 
-    // 遍歷單維陣列
-    foreach($cars as $value) {
-        echo $value . "&lt;br&gt;";
+    // 透過索引值取得陣列內容
+    echo $cars[0]; // 輸出 Volvo
+    echo $cars[1]; // 輸出 BMW
+    echo $cars[2]; // 輸出 Toyota
+
+    // 修改陣列元素
+    $cars[0] = "Ford"; 
+
+    // 在陣列最後面新增一個元素
+    $cars[] = "Honda"; 
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">關聯陣列 (Associative Arrays)</h3>
+    <p class="card-text small text-muted">關聯陣列是帶有「自訂鍵值 (Key)」的陣列，每個鍵會關聯一個「值 (Value)」。這種結構等同於 JavaScript 中的「物件 (Object)」，非常適合用來儲存單筆詳細資料（如使用者個資）。</p>
+
+    
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 宣告與讀取關聯陣列</h4>
+            <p class="small text-muted mb-1">使用 <code>=&gt;</code> 符號來指定鍵與值的對應關係。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 🌟 現代寫法：定義關聯陣列
+    $user = [
+        "name"  =&gt; "Peter",
+        "age"   =&gt; 35,
+        "email" =&gt; "peter@test.com"
+    ];
+
+    // 透過自訂的鍵名 (Key) 來取得值
+    echo $user['name']; // 輸出 Peter
+    echo $user['age'];  // 輸出 35
+
+    // 修改特定鍵的值
+    $user['age'] = 36;
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 搭配 foreach 迴圈遍歷</h4>
+            <p class="small text-muted mb-1"><code>foreach</code> 是專門用來跑陣列的迴圈，可以同時把 Key 和 Value 抓出來。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $ages = ["Peter"=&gt;"35", "Ben"=&gt;"37", "Joe"=&gt;"43"];
+
+    // 語法：foreach ($陣列變數 as $鍵名 =&gt; $值)
+    foreach ($ages as $name =&gt; $age) {
+        // 搭配雙引號變數解析，寫法極度簡潔
+        echo "姓名: {$name}，年齡: {$age} &lt;br&gt;";
     }
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
 
-    // 遍歷多維陣列 (巢狀 foreach)
-    $multi_cars = array(
-        array("Volvo", 100),
-        array("BMW", 60)
-    );
-    foreach($multi_cars as $x) {
-        foreach($x as $y) {
-            echo $y . ' ';
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">多維陣列與巢狀迴圈 (Multidimensional Arrays)</h3>
+    <p class="card-text small text-muted">包含一個或多個陣列的陣列。這在後端開發極度常見，當你從資料庫抓出「多筆商品」或「多個使用者」資料時，回傳的就是多維陣列。</p>
+
+    
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 定義與讀取多維陣列</h4>
+            <p class="small text-muted mb-1">陣列裡面的元素也是陣列，需要使用多個中括號來存取對應層級的資料。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 陣列中包著三個陣列：[品牌, 庫存, 銷量]
+    $cars = [
+        ["Volvo", 100, 96],
+        ["BMW", 60, 59],
+        ["Toyota", 110, 100]
+    ];
+
+    // 讀取第一筆 (Volvo) 的庫存 (100)
+    // $cars[0] 抓到第一列，接著 [1] 抓到該列的第二個元素
+    echo $cars[0][1]; 
+
+    // 讀取第二筆 (BMW) 的銷量 (59)
+    echo $cars[1][2]; 
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 搭配巢狀 foreach 遍歷資料</h4>
+            <p class="small text-muted mb-1">使用雙層迴圈，把外層與內層的資料全部印出來（常用於產生 HTML 表格 <code>&lt;table&gt;</code>）。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $cars = [
+        ["Volvo", 100, 96],
+        ["BMW", 60, 59],
+        ["Toyota", 110, 100]
+    ];
+
+    // 第一層：跑過每一列 (每一台車的資料陣列)
+    foreach ($cars as $carRow) {
+        
+        // 第二層：跑過該列裡面的每一個具體數值
+        foreach ($carRow as $value) {
+            echo "{$value} | ";
         }
-        echo '&lt;br&gt;';
+        
+        echo "&lt;br&gt;"; // 每跑完一台車就換行
     }
 ?&gt;</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
 
@@ -222,21 +753,114 @@
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">GET 與 POST 變數</h3>
-                    <div class="alert-box">
-                        <strong>💡 重點：</strong><br>
-                        <code>$_GET</code> 參數顯示在網址列，有長度限制。<br>
-                        <code>$_POST</code> 不顯示於網址列，較安全且無長度限制。
-                    </div>
-<pre class="code-block"><code>&lt;?php
-    // 取得網址列參數 (?username=...)
-    $user = $_GET["username"];
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">GET 變數與網址傳遞 ($_GET)</h3>
+    <p class="card-text small text-muted">用於收集來自 <code>method="get"</code> 的表單值，或是直接附加在網址後方的參數。</p>
 
-    // 取得隱藏傳遞的表單資料
-    $pwd = $_POST["userpassword"];
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 GET 的特性與使用時機：</strong><br>
+        1. <strong>可見性：</strong> 傳送的資料會以 <code>?key=value</code> 的形式顯示在瀏覽器的網址列，對任何人都是可見的。<br>
+        2. <strong>限制：</strong> 網址長度有限制（大約 2000 個字元），不能傳送過多的資料。<br>
+        3. <strong>適用情境：</strong> 適合用在<strong>沒有安全性考量</strong>且需要被<strong>分享或加入書籤</strong>的操作，例如：搜尋關鍵字、文章分頁、商品篩選條件。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 前端 HTML 表單</h4>
+<pre class="code-block mb-0"><code>&lt;!-- 表單發送後，網址會變成：
+     search.php?keyword=蘋果 --&gt;
+&lt;form action="search.php" method="get"&gt;
+    搜尋：&lt;input type="text" name="keyword"&gt;
+    &lt;input type="submit" value="送出"&gt;
+&lt;/form&gt;
+
+&lt;!-- 也可以直接寫在超連結上 --&gt;
+&lt;a href="search.php?keyword=蘋果"&gt;搜尋蘋果&lt;/a&gt;</code></pre>
+        </div>
+        
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 後端 PHP 接收 ($_GET)</h4>
+            <p class="small text-muted mb-1">使用 PHP 內建的超全域變數 <code>$_GET</code> 陣列來接收。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 透過表單的 name 屬性 (keyword) 來取得對應的值
+    $searchKey = $_GET["keyword"];
+    
+    // ⚠️ 警告：這只是基礎示範。
+    // 在現代實務中直接這樣寫會有報錯風險與資安漏洞，
+    // 請看下方的「安全防護」卡片說明！
 ?&gt;</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">POST 變數與隱藏傳遞 ($_POST)</h3>
+    <p class="card-text small text-muted">用於收集來自 <code>method="post"</code> 的表單值。資料會被打包在 HTTP 請求的 Body 裡面傳送。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 POST 的特性與使用時機：</strong><br>
+        1. <strong>隱蔽性：</strong> 傳送的資訊對任何人都是不可見的（不會顯示在網址列）。<br>
+        2. <strong>無長度限制：</strong> 可以傳送大量的資料。<br>
+        3. <strong>適用情境：</strong> 適合傳送<strong>敏感資訊</strong>（如密碼、身分證字號）或<strong>大型檔案</strong>（如圖片上傳、長篇大論的文章內容）。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 前端 HTML 表單</h4>
+<pre class="code-block mb-0"><code>&lt;!-- 表單發送後，網址依然是 login.php，
+     密碼不會暴露在網址列 --&gt;
+&lt;form action="login.php" method="post"&gt;
+    帳號：&lt;input type="text" name="user"&gt;&lt;br&gt;
+    密碼：&lt;input type="password" name="pwd"&gt;&lt;br&gt;
+    &lt;input type="submit" value="登入"&gt;
+&lt;/form&gt;</code></pre>
+        </div>
+        
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 後端 PHP 接收 ($_POST)</h4>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 透過 $_POST 陣列接收隱藏傳遞的資料
+    $account = $_POST["user"];
+    $password = $_POST["pwd"];
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">💡 現代實戰與安全防護 (Modern Security & Syntax)</h3>
+    <p class="card-text small text-muted">在現代 PHP 8+ 開發中，接收表單與輸出資料必須遵守以下兩大黃金守則。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 1. 防範未定義報錯 (Null Coalescing)</h4>
+            <p class="small text-muted mb-1">如果使用者直接進入網頁（沒送出表單），直接抓取 <code>$_POST['user']</code> 會引發錯誤。現代 PHP 強烈建議使用 <code>??</code> 給予預設值。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    // 🌟 現代寫法：如果左邊不存在，就套用右邊的預設值
+    $account = $_POST["user"] ?? "未輸入帳號";
+    
+    // 如果是分頁，預設為第一頁
+    $page = $_GET["page"] ?? 1;
+?&gt;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 2. 防範 XSS 攻擊 (跨站腳本攻擊)</h4>
+            <p class="small text-muted mb-1"><strong>絕對不要直接 <code>echo</code> 使用者輸入的內容！</strong>駭客可以輸入 <code>&lt;script&gt;</code> 標籤來植入惡意程式。輸出前必須「消毒」。</p>
+<pre class="code-block mb-0"><code>&lt;?php
+    $searchKey = $_GET["keyword"] ?? "";
+
+    // ⚠️ 極度危險 (會被植入惡意腳本)
+    // echo "您搜尋了：" . $searchKey;
+
+    // 🌟 現代寫法：使用 htmlspecialchars() 轉換特殊字元
+    // 這會把 &lt; 轉換成 &amp;lt; 讓腳本失效
+    $safeInput = htmlspecialchars($searchKey, ENT_QUOTES);
+    echo "您搜尋了：{$safeInput}";
+?&gt;</code></pre>
+        </div>
+    </div>
+</div>
 
                 <div class="card">
                     <h3 class="card-title">實戰：檔案上傳處理</h3>

@@ -82,108 +82,349 @@
                 <h2 class="section-title">jQuery 基礎語法與選取器</h2>
             </div>
 
-            <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">起手式與文檔就緒</h3>
-                    <p class="card-text">為了確保 DOM 元素都已經完全載入，所有的 jQuery 代碼都應該包裝在 <code>ready()</code> 函數中。</p>
-<pre class="code-block"><code>// 基礎語法結構：$(selector).action()
-
-// 確保文檔完全加載 (文檔就緒函數)
-$(document).ready(function() {
-    
-    // 你的 jQuery 代碼寫在這裡
-    console.log("jQuery is ready!");
-    
-});</code></pre>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">強大的選擇器 (Selectors)</h3>
-                    <p class="card-text">利用 <code>$()</code> 包裹 CSS 選擇器，就能輕鬆抓取網頁元素。</p>
-<pre class="code-block"><code>// 基本選擇器
-$("p")        // 標籤選擇器
-$(".intro")   // Class 選擇器
-$("#demo")    // ID 選擇器
-
-// 屬性選擇器
-$("[href]")   // 帶有 href 屬性的元素
-$("[href$='.jpg']") // href 值以 .jpg 結尾的元素</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <section class="page-section">
-            <div class="section-header">
-                <h2 class="section-title">DOM 操作與事件綁定</h2>
-            </div>
-
-            <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">內容、屬性與類別操作</h3>
-                    <p class="card-text">jQuery 提供極簡的方法來取得 (Get) 或設定 (Set) 元素的內容與樣式。</p>
-<pre class="code-block"><code>// 內容操作
-$("#text").text("Hello");       // 修改純文字
-$("#box").html("&lt;b&gt;Hi&lt;/b&gt;");  // 修改 HTML 結構
-$("#input").val("Reyna");       // 修改表單輸入值
-
-// 屬性與類別操作
-$("img").attr("src", "new.jpg"); // 修改屬性
-$("p").addClass("highlight");    // 新增 class
-$("p").removeClass("highlight"); // 移除 class</code></pre>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">事件監聽 (Events)</h3>
-                    <div class="alert-box">
-                        <strong>💡 jQuery 的強項：</strong> 原生 JS 的 <code>querySelectorAll</code> 抓到多個元素後必須使用迴圈才能綁定事件，但在 jQuery 裡，它會自動幫所有符合的元素綁定事件！
+<div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. jQuery 基礎語法與起手式</h3>
+                    
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 Modern jQuery 觀念：</strong><br>
+                        傳統的 <code>$(document).ready(function(){})</code> 在 jQuery 3.0 之後已被官方標記為不推薦 (Deprecated)！現代標準請一律改用簡寫版本 <code>$(function() { ... })</code>，若搭配 ES6 箭頭函數則寫為 <code>$(() =&gt; { ... })</code>。
                     </div>
-<pre class="code-block"><code>// 滑鼠點擊事件
-$("button").click(function() {
-    $("p").hide(); // 隱藏所有段落
+
+                    
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 核心語法結構</h4>
+                            <p class="small text-muted mb-1">基礎語法：<code>$(selector).action()</code></p>
+                            <ul class="tech-list mb-1">
+                                <li><strong><code>$</code></strong>：定義/存取 jQuery 函式庫。</li>
+                                <li><strong><code>(selector)</code></strong>：尋找網頁中的 HTML 元素。</li>
+                                <li><strong><code>.action()</code></strong>：對元素執行的操作動作。</li>
+                            </ul>
+<pre class="code-block mb-0"><code>$(this).hide();     // 隱藏當前元素
+$("p").hide();      // 隱藏所有段落
+$(".test").hide();  // 隱藏所有 class="test" 的元素
+$("#test").hide();  // 隱藏所有 id="test" 的元素</code></pre>
+                        </div>
+                        
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 文檔就緒函數 (Document Ready)</h4>
+                            <p class="small text-muted mb-1">為了防止在 DOM 完全加載之前運行代碼（例如試圖隱藏不存在的元素，或獲取未加載的圖片大小），必須將代碼包裝在就緒函數中。</p>
+<pre class="code-block mb-0"><code>// ⚠️ 傳統寫法 (過於冗長，現代不推薦)
+$(document).ready(function() {
+    // 執行代碼...
 });
 
-// 使用 on() 綁定多個事件或未來動態產生的元素
-$(document).on("click", "li", function() {
-    $(this).remove(); // 點擊列表項目即刪除自己
+// 🌟 現代 jQuery 推薦縮寫
+$(function() {
+    // 執行代碼...
+});
+
+// 🌟 現代 jQuery 搭配 ES6 箭頭函數
+$(() =&gt; {
+    console.log("DOM 已載入，jQuery 準備就緒！");
 });</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. 強大的選擇器與樣式操作</h3>
+                    <p class="card-text small text-muted">jQuery 的選擇器語法完美支援 CSS 選擇器，這也是現代原生 JS <code>querySelector</code> 的靈感來源。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 元素與屬性選擇器</h4>
+<pre class="code-block mb-0"><code>// 1. 元素與 Class/ID 選擇器
+$("p")         // 選取 &lt;p&gt; 元素
+$("p.intro")   // 選取 class="intro" 的 &lt;p&gt; 元素
+$("p#demo")    // 選取 id="demo" 的 &lt;p&gt; 元素
+
+// 2. 屬性選擇器
+$("[href]")             // 選取帶有 href 屬性的元素
+$("[href='#']")         // 選取 href 值等於 "#" 的元素
+$("[href!='#']")        // 選取 href 值「不等於」"#" 的元素
+$("[href$='.jpg']")     // 選取 href 值以 ".jpg"「結尾」的元素</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 操作 CSS 樣式與鏈式寫法</h4>
+                            <p class="small text-muted mb-1">使用 <code>.css()</code> 可以動態更改屬性。jQuery 的一大優勢是「鏈式寫法 (Chaining)」，可以一次串接多個動作。</p>
+<pre class="code-block mb-0"><code>// 更改單一 CSS 屬性
+$("p").css("background-color", "red");
+
+// 更改多個 CSS 屬性 (傳入物件格式)
+$("p.intro").css({
+    "background-color": "yellow",
+    "font-size": "20px"
+});
+
+// 🌟 jQuery 特色：鏈式寫法 (Chaining)
+// 選取後，先變更顏色、再滑動隱藏、再滑動顯示
+$("#demo").css("color", "blue").slideUp(2000).slideDown(2000);</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+<section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">DOM 操作與事件綁定 (DOM & Events)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">內容、屬性與樣式操作 (Content & Attributes)</h3>
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 jQuery 核心觀念：Getter / Setter 同體</strong><br>
+                        jQuery 非常聰明，同一個方法（如 <code>text()</code>、<code>css()</code>），<strong>不傳參數時是「取得 (Get)」</strong>，<strong>傳入參數時則是「設定 (Set)」</strong>。這讓程式碼看起來極度乾淨！
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 取得與設定內容 (text, html, val)</h4>
+                            <p class="small text-muted mb-1">對應原生 JS 的 <code>textContent</code>、<code>innerHTML</code> 與 <code>value</code>。</p>
+<pre class="code-block mb-0"><code>// --- 取得內容 (Get) ---
+let myText = $("#test1").text();   // 返回純文字
+let myHtml = $("#test1").html();   // 返回 HTML 結構
+let myVal = $("#test2").val();     // 返回表單欄位的值
+
+// --- 設定內容 (Set) ---
+$("#test1").text("Hello");
+$("#test2").html("&lt;b&gt;Hello world!&lt;/b&gt;");
+$("#test3").val("I am Dragon");</code></pre>
+                        </div>
+                        
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 取得與設定屬性、類別、樣式</h4>
+<pre class="code-block mb-0"><code>// --- 操作屬性 (Attribute) ---
+$("img").attr("src", "images/3.jpg"); // 設定 src 屬性
+$("table").removeAttr("border");      // 移除 border 屬性
+
+// --- 操作 Class 類別 ---
+$("p").addClass("pre");       // 新增類別
+$("p").removeClass("pre");    // 移除類別
+$("p").toggleClass("pre");    // 切換類別
+
+// --- 操作 CSS 樣式 ---
+let bgColor = $("p").css("background-color"); // 取得背景色
+$("p").css("background-color", "yellow");     // 設定單一樣式
+$("p").css({ "color": "red", "font-size": "20px" }); // 設定多個樣式</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">動態添加與刪除元素 (Add & Remove Elements)</h3>
+                    <p class="card-text small text-muted">比起原生 JavaScript，jQuery 提供了更直覺的方位插入方法，以及更方便的刪除機制。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 添加新內容的四個方位</h4>
+                            <ul class="tech-list mb-1">
+                                <li><code>append()</code>：在被選元素的<strong>結尾 (內部)</strong> 插入。</li>
+                                <li><code>prepend()</code>：在被選元素的<strong>開頭 (內部)</strong> 插入。</li>
+                                <li><code>after()</code>：在被選元素<strong>之後 (外部)</strong> 插入。</li>
+                                <li><code>before()</code>：在被選元素<strong>之前 (外部)</strong> 插入。</li>
+                            </ul>
+<pre class="code-block mb-0"><code>let element = "&lt;span&gt; 新節點 &lt;/span&gt;";
+
+$("ol").append("&lt;li&gt;" + element + "&lt;/li&gt;");
+$("ol").prepend("&lt;li&gt;" + element + "&lt;/li&gt;");
+$("#box").after(element);
+$("#box").before(element);</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 刪除元素或內容</h4>
+                            <p class="small text-muted mb-1"><code>remove()</code> 會連根拔起，而 <code>empty()</code> 只會清空肚子裡的內容。</p>
+<pre class="code-block mb-0"><code>// 刪除被選元素 (包含它自己與所有子元素)
+$("#div1").remove();
+
+// 從被選元素中刪除所有子元素 (它自己還留著，但變空了)
+$("#div1").empty();</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">事件綁定與尺寸計算 (Events & Dimensions)</h3>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 jQuery 事件綁定的強項：自動遍歷</strong><br>
+                        在原生 JS 中，抓到多個按鈕必須用迴圈才能一一綁定事件；而在 jQuery 裡，<code>$("button").click()</code> 會<strong>自動幫所有找到的按鈕都綁上事件</strong>，這是 jQuery 極度好用的設計！
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 常見事件與動態事件委派 <code>on()</code></h4>
+                            <p class="small text-muted mb-1">包含：<code>click</code>, <code>dblclick</code>, <code>focus</code>, <code>mouseover</code>, <code>mouseout</code> 等。</p>
+<pre class="code-block mb-0"><code>// 一般事件綁定
+$("button").click(function() {
+    $("p").hide(); // 點擊按鈕隱藏所有的 &lt;p&gt;
+});
+
+// 🌟 進階技巧：動態事件委派 (Event Delegation)
+// 使用 on() 綁定在父元素(如 document)上，
+// 這樣「未來」才動態產生的 &lt;li&gt; 也會有點擊事件！
+$(document).on("click", "li", function() {
+    // 點擊誰，誰就刪除自己
+    $(this).remove(); 
+});</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 尺寸計算方法 (Dimensions)</h4>
+                            <p class="small text-muted mb-1">jQuery 提供了快速計算元素各種寬高的方法，這在做捲動特效或版面計算時非常重要。</p>
+                            <ul class="tech-list mb-1">
+                                <li><code>width()</code> / <code>height()</code>：僅計算內容寬高。</li>
+                                <li><code>innerWidth()</code> / <code>innerHeight()</code>：內容寬高 + Padding 內距。</li>
+                                <li><code>outerWidth()</code> / <code>outerHeight()</code>：內容寬高 + Padding 內距 + Border 邊框。</li>
+                            </ul>
+<pre class="code-block mb-0"><code>let boxW = $("#div1").width();
+let boxInnerW = $("#div1").innerWidth();
+let boxOuterW = $("#div1").outerWidth();
+
+console.log(`寬度: ${boxW}, 含內距: ${boxInnerW}, 含邊界: ${boxOuterW}`);</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
                 <h2 class="section-title">動畫特效 (Effects & Animations)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">基礎特效 (淡入淡出 / 滑動)</h3>
-                    <p class="card-text">能快速製作 UI 互動效果。參數可填入速度 (<code>"slow"</code>, <code>"fast"</code> 或毫秒)。</p>
-<pre class="code-block"><code>// 顯示與隱藏
-$("#panel").toggle("fast");
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">內建基礎特效 (Show/Hide, Fade, Slide)</h3>
+                    
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 參數規則：</strong><br>
+                        大多數特效的語法為 <code>$(selector).effect(speed, callback)</code>。<br>
+                        <code>speed</code>：動畫速度，可填寫毫秒 (如 1000 為 1 秒) 或是 "slow"、"fast"。<br>
+                        <code>callback</code>：動畫 100% 完成後才會執行的函數。
+                    </div>
 
-// 淡入與淡出
-$("#box").fadeToggle(1000); // 1秒內切換淡入/淡出
-$("#box").fadeTo("slow", 0.5); // 透明度漸變至 50%
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 顯示 / 隱藏與淡入 / 淡出</h4>
+<pre class="code-block mb-0"><code>// 1. 顯示與隱藏 (切換顯示狀態)
+$("p").hide(1000);   // 隱藏
+$("p").show("fast"); // 顯示
+$("p").toggle();     // 在 hide() 和 show() 之間切換
 
-// 上下滑動 (常應用於手風琴選單)
-$(".menu").slideDown();</code></pre>
+// 2. 淡入與淡出 (控制透明度至 0 或 100%)
+$("#div1").fadeIn("slow");
+$("#div2").fadeOut(3000);
+$("#div3").fadeToggle(); // 切換淡入與淡出
+
+// 3. 淡化至特定透明度 (0 ~ 1 之間)
+$("#div4").fadeTo("fast", 0.5); // 淡化到 50% 透明度</code></pre>
+                        </div>
+                        
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 上下滑動 (Slide)</h4>
+                            <p class="small text-muted mb-1">透過改變元素高度來產生滑動效果，非常適合用於「手風琴選單」或「下拉式面板」。</p>
+<pre class="code-block mb-0"><code>// 點擊按鈕，讓面板向下滑動顯示
+$("#flipDown").click(function() {
+    $("#panel").slideDown("slow");
+});
+
+// 點擊按鈕，讓面板向上滑動隱藏
+$("#flipUp").click(function() {
+    $("#panel").slideUp("fast");
+});
+
+// 點擊按鈕，自動判斷狀態切換滑動方向
+$("#flipToggle").click(function() {
+    $("#panel").slideToggle(1000);
+});</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">自訂動畫與鍊式寫法 (Chaining)</h3>
-                    <p class="card-text">使用 <code>animate()</code> 改變 CSS 屬性，並使用鍊式寫法將多個動作串接起來，依序執行。</p>
-<pre class="code-block"><code>// 自訂動畫 (屬性名需改用駝峰式)
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">自訂動畫與列隊 (Animate & Queue)</h3>
+                    <p class="card-text small text-muted">語法：<code>$(selector).animate({params}, speed, callback)</code></p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 CSS 屬性寫法提醒：</strong><br>
+                        使用 <code>animate()</code> 時，CSS 屬性必須使用 <strong>Camel 標記法 (駝峰式)</strong>，例如 <code>padding-left</code> 必須寫成 <code>paddingLeft</code>。<br>
+                        注意：元素預設為靜態位置 (static) 無法移動，若要操作 <code>left</code>、<code>top</code>，必須先在 CSS 將 <code>position</code> 設為 relative、fixed 或 absolute！
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 自訂動畫與預定義值</h4>
+<pre class="code-block mb-0"><code>// 操作多個屬性
 $("div").animate({
     left: '250px',
     opacity: '0.5',
-    width: '150px'
+    width: '150px',
+    height: '150px'
 });
 
-// 🌟 鍊式寫法 (Chaining)：一個元素執行多道指令
+// 使用預定義的值 ("show", "hide", "toggle")
+$("div").animate({
+    width: 'toggle',
+    height: 'toggle'
+});</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 動畫列隊功能 (Queue)</h4>
+                            <p class="small text-muted mb-1">如果針對同一個元素寫了多個動畫，jQuery 會自動把它們放入佇列中，一項一項依序執行。</p>
+<pre class="code-block mb-0"><code>$("button").click(function() {
+    let div = $("div");
+    
+    // 以下動畫會依序執行：
+    // 1. 先向右移動 100px
+    div.animate({left: '100px'}, "slow");
+    // 2. 移動完後，字體再放大到 3em
+    div.animate({fontSize: '3em'}, "slow");
+});</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">動畫控制：停止、回呼函數與鏈式寫法</h3>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ stop() 與 Callback 函數</h4>
+                            <ul class="tech-list mb-1">
+                                <li><code>stop()</code> 用於在動畫完成前強制停止。</li>
+                                <li><code>callback</code> 是確保動畫 <strong>100% 完成後</strong> 才執行的程式碼。</li>
+                            </ul>
+<pre class="code-block mb-0"><code>// 停止目前正在進行的動畫
+$("#stopBtn").click(function() {
+    $("#panel").stop();
+});
+
+// Callback 範例：確保隱藏完畢才跳出警告
+$("p").hide(1000, function() {
+    alert("這個段落已經隱藏完成!");
+});</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 方法鏈接 (Chaining)</h4>
+                            <p class="small text-muted mb-1">允許在同一個元素上連續呼叫多個 jQuery 指令，一條接著另一條，省去重複尋找元素的效能浪費。</p>
+<pre class="code-block mb-0"><code>// 鏈接技術：變更顏色 ➔ 向上滑動隱藏 ➔ 向下滑動顯示
+// 程式碼可讀性高，且執行流暢
 $("#p1").css("color", "red")
         .slideUp(2000)
         .slideDown(2000);</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
