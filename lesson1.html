@@ -65,51 +65,125 @@
             </div>
         </header>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
-                <h2 class="section-title">核心概念 (Core Concepts)</h2>
-                <span class="badge">Foundation</span>
+                <h2 class="section-title">核心概念</h2>
             </div>
 
             <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. 網頁是如何運作的？(Client-Server Model)</h3>
+                    <p class="card-text small text-muted">在開始寫程式之前，必須先理解當使用者在瀏覽器輸入網址時，背後發生了什麼事。這是所有網頁工程師的必備常識！</p>
 
-                <div class="card">
-                    <div class="card-icon"><i class="bi bi-diagram-3"></i></div>
-                    <h3 class="card-title">前端技術鐵三角</h3>
-                    <p class="card-text" style="margin-bottom: 12px;">
-                        網頁的呈現由三大核心技術構成，它們在瀏覽器端（Client-side）共同協作：
-                    </p>
-                    <ul class="tech-list">
-                        <li><strong>HTML (骨架)：</strong> 負責建立網頁的內容結構與語意。</li>
-                        <li><strong>CSS (皮囊)：</strong> 控制網頁的視覺樣式、色彩與排版佈局。</li>
-                        <li><strong>JavaScript (肌肉)：</strong> 處理使用者的互動行為與動態資料渲染。</li>
-                    </ul>
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 用戶端 (Client-side)</h4>
+                            <p class="small text-muted mb-1">通常指的是使用者的「瀏覽器」(如 Chrome、Safari)。它的主要工作是：</p>
+                            <ul class="tech-list mb-1">
+                                <li>發送 <strong>HTTP 請求 (Request)</strong> 給伺服器。</li>
+                                <li>接收伺服器傳回來的檔案 (HTML、CSS、JS、圖片)。</li>
+                                <li>將這些原始碼「渲染 (Render)」成我們肉眼看到的漂亮網頁。</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 伺服器端 (Server-side)</h4>
+                            <p class="small text-muted mb-1">一台24小時不關機、存放著你網站檔案的超級電腦。它的主要工作是：</p>
+                            <ul class="tech-list mb-1">
+                                <li>接收瀏覽器的請求，並進行邏輯判斷。</li>
+                                <li>如果需要，會去 <strong>資料庫 (Database)</strong> 撈取資料。</li>
+                                <li>將最終的結果打包成 <strong>回應 (Response)</strong> 傳回給用戶端。</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-icon"><i class="bi bi-hdd-network"></i></div>
-                    <h3 class="card-title">後端與伺服器架構</h3>
-                    <p class="card-text" style="margin-bottom: 12px;">
-                        除了前端介面，一個完整的動態網站需要後端（Server-side）的支援：
-                    </p>
-                    <ul class="tech-list">
-                        <li><strong>PHP (伺服端語言)：</strong> 負責接收前端請求、處理商業邏輯，並產出動態內容回傳給瀏覽器。跨平台且廣泛應用。</li>
-                        <li><strong>MySQL (關聯式資料庫)：</strong> 用於整理與儲存網站資料（如會員資訊、文章）。穩定且開源，是 LAMP 架構的核心。</li>
-                    </ul>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. 前端技術鐵三角 (The Front-End Trinity)</h3>
+                    <p class="card-text small text-muted">瀏覽器唯一看得懂的三種語言。現代前端開發就是建構在這三者的完美協作之上。</p>
+
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 職責分工與經典比喻</h4>
+                            <ul class="tech-list mb-1">
+                                <li><strong>HTML (骨架)：</strong> 負責建立網頁的內容結構與語意 (如：哪裡是標題、哪裡是圖片)。</li>
+                                <li><strong>CSS (皮囊/化妝)：</strong> 控制網頁的視覺樣式、色彩、排版與動畫。</li>
+                                <li><strong>JavaScript (肌肉/神經)：</strong> 處理使用者的互動行為 (點擊按鈕、跳出視窗) 與動態資料抓取。</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 程式碼是如何關聯的？</h4>
+                            <p class="small text-muted mb-1">實務上，我們會將這三者寫在不同的檔案中，並透過 HTML 將它們串聯起來：</p>
+<pre class="code-block mb-0"><code>&lt;!-- index.html 檔案 --&gt;
+&lt;head&gt;
+    &lt;!-- 引入 CSS 樣式表 --&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;哈囉世界&lt;/h1&gt;
+
+    &lt;!-- 引入 JavaScript 檔案 (通常放在 body 底部) --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-icon"><i class="bi bi-tools"></i></div>
-                    <h3 class="card-title">開發環境建置 (IDE)</h3>
-                    <p class="card-text" style="margin-bottom: 12px;">
-                        建立高效的開發環境是第一步。目前業界最主流的前端編輯器：
-                    </p>
-                    <ul class="tech-list">
-                        <li><strong>Visual Studio Code (VS Code)：</strong> 微軟開發的免費、開源編輯器。</li>
-                        <li><strong>推薦擴充套件 (Extensions)：</strong> Live Server (即時預覽)、Prettier (程式碼排版)、Auto Rename Tag。</li>
-                    </ul>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">3. 後端與資料庫架構 (Back-End & Database)</h3>
+                    <p class="card-text small text-muted">如果前端是餐廳的「外場」，那後端就是「廚房」。一個有會員登入、購物車功能的網站，絕對需要後端的支援。</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 什麼是 LAMP 架構？</strong><br>
+                        這是網頁開發史上最經典的後端技術組合：<strong>L</strong>inux (作業系統) + <strong>A</strong>pache (網站伺服器軟體) + <strong>M</strong>ySQL (資料庫) + <strong>P</strong>HP (後端語言)。這也是你在後續課程即將掌握的強大武器！
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ PHP (後端伺服端語言)</h4>
+                            <p class="small text-muted mb-1">負責接收前端傳來的表單（如帳號密碼），進行邏輯運算與身分驗證，並動態生成 HTML 回傳給瀏覽器。最大優勢是跨平台且伺服器支援度極高。</p>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ MySQL (關聯式資料庫)</h4>
+                            <p class="small text-muted mb-1">負責將網站的數據（會員個資、商品清單、訂單紀錄）分門別類地儲存在資料表中。透過 SQL 語法，PHP 可以精準地對資料進行「新增、讀取、更新、刪除 (CRUD)」。</p>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 現代開發環境建置 (Modern Dev Environment)</h3>
+                    <p class="card-text small text-muted">工欲善其事，必先利其器。打造一個舒服且高效的開發環境是工程師的第一課。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 前端利器：VS Code</h4>
+                            <p class="small text-muted mb-1">微軟開發的免費開源編輯器，是目前業界絕對的主流。推薦安裝以下必備擴充套件 (Extensions)：</p>
+                            <ul class="tech-list mb-1">
+                                <li><strong>Live Server：</strong> 存檔即時更新瀏覽器畫面，切版必備。</li>
+                                <li><strong>Prettier：</strong> 程式碼自動排版神器，保持程式碼整潔。</li>
+                                <li><strong>Auto Rename Tag：</strong> 修改 HTML 標籤開頭時，結尾會自動跟著改。</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 後端利器：本地端伺服器 (Localhost)</h4>
+                            <p class="small text-muted mb-1"><strong>注意：PHP 檔案不能像 HTML 一樣直接點兩下在瀏覽器打開！</strong>它必須經過伺服器解析。</p>
+<pre class="code-block mb-0"><code>/* 開發 PHP/MySQL 的必備懶人包軟體：*/
+
+1. Windows 用戶推薦安裝：XAMPP
+2. Mac 用戶推薦安裝：MAMP
+
+/* 安裝後，將專案資料夾放在 htdocs 裡面，
+   並在瀏覽器輸入 http://localhost/ 就能預覽了！ */</code></pre>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 

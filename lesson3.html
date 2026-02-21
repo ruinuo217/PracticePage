@@ -75,37 +75,379 @@
             </div>
         </section>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
                 <h2 class="section-title">核心觀念與選取器 (Core & Selectors)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">CSS 的三種套用方式</h3>
-                    <p class="card-text">實務上強烈建議使用<strong>外部樣式表 (External)</strong>，以達到「結構與樣式分離」的最佳實踐，利於維護。</p>
-<pre class="code-block"><code>&lt;!-- 1. 行內 (Inline) - 盡量避免 --&gt;
-&lt;p style="color: red;"&gt;Text&lt;/p&gt;
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. CSS 語法結構與基礎選取器 (Basics & Grouping)</h3>
+                    <p class="card-text small text-muted">CSS 規則是由「選擇器 (Selector)」和一條或多條「樣式聲明 (Declaration)」所構成。</p>
 
-&lt;!-- 2. 內部 (Internal) - 寫在 head 內 --&gt;
-&lt;style&gt; p { color: blue; } &lt;/style&gt;
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 語法結構拆解</h4>
+                            <p class="small text-muted mb-1">聲明區塊必須用大括號 <code>{}</code> 包覆，每條聲明包含「屬性」與「值」，並以分號 <code>;</code> 結尾。</p>
+<pre class="code-block mb-0"><code>/* 選擇器 { 屬性: 值; } */
+h1 { 
+    color: red; 
+    font-size: 14px; 
+}</code></pre>
+                        </div>
 
-&lt;!-- 3. 外部 (External) - 業界標準 🌟 --&gt;
-&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 群組選擇器 (Grouping)</h4>
+                            <p class="small text-muted mb-1">如果有多個標籤需要一模一樣的樣式，可以用「逗號」將它們分開，一次宣告，讓代碼更簡潔。</p>
+<pre class="code-block mb-0"><code>/* h1, h2, h3 將會共用這組綠色樣式 */
+h1, h2, h3 {
+    color: green;
+    font-weight: bold;
+}</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">CSS 選取器與權重</h3>
-                    <p class="card-text">除了基本的標籤、Class (<code>.</code>) 與 ID (<code>#</code>) 外，掌握偽類 (Pseudo-classes) 能讓介面互動更豐富。</p>
-<pre class="code-block"><code>/* 群組與後代選取器 */
-.navbar li a { color: #333; }
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. Class、ID 與屬性選取器 (Class, ID & Attributes)</h3>
+                    
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 Modern CSS 觀念：慎用 ID 選擇器</strong><br>
+                        雖然 ID (<code>#</code>) 的權重很高，但在現代前端實務中，<strong>強烈建議只用 Class (<code>.</code>) 來設定樣式</strong>。因為 ID 在一個網頁中只能出現一次（無法重複使用），且權重過高會導致日後樣式極難覆蓋。ID 請保留給 JavaScript 抓取元素或錨點連結使用。
+                    </div>
 
-/* 屬性選取器 */
-input[type="text"] { border: 1px solid #ccc; }
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ Class 與 ID 選擇器</h4>
+<pre class="code-block mb-0"><code>/* 🌟 推薦寫法：Class 選擇器 (使用 . 開頭) */
+.center-text { text-align: center; }
 
-/* 偽類選取器 (滑鼠懸浮、子元素) */
-.btn:hover { background-color: #0056b3; }
-.list-item:nth-child(even) { background: #f9f9f9; }</code></pre>
+/* ⚠️ 盡量避免：ID 選擇器 (使用 # 開頭) */
+#main-title { color: red; }
+
+/* 應用在 HTML 中：
+   &lt;h1 class="center-text"&gt;標題&lt;/h1&gt;
+   &lt;p class="center-text"&gt;段落也可以重複套用&lt;/p&gt;
+*/</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 屬性選擇器 (Attribute Selectors)</h4>
+                            <p class="small text-muted mb-1">透過 HTML 標籤內的「屬性」來指定樣式，最常用於表單 <code>input</code> 元素。</p>
+<pre class="code-block mb-0"><code>/* 選取所有帶有 title 屬性的元素 */
+[title] { color: red; }
+
+/* 🌟 實戰常用：選取特定的 input 類型 */
+input[type="text"] { 
+    border: 1px solid blue; 
+}
+input[type="submit"] {
+    background-color: green;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">3. 階層選取器與基礎視覺樣式 (Hierarchy & Backgrounds)</h3>
+                    
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 後代選擇器 (Descendant)</h4>
+                            <p class="small text-muted mb-1">根據 HTML 的包覆關係來確定樣式。中間使用「空白」隔開，代表選取裡面所有的目標元素。</p>
+<pre class="code-block mb-0"><code>/* 選取 &lt;li&gt; 裡面「所有」的 &lt;strong&gt; 標籤 */
+li strong {
+    font-style: italic;
+    font-weight: normal;
+}
+
+/* 💡 補充：子選擇器 (使用 &gt;)
+   只選取「第一層」直系血親的 &lt;strong&gt; */
+li &gt; strong {
+    color: orange;
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 基礎視覺：背景色彩與圖片</h4>
+                            <p class="small text-muted mb-1">現代網頁必備技巧：使用背景圖片時，搭配 <code>cover</code> 和 <code>center</code> 可以讓圖片完美適應不同螢幕大小，不會變形！</p>
+<pre class="code-block mb-0"><code>.hero-section {
+    /* 1. 設定背景顏色 (可使用英文、色碼、RGB) */
+    background-color: #f4f4f4;
+
+    /* 2. 設定背景圖片 */
+    background-image: url('images/bg.jpg');
+    
+    /* 🌟 現代排版必備設定 */
+    background-size: cover;     /* 讓圖片填滿整個容器，不變形 */
+    background-position: center; /* 讓圖片永遠置中對齊 */
+    background-repeat: no-repeat; /* 防止圖片太小而重複拼貼 */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">4. CSS 的四種套用方式與媒體類別</h3>
+                    
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 現代前端最佳實踐：</strong><br>
+                        實務上<strong>強烈建議統一使用「外部連接套用 (External Link)」</strong>，以達到 HTML 結構與 CSS 樣式徹底分離，利於團隊協作與快取。請<strong>極力避免使用行內套用 (Inline)</strong>；也<strong>不推薦使用 <code>@import</code></strong>，因為它會拖慢網頁載入速度。
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 現代主流與不推薦寫法</h4>
+<pre class="code-block mb-0"><code>&lt;!-- 1. 🌟 外部連接 (External) - 業界標準寫法 --&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;
+
+&lt;!-- 2. 嵌入套用 (Embed) - 寫在 head 內 --&gt;
+&lt;style&gt; p { color: red; } &lt;/style&gt;
+
+&lt;!-- 3. ⚠️ 行內套用 (Inline) - 極難維護，應避免 --&gt;
+&lt;p style="color:red; font-size:16px;"&gt;Text&lt;/p&gt;
+
+&lt;!-- 4. ⚠️ 匯入套用 (Import) - 會阻礙並行下載，不推薦 --&gt;
+&lt;style&gt; @import url("style.css"); &lt;/style&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 媒體類別 (Media Types)</h4>
+                            <p class="small text-muted mb-1">針對不同媒體裝置套用不同樣式。最常用的是 <code>screen</code> (螢幕) 與 <code>print</code> (列印)。</p>
+<pre class="code-block mb-0"><code>&lt;!-- 針對電腦/手機螢幕的樣式 --&gt;
+&lt;link rel="stylesheet" href="screen.css" media="screen"&gt;
+
+&lt;!-- 針對印表機列印時的樣式 (例如隱藏導覽列) --&gt;
+&lt;link rel="stylesheet" href="print.css" media="print"&gt;
+
+/* 現代更常在 CSS 檔案內使用 Media Queries */
+/* @media screen and (max-width: 768px) { ... } */</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 業界必考：串接順序與權重計算 (Cascading & Specificity)</h3>
+                    <p class="card-text small text-muted">當不同樣式表對同一個元素設定了衝突的屬性時，瀏覽器會依據「套用方式的順序」與「選擇器的權重分數」來決定誰贏。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 套用方式的優先權 (由高到低)</h4>
+                            <ul class="tech-list mb-1">
+                                <li><code>!important</code> (霸王條款，最高優先權，請謹慎使用)</li>
+                                <li>行內套用 (Inline style)</li>
+                                <li>嵌入套用 (Embedded)</li>
+                                <li>外部連接套用 (Linked) / 匯入套用 (Imported)</li>
+                                <li>瀏覽器本身的預設樣式表</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 選擇器權重分數計算 (Specificity)</h4>
+                            <p class="small text-muted mb-1">這是在專案中除錯 (Debug) "為什麼 CSS 沒反應" 的關鍵觀念！</p>
+                            <ul class="tech-list mb-1">
+                                <li><strong>1000 分：</strong> 寫在 HTML 裡的行內樣式 (Inline)</li>
+                                <li><strong>100 分：</strong> ID 選擇器 (<code>#header</code>)</li>
+                                <li><strong>10 分：</strong> Class、屬性與偽類選擇器 (<code>.box</code>, <code>:hover</code>)</li>
+                                <li><strong>1 分：</strong> HTML 標籤選擇器與偽元素 (<code>p</code>, <code>div</code>)</li>
+                            </ul>
+                            <p class="small text-muted mt-1"><em>Ex: <code>#nav .link:hover</code> = 100 + 10 + 10 = 120 分</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">視覺樣式與排版屬性 (Visual Styles & Typography)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. 背景樣式 (Backgrounds)</h3>
+                    <p class="card-text small text-muted">除了單純填滿顏色，背景圖片的定位與重複方式也是網頁視覺設計的基礎。</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 現代實戰：背景縮寫與尺寸控制</strong><br>
+                        現代排版為了讓背景圖適應各種螢幕大小，絕對少不了 <code>background-size: cover;</code>。實務上也常把所有背景屬性寫成一行縮寫 (Shorthand) 來保持代碼乾淨。
+                    </div>
+
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 背景重複與定位</h4>
+<pre class="code-block mb-0"><code>body {
+    background-image: url('images/bg.jpg');
+    
+    /* 重複方式：
+       repeat-x (水平), repeat-y (垂直)
+       no-repeat (不重複，現代最常用) */
+    background-repeat: no-repeat;
+    
+    /* 背景定位：水平 垂直 (可填 left/center/right 或 px/%) */
+    background-position: center center;
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 現代主流縮寫寫法</h4>
+<pre class="code-block mb-0"><code>/* 🌟 縮寫語法：color image repeat position/size */
+.hero-box {
+    background: #f4f4f4 url('images/bg.jpg') no-repeat center/cover;
+    
+    /* 若拆開寫，尺寸控制如下：
+       cover: 圖片等比例放大，填滿容器 (可能裁切)
+       contain: 圖片等比例縮放，完整顯示 (可能留白) */
+    background-size: cover;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. 文字與字體排版 (Typography)</h3>
+                    
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 現代排版單位：捨棄 em 改用 rem</strong><br>
+                        雖然 <code>em</code> 可以依據父元素轉換像素 (1em = 父元素字體大小)，但巢狀結構一深容易引發「字體級聯失控」。現代前端強烈推薦使用 <strong><code>rem</code></strong> (Root em)，它永遠只參考根節點 (<code>html</code>) 的大小 (預設 16px)，計算更安全！(例：<code>1.5rem</code> = 24px)。
+                    </div>
+
+                    
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 字體與大小設定</h4>
+<pre class="code-block mb-0"><code>h1 { 
+    /* 字體系列：支援備用字體，最後補上通用字體如 sans-serif */
+    font-family: "微軟正黑體", sans-serif; 
+    
+    /* 字體大小：現代推薦用 rem 或 px */
+    font-size: 2rem; /* 相當於 32px */
+    
+    /* 字體粗細：normal(400), bold(700), 100~900 */
+    font-weight: 700; 
+    
+    /* 字體風格：italic (斜體) */
+    font-style: italic; 
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 文字排版與間距</h4>
+<pre class="code-block mb-0"><code>p {
+    /* 水平對齊：left, center, right, justify(左右切齊) */
+    text-align: justify;
+    
+    /* 首行縮排 (正值縮排，負值凸排需搭配 padding) */
+    text-indent: 2rem;
+    
+    /* 字母間距 / 單字間距 */
+    letter-spacing: 2px;
+    word-spacing: 5px;
+
+    /* 文字裝飾：none, underline, line-through(刪除線) */
+    text-decoration: none;
+    
+    /* 🌟 行高：影響閱讀體驗的關鍵！推薦設為 1.5 到 1.7 */
+    line-height: 1.6; 
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">3. 超連結狀態與互動效果 (Links & Transitions)</h3>
+                    <p class="card-text small text-muted">根據使用者的滑鼠操作，超連結可以呈現不同的狀態。現代網頁通常會搭配 <code>transition</code> 製作滑順的微交互特效。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 偽類宣告順序 (LVHA 原則)</h4>
+                            <p class="small text-muted mb-1">同時設定多個連結偽類時，必須嚴格遵守 <strong>L</strong>ink ➔ <strong>V</strong>isited ➔ <strong>H</strong>over ➔ <strong>A</strong>ctive 的順序，否則樣式會被覆蓋失效！</p>
+<pre class="code-block mb-0"><code>/* 1. 未被訪問的預設狀態 */
+a:link { color: #3498db; text-decoration: none; }
+
+/* 2. 已訪問過的狀態 */
+a:visited { color: #2980b9; }
+
+/* 3. 滑鼠懸浮在上方時 (現代 UI 最常設計的狀態) */
+a:hover { color: #e74c3c; text-decoration: underline; }
+
+/* 4. 滑鼠點擊按下的瞬間 */
+a:active { color: #c0392b; }</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 🌟 現代實戰：加入轉場動畫</h4>
+                            <p class="small text-muted mb-1">不要讓顏色瞬間改變！加上轉場屬性，質感立刻升級。</p>
+<pre class="code-block mb-0"><code>.nav-btn {
+    color: #fff;
+    background-color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    
+    /* 告訴瀏覽器：背景色改變時，請花 0.3 秒漸變！ */
+    transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #e74c3c;
+    /* 滑過時顏色會滑順地改變，而不是生硬閃爍 */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">4. 列表樣式與表格框線 (Lists & Borders)</h3>
+
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 清單列表樣式 (ul, ol)</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm mt-2" style="font-size: 13px;">
+                                    <thead class="table-light">
+                                        <tr><th>屬性/值</th><th>功能描述</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td><code>list-style-type</code></td><td><code>none</code>(無), <code>disc</code>(實心圓), <code>decimal</code>(數字) 等</td></tr>
+                                        <tr><td><code>list-style-image</code></td><td><code>url('icon.png')</code> 將自訂圖片作為項目符號</td></tr>
+                                        <tr><td><code>list-style-position</code></td><td><code>inside</code> 或 <code>outside</code> 控制符號是否算在內容區塊內</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+<pre class="code-block mb-0"><code>/* 實戰最常用：完全拔除清單預設樣式，方便自訂排版 */
+ul.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 框線縮寫與表格折疊</h4>
+                            <p class="small text-muted mb-1">框線順序為：<strong>寬度 線型 顏色</strong>。常見線型有：<code>solid</code>(實線)、<code>dashed</code>(虛線)、<code>dotted</code>(點狀)。</p>
+<pre class="code-block mb-0"><code>/* 為表格、標題單元格、資料單元格設定 1px 藍色實線 */
+table, th, td { 
+    border: 1px solid blue; 
+}
+
+/* 🌟 表格必備：消除儲存格之間的雙重框線縫隙 */
+table { 
+    border-collapse: collapse; 
+}
+
+/* 單獨針對某個方向設定框線 */
+.bottom-line {
+    border-bottom: 2px dashed #999;
+}</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -116,73 +458,638 @@ input[type="text"] { border: 1px solid #ccc; }
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">盒模型 (Box Model) 與陷阱</h3>
-                    <div class="alert-box">
-                        <strong>💡 box-sizing</strong><br>
-                        預設的 <code>content-box</code> 會讓 padding 撐大元素總寬度。現代前端一律在全域設定 <code>border-box</code>，讓寬高包含 padding 與 border，排版才不會跑掉！
+<div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. 盒模型解剖與防雷起手式 (The Box Model)</h3>
+                    <p class="card-text small text-muted">網頁上的每一個元素，本質上都是一個「矩形的盒子」。這個盒子由內到外分為四層：內容 (Content)、內邊距 (Padding)、邊框 (Border) 與外邊距 (Margin)。</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 現代前端必備：box-sizing 陷阱防範</strong><br>
+                        瀏覽器預設的 <code>box-sizing: content-box</code> 非常反人類，當你設定 <code>width: 200px</code> 又加了 padding 後，盒子會「被撐大」超過 200px，導致排版壞掉！現代前端一律在全域設定 <strong><code>border-box</code></strong>，讓寬高直接包含 padding 與 border，盒子才會乖乖聽話！
                     </div>
-<pre class="code-block"><code>/* 現代前端起手式 (CSS Reset 概念) */
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 盒模型的四個層次</h4>
+                            <ul class="tech-list mb-1">
+                                <li><strong>Content (內容)：</strong> 顯示文字或圖片的實際區域。</li>
+                                <li><strong>Padding (內邊距)：</strong> 內容與邊框之間的留白。</li>
+                                <li><strong>Border (邊框)：</strong> 包圍內容與內邊距的線條。</li>
+                                <li><strong>Margin (外邊距)：</strong> 盒子與其他盒子之間的距離 (透明的)。</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 🌟 CSS Reset 現代起手式</h4>
+                            <p class="small text-muted mb-1">所有現代專案在寫任何 CSS 之前，必定會先寫上這段全域重置設定。</p>
+<pre class="code-block mb-0"><code>/* 星號代表選取網頁上「所有」元素 */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* 🌟 關鍵屬性 */
+    /* 讓 padding 和 border 向內擠壓，不撐破盒子 */
+    box-sizing: border-box; 
 }
 
 .box {
     width: 200px;
     padding: 20px;
     border: 5px solid black;
-    /* 總寬度依然會是 200px 乖乖聽話 */
+    /* 總寬度依然是完美的 200px！ */
 }</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">CSS3 Flexbox 彈性排版</h3>
-                    <p class="card-text">取代傳統 <code>float</code> 的現代排版神器，能輕鬆解決垂直置中與等比例分配的問題。</p>
-<pre class="code-block"><code>.container {
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. 內外邊距設定與區塊置中 (Margin & Padding)</h3>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 順時針縮寫法則 (Shorthand)</h4>
+                            <p class="small text-muted mb-1">不管寫幾個值，永遠遵循「上 ➔ 右 ➔ 下 ➔ 左」的順時針邏輯。Padding 的邏輯也完全一樣。</p>
+<pre class="code-block mb-0"><code>/* 單邊設定 */
+h1 { margin-top: 10px; margin-left: 5px; }
+
+/* 🌟 4 個值：上、右、下、左 (順時針) */
+h1 { margin: 10px 5px 15px 20px; }
+
+/* 🌟 2 個值：上下、左右 (最常用) */
+p { margin: 20px 0; } /* 上下20px，左右0 */
+
+/* 🌟 3 個值：上、左右、下 (排版微調常用) */
+div { margin: 10px 15px 20px; }</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 🌟 經典神技：區塊水平置中</h4>
+                            <p class="small text-muted mb-1">將 <code>margin</code> 的左右設為 <code>auto</code>，瀏覽器會自動平分剩下的空間，讓區塊完美置中。</p>
+<pre class="code-block mb-0"><code>.container {
+    /* 必須先給定寬度，否則預設 100% 看不出置中效果 */
+    width: 80%;
+    max-width: 1200px;
+    
+    /* 上下為 0，左右為 auto (平分剩餘空間) */
+    margin: 0 auto; 
+    
+    /* 註：此方法只對「區塊元素 (Block)」有效！
+       若是純文字置中，請用 text-align: center; */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">3. 邊框樣式與響應式尺寸 (Borders & Dimensions)</h3>
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 邊框綜合寫法 (Border Shorthand)</h4>
+                            <p class="small text-muted mb-1">傳統會把 width、style、color 分開寫，現代一律寫在同一行。常見線型：<code>solid</code>(實線)、<code>dashed</code>(虛線)、<code>dotted</code>(點狀)。</p>
+<pre class="code-block mb-0"><code>/* 綜合縮寫：粗細 線型 顏色 (順序不拘，但習慣如此) */
+.box { 
+    border: 2px solid #333; 
+}
+
+/* 只針對單獨一邊設定框線 */
+.underline-box {
+    border-bottom: 3px dashed red;
+}
+
+/* RWD 常見技巧：移除邊框 */
+.no-border { border: none; }</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ RWD 必備：max-width / min-height</h4>
+                            <p class="small text-muted mb-1">使用絕對單位 (如 <code>width: 500px</code>) 在手機螢幕上會破版出現橫向卷軸，搭配 <code>max-width</code> 才是王道。</p>
+<pre class="code-block mb-0"><code>.responsive-img {
+    /* 🌟 讓圖片寬度隨著父元素縮放，但最大不超過原始大小 */
+    max-width: 100%;
+    height: auto; /* 保持圖片比例不變形 */
+}
+
+.hero-banner {
+    /* 最小高度：內容少時維持 300px，內容多時自動往下長 */
+    min-height: 300px;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 顯示與隱藏的關鍵差異 (Display vs Visibility)</h3>
+                    <p class="card-text small text-muted">在控制元素消失時，有兩種截然不同的屬性可以使用，這在製作下拉選單或彈出視窗時非常重要。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ display: none (直接消失)</h4>
+                            <p class="small text-muted mb-1">元素不僅變得不可見，且<strong>「不再佔據原本的空間」</strong>。後面的元素會自動遞補上來。</p>
+<pre class="code-block mb-0"><code>.modal-box {
+    /* 完全從畫面佈局中抽離，像是被刪除了一樣 */
+    display: none; 
+}
+
+/* 常搭配 JS 切換 Class 顯示回來 */
+.modal-box.show {
+    display: block; /* 或 flex 等 */
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ visibility: hidden (隱形斗篷)</h4>
+                            <p class="small text-muted mb-1">元素不可見，但<strong>「仍會霸佔著原本的空間」</strong>。常用於保留排版佔位，或是製作透明度動畫的前置狀態。</p>
+<pre class="code-block mb-0"><code>.secret-element {
+    /* 看不見，但滑鼠如果滑過去原本的位置，仍會擋住後方元素 */
+    visibility: hidden; 
+}
+
+/* 顯示回來 */
+.secret-element.active {
+    visibility: visible;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+<div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. Flexbox 核心觀念：主軸與交叉軸 (Axes & Direction)</h3>
+                    <p class="card-text small text-muted">在父元素加上 <code>display: flex;</code> 後，它就變成了一個「彈性容器」。裡面的子元素會立刻變成「彈性項目」，並且預設會「由左到右」排成一列。</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>💡 Flexbox 的靈魂：軸線 (Axis) 系統</strong><br>
+                        Flexbox 的排版完全依賴兩條隱形的線：<strong>主軸 (Main Axis)</strong> 與 <strong>交叉軸 (Cross Axis)</strong>。預設情況下，主軸是水平的（左到右），交叉軸是垂直的（上到下）。只要改變 <code>flex-direction</code>，這兩條軸線就會跟著旋轉！
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 宣告彈性容器</h4>
+                            <p class="small text-muted mb-1">外層容器一旦變成 flex，子元素的 <code>float</code>、<code>clear</code>、<code>vertical-align</code> 都會立刻失效。</p>
+<pre class="code-block mb-0"><code>.container {
+    /* 啟動彈性排版模式 */
+    display: flex; 
+    
+    /* 也可以使用 inline-flex，
+       容器本身會像 inline-block 一樣不強制換行 */
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 控制主軸方向 (flex-direction)</h4>
+                            <p class="small text-muted mb-1">決定子元素是橫著排，還是直著排。這在做 RWD 手機版變換排列方向時極度好用！</p>
+<pre class="code-block mb-0"><code>.container {
     display: flex;
-    /* 主軸對齊：分散對齊 */
-    justify-content: space-between; 
-    /* 交叉軸對齊：垂直置中 */
-    align-items: center; 
-    /* 允許子元素換行 */
-    flex-wrap: wrap; 
-    /* 元素間的間距 (CSS3 新特性) */
-    gap: 20px; 
+
+    /* row：預設值，由左到右排成一列 (主軸水平) */
+    flex-direction: row; 
+    
+    /* column：由上到下排成一行 (主軸垂直) */
+    /* flex-direction: column; */
+    
+    /* 還有 row-reverse (右到左) 
+       與 column-reverse (下到上) */
 }</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">元素定位 (Positioning)</h3>
-                    <p class="card-text">控制元素脫離正常文件流的方式。常搭配 <code>z-index</code> 調整層級。</p>
-<pre class="code-block"><code>.parent {
-    position: relative; /* 建立定位基準 */
-}
-.child {
-    position: absolute; /* 絕對定位 */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* 完美置中公式 */
-}
-/* 其他：fixed (固定視窗), sticky (滾動吸頂) */</code></pre>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. 外層容器：對齊、換行與間距 (Container Properties)</h3>
+                    
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 主軸與交叉軸對齊</h4>
+                            <p class="small text-muted mb-1"><code>justify-content</code> 控制主軸，<code>align-items</code> 控制交叉軸。</p>
+<pre class="code-block mb-0"><code>.container {
+    display: flex;
+    
+    /* 🌟 主軸對齊 (水平佈局時為左右對齊)
+       center(置中), flex-start(靠頭), flex-end(靠尾),
+       space-between(貼齊兩邊，中間均分), 
+       space-around(每個物件左右間距相等) */
+    justify-content: space-between; 
+
+    /* 🌟 交叉軸對齊 (水平佈局時為垂直對齊)
+       center(置中), flex-start(靠上), flex-end(靠下),
+       stretch(預設值：拉伸填滿容器高度) */
+    align-items: center; 
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 換行與現代間距神技 (gap)</h4>
+                            <p class="small text-muted mb-1">過去要讓元素之間有空隙，必須寫一堆醜陋的 <code>margin</code> 計算；現在只要一個 <code>gap</code> 就搞定！</p>
+<pre class="code-block mb-0"><code>.container {
+    display: flex;
+    
+    /* 預設 nowrap(不換行，空間不夠會硬擠縮小)。
+       改為 wrap，空間不夠時會自動換到下一行 */
+    flex-wrap: wrap; 
+    
+    /* 🌟 現代排版神技：子元素之間的溝槽間距
+       只在元素「之間」產生空隙，邊緣不會有留白！ */
+    gap: 20px; 
+    
+    /* 也可以分開設定：row-gap 與 column-gap */
+    /* gap: 20px 10px; */ 
+}</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">CSS 變數與響應式 (RWD)</h3>
-                    <p class="card-text">使用 <code>:root</code> 宣告變數方便統一管理主題色。並透過 Media Queries 讓網站適應手機與平板尺寸。</p>
-<pre class="code-block"><code>/* 宣告 CSS 變數 */
-:root {
-    --primary-color: #4A90E2;
-}
-.title { color: var(--primary-color); }
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">3. 內層項目：比例分配與個別對齊 (Item Properties)</h3>
+                    <p class="card-text small text-muted">Flexbox 不只管外層，也可以單獨控制裡面某個區塊「要佔據多少剩餘空間」，或是「打破常規自己對齊」。</p>
 
-/* RWD 響應式設計：小於 768px 時觸發 */
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 空間比例分配 (flex-grow / shrink)</h4>
+                            <p class="small text-muted mb-1">使用縮寫 <code>flex: 1;</code> 是現代切版最常見的手法，能讓該元素像海綿一樣吸滿剩下的空間！</p>
+<pre class="code-block mb-0"><code>/* 縮寫語法：flex: grow shrink basis; */
+
+.sidebar {
+    /* 固定寬度 250px，不放大也不縮小 */
+    flex: 0 0 250px; 
+}
+
+.main-content {
+    /* 🌟 將剩餘的所有空間全部佔滿！ 
+       (等同於 flex: 1 1 0%) */
+    flex: 1; 
+}
+
+/* 應用場景：如果三個區塊都設定 flex: 1，
+   它們就會完美地等分 33.33% 的寬度！ */</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 個別對齊與排序 (align-self / order)</h4>
+<pre class="code-block mb-0"><code>.special-item {
+    /* 打破父容器 align-items: center 的規定，
+       自己一個人對齊到最下面 */
+    align-self: flex-end; 
+}
+
+.first-item {
+    /* 預設 order 都是 0。
+       數字越小排越前面，越大排越後面！
+       (這在 RWD 改變區塊視覺順序時非常有用) */
+    order: -1; 
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 現代排版神技：終極完美置中 (The Ultimate Centering)</h3>
+                    <p class="card-text small text-muted">在 CSS 歷史上，要把一個東西「水平且垂直完美置中」曾經是個世紀大難題。自從有了 Flexbox，這件事只需要三行程式碼！</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 寫在父容器上的三行神蹟</h4>
+<pre class="code-block mb-0"><code>.modal-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+
+    /* 🌟 完美置中公式 🌟 */
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center;     /* 垂直置中 */
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 子容器完全不用煩惱</h4>
+                            <p class="small text-muted mb-1">裡面的子容器無論寬高是多少、是否動態增減內容，都會死死地釘在畫面的正中央！</p>
+<pre class="code-block mb-0"><code>.modal-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    
+    /* 裡面完全不需要寫 top: 50%、transform 等定位屬性，
+       Flexbox 父容器已經幫你處理好一切了！ */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+<div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. 定位機制與層級控制 (Position & Z-Index)</h3>
+                    <p class="card-text small text-muted">網頁元素預設是按照「普通文件流」(Normal Flow) 從上到下、由左至右排列。使用 <code>position</code> 屬性可以讓元素「脫離」這個正常隊伍，並透過上下左右的數值自由移動。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 移動與對齊屬性</h4>
+                            <p class="small text-muted mb-1">一旦開啟了定位，就可以使用以下屬性來控制位置。<strong>(注意：必須先設定 position 才有效！)</strong></p>
+<pre class="code-block mb-0"><code>.moved-box {
+    /* 向下移動 20px (距離上方邊界 20px) */
+    top: 20px;
+    
+    /* 向右移動 30px (距離左方邊界 30px) */
+    left: 30px;
+    
+    /* 還有 bottom 與 right 可用 */
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ Z-Index (控制圖層堆疊順序)</h4>
+                            <p class="small text-muted mb-1">當定位元素互相重疊時，誰會顯示在最上面？數字越大的越在上面。<strong>(注意：同樣只對有設定 position 的元素有效！)</strong></p>
+<pre class="code-block mb-0"><code>.modal-background {
+    /* 蓋住正常網頁內容 */
+    z-index: 99; 
+}
+
+.modal-content {
+    /* 數字更大，所以會顯示在背景的更上層 */
+    z-index: 100; 
+    
+    /* 也可以設定負值，把它塞到最底層 */
+    /* z-index: -1; */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. 四大定位模式解析 (The 4 Position Types)</h3>
+                    
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ Relative (相對定位)</h4>
+                            <p class="small text-muted mb-1">相對於「自己原本應該在的位置」進行偏移。<strong>特點：原本霸佔的空間依然會保留著，不會被其他元素遞補。</strong></p>
+<pre class="code-block mb-0"><code>.box {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}</code></pre>
+                            
+                            <h4 class="fs-6 fw-bold mt-3">⚫ Fixed (固定定位)</h4>
+                            <p class="small text-muted mb-1">相對於「瀏覽器視窗」進行定位。<strong>特點：不管網頁怎麼往下滾動，它都會死死地釘在畫面的同一個地方！(常用於置頂導覽列、回到頂端按鈕)</strong></p>
+<pre class="code-block mb-0"><code>.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* 固定定位會失去寬度，需手動補上 */
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ Absolute (絕對定位)</h4>
+                            <p class="small text-muted mb-1">完全脫離文件流(原本的空間會被其他元素遞補)。相對於「最近一個有設定定位的父層元素」進行偏移。如果往上找不到，就會對齊整個網頁。</p>
+<pre class="code-block mb-0"><code>.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}</code></pre>
+
+                            <h4 class="fs-6 fw-bold mt-3">⚫ 🌟 Sticky (現代吸頂定位)</h4>
+                            <p class="small text-muted mb-1">這是結合 Relative 與 Fixed 的現代神技！預設像 Relative 一樣跟著網頁滾動，但一旦滾動到指定的 <code>top</code> 數值，它就會變成 Fixed 黏在螢幕邊緣！</p>
+<pre class="code-block mb-0"><code>.table-header {
+    position: sticky;
+    top: 0; /* 滾動到距離視窗頂部 0px 時開始吸附 */
+    /* 注意：其父元素絕對不能有 overflow: hidden 設定 */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 業界排版公式：子絕父相 (Absolute within Relative)</h3>
+                    <p class="card-text small text-muted">這是 CSS 定位最經典、每天都會用到的組合技！當我們想要把一個元素（例如「最新」的紅色標籤）精準地放在另一個容器（例如「商品卡片」）的右上角時，就必須使用這個口訣。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 為什麼要「父相」？</h4>
+                            <p class="small text-muted mb-1">因為 Absolute (絕對定位) 會一直往上找「有設定定位」的長輩當作基準點。如果父層沒有設定，標籤就會直接飛到整個網頁的最右上角！</p>
+<pre class="code-block mb-0"><code>/* 1. 父元素：設定相對定位 (建立基準點) */
+.product-card {
+    /* 這裡只給定位屬性，不給 top/left，
+       所以卡片本身的位置不會改變！ */
+    position: relative; 
+    
+    width: 200px;
+    height: 300px;
+    background: #eee;
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 「子絕」精準打擊</h4>
+<pre class="code-block mb-0"><code>/* 2. 子元素：設定絕對定位 */
+.new-badge {
+    position: absolute;
+    
+    /* 這樣一來，它就會「相對於 .product-card」
+       跑到這張卡片的右上角了！ */
+    top: 10px;
+    right: 10px;
+    
+    background: red;
+    color: white;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">4. 內容溢出控制與傳統浮動 (Overflow & Float)</h3>
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 溢出控制 (Overflow)</h4>
+                            <p class="small text-muted mb-1">當裡面的內容（文字或圖片）大於外層盒子時該怎麼辦？使用 overflow 可以控制裁切或顯示捲軸。</p>
+                            <ul class="tech-list mb-1">
+                                <li><code>visible</code>：預設值，內容直接凸出來破版。</li>
+                                <li><code>hidden</code>：超出盒子的部分直接卡掉隱藏。(常用於製作圓角圖片)</li>
+                                <li><code>auto</code> / <code>scroll</code>：超出範圍時自動產生捲軸。</li>
+                            </ul>
+<pre class="code-block mb-0"><code>.scroll-box {
+    width: 200px;
+    height: 200px;
+    /* 內容過多時，只在垂直方向產生捲軸 */
+    overflow-y: auto; 
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 傳統浮動 (Float) 的現代用途</h4>
+                            <p class="small text-muted mb-1">以前 Float 被大量濫用於版面切割，現在這種苦差事已交給 Flexbox。<strong>現代 Float 的唯一用途：製作「文字環繞圖片」的效果！</strong></p>
+<pre class="code-block mb-0"><code>.article-image {
+    /* 讓圖片浮動到左邊，
+       右邊的文字會自然地包圍著圖片流動！ */
+    float: left; 
+    
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+/* 若想強迫後面的段落不要環繞，
+   可使用 clear: both; 清除浮動影響 */</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+<div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. 響應式基礎：視口設定與相對單位 (Viewport & Fluid Units)</h3>
+                    <p class="card-text small text-muted">響應式網頁設計 (RWD) 的核心目標是讓網頁在不同尺寸的設備上都能完美呈現。而在寫任何 CSS 之前，HTML 的設定才是關鍵！</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>⚠️ 致命地雷：忘記加上 Viewport Meta Tag</strong><br>
+                        如果 HTML 的 <code>&lt;head&gt;</code> 裡面沒有加上這行標籤，手機瀏覽器會以為這是一個「傳統桌面版網頁」，然後硬生生地把它縮小塞進手機螢幕裡，導致你的 RWD 媒體查詢完全失效！
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ RWD 絕對起手式 (HTML)</h4>
+                            <p class="small text-muted mb-1">確保網頁寬度等於設備寬度，且初始縮放比例為 1.0。</p>
+<pre class="code-block mb-0"><code>&lt;head&gt;
+    &lt;meta name="viewport" 
+          content="width=device-width, initial-scale=1.0"&gt;
+&lt;/head&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 現代排版相對單位</h4>
+                            <p class="small text-muted mb-1">除了使用 <code>%</code>，現代排版更常使用 <code>vw</code> (視窗寬度百分比) 和 <code>vh</code> (視窗高度百分比)。</p>
+<pre class="code-block mb-0"><code>.full-screen-banner {
+    /* 🌟 100vh 代表「佔滿整個螢幕的可視高度」 */
+    height: 100vh; 
+    
+    /* 50vw 代表「螢幕寬度的一半」 */
+    width: 50vw; 
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. 媒體查詢與斷點策略 (Media Queries & Breakpoints)</h3>
+                    <p class="card-text small text-muted">透過 <code>@media</code> 規則，我們可以偵測使用者的螢幕寬度，並在特定的「斷點 (Breakpoint)」套用不同的 CSS 樣式。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 桌面優先 (Desktop-First)</h4>
+                            <p class="small text-muted mb-1">預設寫桌機版樣式，螢幕「小於」特定寬度時才改變。使用 <code>max-width</code>。</p>
+<pre class="code-block mb-0"><code>/* 1. 預設樣式 (桌機版：橫向排列) */
+.container { display: flex; flex-direction: row; }
+
+/* 2. 當螢幕寬度小於或等於 768px 時觸發 (平板/手機) */
 @media screen and (max-width: 768px) {
     .container {
-        flex-direction: column; /* 手機版改為直向排列 */
+        /* 改為直向排列 */
+        flex-direction: column; 
     }
 }</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 🌟 手機優先 (Mobile-First)</h4>
+                            <p class="small text-muted mb-1">業界現代主流！預設先寫手機版樣式，螢幕「大於」特定寬度時才展開。使用 <code>min-width</code>，效能更好且邏輯更清晰。</p>
+<pre class="code-block mb-0"><code>/* 1. 預設樣式 (手機版：直向排列，全寬) */
+.container { display: flex; flex-direction: column; }
+.item { width: 100%; }
+
+/* 2. 當螢幕寬度大於 768px 時觸發 (桌機版) */
+@media screen and (min-width: 768px) {
+    .container {
+        /* 展開為橫向排列 */
+        flex-direction: row; 
+    }
+    .item { width: 33.33%; }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">3. CSS 原生變數 (Custom Properties)</h3>
+                    <p class="card-text small text-muted">過去我們必須依賴 Sass 或 Less 等預處理器才能使用變數，現在 CSS 已經原生支援！它可以大幅減少重複的色碼，並讓統一修改主題色變得輕而易舉。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 宣告與區域變數</h4>
+                            <p class="small text-muted mb-1">使用 <code>--</code> 開頭來命名變數。宣告在 <code>:root</code> 代表全域共用。</p>
+<pre class="code-block mb-0"><code>/* 定義全域變數 (通常寫在檔案最上方) */
+:root {
+    --primary-color: #4A90E2; /* 主題藍色 */
+    --text-dark: #333333;     /* 深灰色文字 */
+    --base-spacing: 16px;     /* 基礎間距 */
+}
+
+/* 也可以定義區域變數 (只有 .card 裡面能用) */
+.card {
+    --card-bg: #ffffff;
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 呼叫與動態覆蓋</h4>
+                            <p class="small text-muted mb-1">使用 <code>var()</code> 函式來呼叫變數。搭配第二個參數可以設定「找不到變數時的預設值」。</p>
+<pre class="code-block mb-0"><code>.title { 
+    /* 呼叫變數設定顏色 */
+    color: var(--primary-color); 
+    
+    /* 若 --base-spacing 不存在，就用 20px */
+    margin-bottom: var(--base-spacing, 20px);
+}
+
+/* 按鈕滑過時，直接修改變數的值 */
+.btn:hover {
+    --primary-color: #357ABD; 
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 現代實戰：深色模式自動切換與流體字體</h3>
+                    <p class="card-text small text-muted">結合「CSS 變數」與「媒體查詢」，我們可以不寫半行 JavaScript 就實作出系統級的深色模式 (Dark Mode)！</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 深色模式 (Dark Mode) 實作</h4>
+                            <p class="small text-muted mb-1">利用 <code>prefers-color-scheme</code> 偵測使用者的系統偏好，直接抽換 CSS 變數的色票。</p>
+<pre class="code-block mb-0"><code>/* 1. 預設白天模式的變數 */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #222222;
+}
+
+/* 2. 偵測如果使用者系統開啟了深色模式 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* 🌟 直接覆蓋變數！不用去改原本的 class */
+        --bg-color: #121212;
+        --text-color: #f1f1f1;
+    }
+}
+
+/* 網頁直接套用變數即可 */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 流體排版神技：clamp()</h4>
+                            <p class="small text-muted mb-1">現代 CSS 的超強數學函式 <code>clamp(最小值, 理想動態值, 最大值)</code>。讓字體大小跟著螢幕寬度像水一樣平滑縮放，不用再寫一堆 media queries！</p>
+<pre class="code-block mb-0"><code>.hero-title {
+    /* 最小值：不管螢幕多小，字體至少有 1.5rem
+       動態值：4vw 代表螢幕寬度的 4% (會隨螢幕縮放)
+       最大值：不管螢幕多大，字體最多只到 3rem
+    */
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    
+    /* 這個神技也常拿來設定 width 或 padding！ */
+    width: clamp(300px, 80%, 1200px);
+}</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

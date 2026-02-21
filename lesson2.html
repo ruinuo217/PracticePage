@@ -77,79 +77,380 @@
             </div>
         </section>
 
-        <section class="page-section">
+<section class="page-section">
             <div class="section-header">
-                <h2 class="section-title">基礎結構與文本 (Basics)</h2>
+                <h2 class="section-title">基礎結構與文本排版 (Basics & Text)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">HTML 基本文件結構</h3>
-                    <p class="card-text">所有的 HTML5 網頁都必須具備以下基本骨架，宣告文件類型並設定語系：</p>
-<pre class="code-block"><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-Hant"&gt;
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">HTML5 基本文件骨架</h3>
+                    <p class="card-text small text-muted">所有現代網頁都必須具備以下結構。宣告文件類型、設定語系 (對 SEO 很重要)，以及設定行動裝置的 Viewport。</p>
+<pre class="code-block mb-0"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant"&gt; &lt;!-- 設定為繁體中文 --&gt;
 &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
+    &lt;meta charset="UTF-8"&gt; &lt;!-- 設定萬國碼，防止中文亂碼 --&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;網頁標題&lt;/title&gt;
+    &lt;title&gt;網頁標題會顯示在瀏覽器分頁上&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;!-- 這裡放置所有會顯示在網頁畫面上的內容 --&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">超連結 & 圖片 (Links & Images)</h3>
-                    <p class="card-text">使用 <code>&lt;a&gt;</code> 建立導覽，並利用 <code>target="_blank"</code> 另開視窗。圖片 <code>&lt;img&gt;</code> 屬於單標籤，務必加上 <code>alt</code> 屬性提升 SEO 與無障礙體驗。</p>
-<pre class="code-block"><code>&lt;!-- 連結到外部網站並另開視窗 --&gt;
-&lt;a href="https://google.com" target="_blank"&gt;Google&lt;/a&gt;
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">文本標籤與區塊/行內元素 (Block vs Inline)</h3>
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 標題與段落</h4>
+                            <p class="small text-muted mb-1"><code>&lt;h1&gt;</code> 到 <code>&lt;h6&gt;</code> 代表標題層級。<strong>注意：一個頁面強烈建議只能有一個 h1！</strong></p>
+<pre class="code-block mb-0"><code>&lt;h1&gt;這是網站主標題 (H1)&lt;/h1&gt;
+&lt;h2&gt;這是次標題 (H2)&lt;/h2&gt;
 
-&lt;!-- 插入圖片並設定替代文字 --&gt;
-&lt;img src="profile.jpg" alt="Reyna 的個人照"&gt;</code></pre>
+&lt;p&gt;這是一個段落 (Paragraph)。文字會自動換行。&lt;/p&gt;
+
+&lt;!-- 強調語意：strong 會加粗，em 會斜體 --&gt;
+&lt;p&gt;這是一段&lt;strong&gt;非常重要&lt;/strong&gt;的文字。&lt;/p&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ Div 與 Span (無語意容器)</h4>
+                            <p class="small text-muted mb-1">當只是為了「CSS 排版」而不需要賦予特定意義時使用。</p>
+<pre class="code-block mb-0"><code>&lt;!-- Block 區塊元素：預設佔滿整行寬度 --&gt;
+&lt;div class="container"&gt;
+    這是一個區塊容器，常用於排版外層。
+&lt;/div&gt;
+
+&lt;!-- Inline 行內元素：寬度由內容決定，不會換行 --&gt;
+&lt;p&gt;這段文字中，有一個 &lt;span class="highlight"&gt;重點字詞&lt;/span&gt; 被特別標示。&lt;/p&gt;</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="page-section">
             <div class="section-header">
-                <h2 class="section-title">資料結構與多媒體 (Data & Media)</h2>
+                <h2 class="section-title">網頁靈魂：語意化標籤 (Semantic HTML5)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">表格結構 (Table)</h3>
-                    <div class="alert-box">
-                        <strong>💡 現代前端開發觀念：</strong><br>
-                        過去常在 HTML 寫 <code>border="1"</code> 或 <code>cellpadding</code>。現在應將 HTML 專注於結構 (<code>thead</code>, <code>tbody</code>)，樣式統一交由 CSS 處理！
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">為什麼要使用語意化標籤？</h3>
+                    <p class="card-text small text-muted">過去開發者習慣用 <code>&lt;div id="header"&gt;</code> 寫滿整個網頁（俗稱 Div Soup）。HTML5 引入了具備「意義」的標籤，這對 <strong>SEO (讓 Google 更好讀懂你的網站)</strong> 以及 <strong>無障礙網頁 (幫助視障人士的螢幕閱讀器)</strong> 有著決定性的影響。</p>
+
+                    
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 網頁主要地標</h4>
+<pre class="code-block mb-0"><code>&lt;body&gt;
+    &lt;!-- 網頁頁首：通常包含 Logo 與主選單 --&gt;
+    &lt;header&gt;
+        &lt;nav&gt;這裡放導覽列超連結&lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;!-- 網頁主要內容：一個頁面只能有一個 --&gt;
+    &lt;main&gt;
+        核心內容放這裡
+    &lt;/main&gt;
+
+    &lt;!-- 網頁頁尾：版權宣告、聯絡資訊 --&gt;
+    &lt;footer&gt;
+        &copy; 2026 Reyna Gao.
+    &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 內容區塊分類</h4>
+<pre class="code-block mb-0"><code>&lt;main&gt;
+    &lt;!-- Section：具有明確主題的區塊 --&gt;
+    &lt;section class="about-me"&gt;
+        &lt;h2&gt;關於我&lt;/h2&gt;
+        &lt;p&gt;...&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Article：獨立、完整且可單獨發布的內容 --&gt;
+    &lt;!-- 例如：一篇部落格文章、一則新聞 --&gt;
+    &lt;article&gt;
+        &lt;h2&gt;JavaScript 學習筆記&lt;/h2&gt;
+        &lt;p&gt;內容...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+                        </div>
                     </div>
-<pre class="code-block"><code>&lt;table&gt;
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">表單與清單結構 (Forms & Lists)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">清單列表 (Lists)</h3>
+                    <p class="card-text small text-muted">網頁中最常用來呈現項目符號或選單結構的標籤。</p>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 無序清單 (Unordered List)</h4>
+<pre class="code-block mb-0"><code>&lt;!-- 實務上極常用於製作導覽列 (Navbar) --&gt;
+&lt;ul&gt;
+    &lt;li&gt;首頁&lt;/li&gt;
+    &lt;li&gt;關於我&lt;/li&gt;
+    &lt;li&gt;作品集&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                        </div>
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 有序清單 (Ordered List)</h4>
+<pre class="code-block mb-0"><code>&lt;!-- 會自動帶有 1, 2, 3 數字 --&gt;
+&lt;ol&gt;
+    &lt;li&gt;打開冰箱&lt;/li&gt;
+    &lt;li&gt;把大象放進去&lt;/li&gt;
+    &lt;li&gt;關上冰箱&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 現代表單實作 (Forms & Inputs)</h3>
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>實戰關鍵：<code>&lt;label&gt;</code> 與 <code>id</code> 的綁定</strong><br>
+                        務必使用 <code>for</code> 屬性將 label 對應到 input 的 <code>id</code>。這樣使用者點擊文字時，輸入框就會自動獲得焦點，這對手機操作體驗極度重要！
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 基礎表單元件</h4>
+<pre class="code-block mb-0"><code>&lt;form action="/api/login" method="POST"&gt;
+    &lt;!-- 文字輸入與綁定 --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="userAccount"&gt;帳號：&lt;/label&gt;
+        &lt;input type="text" id="userAccount" name="account" 
+               placeholder="請輸入 Email" required&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 密碼與下拉選單 --&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="userPwd"&gt;密碼：&lt;/label&gt;
+        &lt;input type="password" id="userPwd" name="pwd" required&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- 現代按鈕寫法 --&gt;
+    &lt;button type="submit"&gt;確認登入&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 選擇與勾選元件</h4>
+<pre class="code-block mb-0"><code>&lt;!-- 下拉選單 (Select) --&gt;
+&lt;label for="city"&gt;居住城市：&lt;/label&gt;
+&lt;select id="city" name="city"&gt;
+    &lt;option value="taipei"&gt;台北市&lt;/option&gt;
+    &lt;option value="new_taipei"&gt;新北市&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- 單選框 (Radio)：name 必須相同才能互斥 --&gt;
+&lt;label&gt;
+    &lt;input type="radio" name="gender" value="M"&gt; 男性
+&lt;/label&gt;
+&lt;label&gt;
+    &lt;input type="radio" name="gender" value="F"&gt; 女性
+&lt;/label&gt;
+
+&lt;!-- 複選框 (Checkbox) --&gt;
+&lt;label&gt;
+    &lt;input type="checkbox" name="agree" required&gt; 我同意服務條款
+&lt;/label&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">數據表格結構 (Data Tables)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. 表格基礎結構與現代觀念 (Table Structure)</h3>
+                    <p class="card-text small text-muted">表格 (Table) 曾經被大量濫用於網頁排版，但現代前端規範嚴格要求：表格只能用來呈現「二維數據資料」。</p>
+
+                    <div class="alert-box mb-3" style="font-size: 13px;">
+                        <strong>⚠️ 時代眼淚警告：捨棄 HTML 樣式屬性</strong><br>
+                        你可能看過 <code>&lt;table border="1" cellpadding="5" align="center"&gt;</code> 這種寫法。請注意，這些屬性在 HTML5 已經被<strong>淘汰或極度不推薦</strong>！現代網頁中，HTML 只負責定義 <code>thead</code>、<code>tbody</code>、<code>tr</code> 等結構，所有的框線、間距與對齊，<strong>一律交給 CSS 處理</strong>。
+                    </div>
+
+                    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 完整且語意化的表格結構</h4>
+<pre class="code-block mb-0"><code>&lt;table&gt;
+    &lt;!-- 表頭區塊 (通常文字會預設加粗、置中) --&gt;
     &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;標題 1&lt;/th&gt;
-            &lt;th&gt;標題 2&lt;/th&gt;
+        &lt;tr&gt; &lt;!-- Table Row：宣告一橫列 --&gt;
+            &lt;th&gt;品項&lt;/th&gt; &lt;!-- Table Head：標題儲存格 --&gt;
+            &lt;th&gt;價格&lt;/th&gt;
         &lt;/tr&gt;
     &lt;/thead&gt;
+    
+    &lt;!-- 主要資料區塊 --&gt;
     &lt;tbody&gt;
         &lt;tr&gt;
-            &lt;!-- colspan 用於合併欄位 --&gt;
-            &lt;td colspan="2"&gt;合併兩欄的資料&lt;/td&gt;
+            &lt;td&gt;熱拿鐵&lt;/td&gt; &lt;!-- Table Data：一般儲存格 --&gt;
+            &lt;td&gt;$120&lt;/td&gt;
         &lt;/tr&gt;
     &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 跨行與跨列 (Rowspan & Colspan)</h4>
+                            <p class="small text-muted mb-1">當遇到複雜的報表時，我們可以使用這兩個屬性來「合併儲存格」。</p>
+<pre class="code-block mb-0"><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;!-- colspan：水平合併 2 個欄位 (左右合併) --&gt;
+        &lt;td colspan="2"&gt;這格佔了兩欄的寬度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;!-- rowspan：垂直合併 2 個列 (上下合併) --&gt;
+        &lt;td rowspan="2"&gt;這格佔了兩列的高度&lt;/td&gt;
+        &lt;td&gt;一般儲存格 A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;一般儲存格 B&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">超連結、圖片與多媒體 (Links, Images & Media)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">1. 超連結與圖片 (Links & Images)</h3>
+                    <p class="card-text small text-muted">網頁之間串聯的橋樑，以及視覺呈現的核心標籤。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 超連結 (Anchor)</h4>
+                            <p class="small text-muted mb-1">設定 <code>target="_blank"</code> 可以讓連結在新的分頁開啟。若是連到外部網站，現代實務建議加上 <code>rel="noopener"</code> 防範安全漏洞。</p>
+<pre class="code-block mb-0"><code>&lt;!-- 內部連結 (跳轉到同一網站的其他頁面) --&gt;
+&lt;a href="about.html"&gt;關於我&lt;/a&gt;
+
+&lt;!-- 外部連結 (另開新分頁，並加上安全防護) --&gt;
+&lt;a href="https://google.com" target="_blank" rel="noopener"&gt;
+    前往 Google
+&lt;/a&gt;
+
+&lt;!-- 錨點連結 (跳轉到同一頁的特定 ID 區塊) --&gt;
+&lt;a href="#contact-section"&gt;聯絡我們&lt;/a&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 圖片 (Image) 與 SEO 關鍵</h4>
+                            <p class="small text-muted mb-1">圖片是單標籤，不需要結尾。<strong><code>alt</code> 屬性絕對不能省略</strong>，它是 SEO 與無障礙閱讀器的核心！</p>
+<pre class="code-block mb-0"><code>&lt;!-- 🌟 現代圖片標準寫法 --&gt;
+&lt;img src="images/profile.jpg" 
+     alt="Reyna 的個人照" 
+     loading="lazy"&gt;
+
+&lt;!-- 
+  💡 解析：
+  1. src: 圖片的來源路徑
+  2. alt: 圖片破圖時顯示的文字，也會念給視障人士聽
+  3. loading="lazy": 現代原生支援的「延遲載入」，
+     滑到才載入，大幅提升網頁效能！ 
+--&gt;</code></pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card">
-                    <h3 class="card-title">多媒體與嵌入 (Audio, Video, Iframe)</h3>
-                    <p class="card-text">HTML5 原生支援影音播放，只需加上 <code>controls</code> 屬性即可顯示播放面板。<code>iframe</code> 則常用於嵌入 YouTube 影片或 Google 地圖。</p>
-<pre class="code-block"><code>&lt;!-- 音樂播放器 --&gt;
-&lt;audio src="music.mp3" controls&gt;&lt;/audio&gt;
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">2. HTML5 原生影音播放 (Audio & Video)</h3>
+                    <p class="card-text small text-muted">以前網頁要播影片都必須安裝 Flash 外掛，HTML5 引入了原生的 <code>&lt;audio&gt;</code> 與 <code>&lt;video&gt;</code> 標籤，讓多媒體整合變得超級簡單。</p>
 
-&lt;!-- 影片播放器 --&gt;
-&lt;video src="movie.mp4" width="100%" controls&gt;&lt;/video&gt;
+                    
 
-&lt;!-- 嵌入外部網頁 --&gt;
-&lt;iframe src="https://example.com" width="100%" height="400"&gt;&lt;/iframe&gt;</code></pre>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 音樂播放 (Audio)</h4>
+                            <p class="small text-muted mb-1">加上 <code>controls</code> 屬性，瀏覽器就會自動產生播放、暫停與音量控制面板。</p>
+<pre class="code-block mb-0"><code>&lt;!-- 嚴謹寫法：提供多種格式讓瀏覽器挑選支援的播 --&gt;
+&lt;audio controls&gt;
+    &lt;source src="song.mp3" type="audio/mpeg"&gt;
+    &lt;source src="song.ogg" type="audio/ogg"&gt;
+    您的瀏覽器不支援音樂播放。
+&lt;/audio&gt;
+
+&lt;!-- 現代簡易寫法 (多數瀏覽器已全面支援 mp3) --&gt;
+&lt;audio src="song.mp3" controls loop&gt;&lt;/audio&gt;
+&lt;!-- loop 屬性代表音樂播完會自動重播 --&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 影片播放 (Video) 與自動播放限制</h4>
+                            <p class="small text-muted mb-1">現代瀏覽器為了不吵到使用者，<strong>嚴格禁止有聲音的影片自動播放</strong>。若要自動播放，必須同時加上 <code>muted</code> (靜音)。</p>
+<pre class="code-block mb-0"><code>&lt;!-- 🌟 實戰常用：作為網頁背景的靜音自動循環影片 --&gt;
+&lt;video src="background.mp4" 
+       width="100%" 
+       autoplay 
+       muted 
+       loop 
+       playsinline&gt; &lt;!-- playsinline 讓 iOS 不會強制全螢幕 --&gt;
+&lt;/video&gt;
+
+&lt;!-- 一般帶有控制面板的影片 --&gt;
+&lt;video src="movie.mp4" controls poster="cover.jpg"&gt;&lt;/video&gt;
+&lt;!-- poster 可以設定影片播放前顯示的封面圖 --&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+                    <h3 class="card-title">💡 3. 網頁中的網頁 (Iframe Embeds)</h3>
+                    <p class="card-text small text-muted"><code>&lt;iframe&gt;</code> (內聯框架) 允許我們在當前的網頁中，挖一個洞來顯示另一個外部網頁。實務上最常用來嵌入 YouTube 影片或 Google 地圖。</p>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 基礎語法與現代安全屬性</h4>
+<pre class="code-block mb-0"><code>&lt;!-- 傳統的 frameborder 已不推薦使用，請改用 CSS 去除邊框 --&gt;
+&lt;iframe 
+    src="https://example.com" 
+    width="100%" 
+    height="400"
+    title="第三方網站預覽"
+    loading="lazy"&gt;
+&lt;/iframe&gt;</code></pre>
+                        </div>
+
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 實戰：嵌入 YouTube 影片</h4>
+                            <p class="small text-muted mb-1">通常可以直接從 YouTube 的「分享」>「嵌入」複製程式碼。<code>allowfullscreen</code> 屬性是讓使用者能全螢幕觀看的關鍵。</p>
+<pre class="code-block mb-0"><code>&lt;iframe 
+    width="560" height="315" 
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+    title="YouTube video player" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
