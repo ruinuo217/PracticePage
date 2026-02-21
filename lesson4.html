@@ -66,58 +66,346 @@
             </div>
         </header>
 
+<section class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">JavaScript 基礎 (Basics)</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">什麼是 JavaScript？</h3>
+                    <ul class="tech-list mb-0">
+                        <li>JavaScript 是一種輕量級的編程語言。</li>
+                        <li>JavaScript 是可插入 HTML 頁面的編程代碼。</li>
+                        <li>JavaScript 插入 HTML 頁面後，可由所有的現代瀏覽器執行。</li>
+                        <li>JavaScript 很容易學習。</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">JavaScript 使用方式</h3>
+                    <p class="card-text">HTML 中的腳本必須位於 <code>&lt;script&gt;</code> 與 <code>&lt;/script&gt;</code> 標籤之間。</p>
+<pre class="code-block"><code>&lt;script&gt;
+    alert("Hello world");
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">寫到文檔輸出 (document.write)</h3>
+                    <p class="card-text mb-1">可以直接把元素寫入 HTML 文檔中。<strong>注意：</strong>如果在文檔已完成加載後才執行，則整個 HTML 頁面將被覆蓋。</p>
+<pre class="code-block"><code>&lt;!-- 直接輸出 --&gt;
+&lt;script&gt;
+    document.write("&lt;h1&gt;This is a heading&lt;/h1&gt;");
+&lt;/script&gt;
+
+&lt;!-- 觸發覆蓋頁面範例 --&gt;
+&lt;button onclick="myFunction()"&gt;點擊這裡&lt;/button&gt;
+&lt;script&gt;
+function myFunction() {
+    document.write("覆蓋所有內容了!");
+}
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">操作 HTML 元素</h3>
+                    <p class="card-text">如需從 JavaScript 訪問某個 HTML 元素，可以使用 <code>document.getElementById(id)</code> 方法及 <code>innerHTML</code> 屬性。請使用 id 屬性來標識 HTML 元素。</p>
+                    
+                    
+                    
+<pre class="code-block mt-2"><code>&lt;p id="demo"&gt;I am demo&lt;/p&gt;
+
+&lt;script&gt;
+    // 將 id 為 demo 的元素內容替換為 JavaScript
+    document.getElementById("demo").innerHTML = "JavaScript";
+&lt;/script&gt;</code></pre>
+                </div>
+
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 class="card-title">JavaScript 註解與除錯</h3>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <h4 class="fs-6 fw-bold">⚫ 程式碼註解 (Comments)</h4>
+                            <p class="small text-muted mb-1">JavaScript 不會執行註解。我們可以利用添加註解來對代碼進行解釋，或者提高代碼的可讀性。</p>
+<pre class="code-block"><code>// 單行註釋以雙斜線開頭
+
+/* 多行註釋
+   以斜線星號開始，以星號斜線結尾 
+*/</code></pre>
+                        </div>
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h4 class="fs-6 fw-bold">⚫ 瀏覽器控制台除錯 (Console)</h4>
+                            <p class="small text-muted mb-1">通過 <code>console.log()</code> 可以將欲檢視的內容，藉由瀏覽器開發者工具的控制台 (Console) 顯示出來。</p>
+<pre class="code-block"><code>&lt;body&gt;
+    &lt;script&gt;
+        // 印出 body 的客戶端寬度
+        console.log(document.body.clientWidth);
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <section class="page-section">
             <div class="section-header">
                 <h2 class="section-title">變數與基礎邏輯 (Variables & Logic)</h2>
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">變數宣告與資料型別</h3>
-                    <div class="alert-box">
-                        <strong>💡 Modern JS 觀念：</strong><br>
-                        現代前端已棄用 <code>var</code>。請一律使用 <code>let</code>（宣告可變更的變數）與 <code>const</code>（宣告不可變更的常數），以避免區域變數污染的問題。
-                    </div>
-<pre class="code-block"><code>// 現代變數宣告方式
-let age = 25;      // 數字 (Number)
-const name = "Reyna"; // 字串 (String) - 宣告後不可修改
-let isDeveloper = true; // 布林值 (Boolean)
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">變數宣告與生命週期 (Variables & Scope)</h3>
+    
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        現代前端已棄用 <code>var</code>。請一律使用 <code>let</code>（宣告可變動的值）與 <code>const</code>（宣告不可變更的常數），以避免全域變數污染的問題。此外，講義中提到「未宣告就直接賦值會變成全域變數」，雖然在舊版 JS 成立，但在現代的「嚴格模式 (Strict Mode)」下會直接引發錯誤。請務必養成先宣告再使用的好習慣！
+    </div>
 
-// typeof 運算子：用來檢查資料型別
-console.log(typeof age); // 回傳 "number"</code></pre>
-                </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 變數基礎與命名規則</h4>
+            <ul class="tech-list mb-1">
+                <li>變數是<strong>存儲信息的容器</strong>，就像代數一樣可以做資料的運算。</li>
+                <li>可以使用短名稱 (如 <code>x</code> 和 <code>y</code>)，也可以使用描述性更好的名稱 (如 <code>age</code>, <code>sum</code>, <code>total_volume</code>)。</li>
+                <li>名稱必須以<strong>字母開頭</strong>。</li>
+                <li><strong>對大小寫敏感</strong> (<code>y</code> 和 <code>Y</code> 是不同的變數)。</li>
+            </ul>
+<pre class="code-block"><code>// 現代變數宣告方式 (取代舊有的 var)
+let x = 2;
+let y = 3;
+let z = x + y; // z 的結果為 5
 
-                <div class="card">
-                    <h3 class="card-title">運算子與條件判斷</h3>
-                    <p class="card-text">除了基本的 <code>+ - * / %</code> 算數運算子，邏輯判斷在實務上極為重要。強烈建議使用 <code>===</code>（全等）取代 <code>==</code>。</p>
-<pre class="code-block"><code>let time = new Date().getHours();
-let greeting = "";
+let age = 25;         // 數字 (Number)
+const name = "Reyna"; // 字串 (String) - 宣告後不可修改</code></pre>
+        </div>
 
-// If...else if...else 判斷式
-if (time < 12) {
-    greeting = "Good morning";
-} else if (time < 18) {
-    greeting = "Good afternoon";
-} else {
-    greeting = "Good evening";
-}</code></pre>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">迴圈控制 (Loops)</h3>
-                    <p class="card-text">用來重複執行代碼。常見有 <code>for</code> (已知次數)、<code>while</code> (未知次數，依條件執行)。</p>
-<pre class="code-block"><code>// 基礎 For 迴圈
-for (let i = 0; i < 5; i++) {
-    if (i === 3) break; // 跳出整個迴圈
-    console.log("當前數字：" + i);
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 變數的生命週期 (Scope)</h4>
+            <ul class="tech-list mb-1">
+                <li><strong>局部變數 (Local)：</strong> 在函數內部宣告的變數，只能在函數內部訪問。只要函數運行完畢，本地變數就會被刪除。因此可以在不同的函數中使用名稱相同的局部變數。</li>
+                <li><strong>全局變數 (Global)：</strong> 在函數外宣告的變數是全局變數，網頁上的所有腳本和函數都能訪問它。</li>
+            </ul>
+<pre class="code-block"><code>let globalVar = "我是全局變數";
+
+function myFunction() {
+    // 在函數內部宣告，屬於局部變數
+    let localVar = "我是局部變數";
+    console.log(globalVar); // 內部可以正常讀取全局變數
 }
 
-// 搭配陣列使用
-const cars = ["BMW", "Volvo", "Ford"];
-for (let i = 0; i < cars.length; i++) {
-    console.log(cars[i]);
+// console.log(localVar); 
+// ❌ 錯誤：無法在函數外部訪問 localVar</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">運算子 (Operators)</h3>
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        1. 比較時強烈建議使用 <code>===</code>（全等）與 <code>!==</code>（不全等），它們不會自動轉換資料型別，能避免許多預期外的 Bug。<br>
+        2. 現代字串拼接推薦使用 ES6 的<strong>樣板字面值 (Template Literals)</strong>，用反引號 <code>`</code> 搭配 <code>${}</code>，取代傳統且容易看錯的 <code>+</code> 號。
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 算數與指定運算子</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm mt-2" style="font-size: 13px;">
+                    <thead class="table-light">
+                        <tr><th>種類</th><th>運算符</th><th>範例與說明</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="2">算數</td><td><code>+  -  * /  %</code></td><td>加、減、乘、除、取餘數(%)</td></tr>
+                        <tr><td><code>++  --</code></td><td>遞增 (+1)、遞減 (-1)</td></tr>
+                        <tr><td>指定</td><td><code>=  +=  -=  *=  /=</code></td><td><code>x += y</code> 等同於 <code>x = x + y</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="small text-muted mb-1 mt-2">字串串接 (註：數字與字串相加，結果將成為字串)：</p>
+<pre class="code-block mb-0"><code>let txt1 = "What a very";
+let txt2 = "nice day";
+
+// 傳統字串相加
+let result1 = txt1 + " " + txt2; 
+
+// 現代寫法：樣板字面值 (推薦)
+let result2 = `${txt1} ${txt2}`; </code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 比較運算子</h4>
+            <p class="small text-muted mb-1">通常使用在邏輯語句中，以判定變數或值是否符合條件，回傳布林值。</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm mt-2" style="font-size: 13px;">
+                    <thead class="table-light">
+                        <tr><th>運算符</th><th>描述</th><th>範例 (假設 x=5)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>===</code></td><td>全等 (值與型別皆須相同)</td><td><code>x === "5"</code> ➔ false</td></tr>
+                        <tr><td><code>!==</code></td><td>不全等</td><td><code>x !== "5"</code> ➔ true</td></tr>
+                        <tr><td><code>==</code></td><td>等於 (會自動轉換型別)</td><td><code>x == "5"</code> ➔ true</td></tr>
+                        <tr><td><code>>  <</code></td><td>大於 / 小於</td><td><code>x > 8</code> ➔ false</td></tr>
+                        <tr><td><code>>=  <=</code></td><td>大於或等於 / 小於或等於</td><td><code>x <= 8</code> ➔ true</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">條件判斷 (Conditional Statements)</h3>
+    <p class="card-text small text-muted">通常在寫代碼時，需要為不同的決定執行不同的動作。主要使用 <code>if...else</code> 及 <code>switch</code> 判斷式。</p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ If...Else 判斷式</h4>
+            <p class="small text-muted mb-1">依序檢查條件，當條件為 <code>true</code> 時執行對應區塊。</p>
+<pre class="code-block mb-0"><code>let time = new Date().getHours();
+let message = "";
+
+if (time < 12) {
+    message = "Good morning";
+} else if (time < 18) {
+    // 前一個條件不成立，且此條件成立時執行
+    message = "Good afternoon";
+} else {
+    // 所有條件皆不成立時執行
+    message = "Good evening";
+}
+// 輸出結果到 HTML
+document.getElementById("demo").innerHTML = message;</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Switch 判斷式</h4>
+            <p class="small text-muted mb-1">適合用於「單一變數」比對「多種特定值」的情境。切記每個 <code>case</code> 結束都要加 <code>break</code> 避免往下執行。</p>
+<pre class="code-block mb-0"><code>let day = new Date().getDay(); // 0是週日, 1是週一
+let activity = "";
+
+switch (day) {
+    case 1:
+        activity = "星期一，猴子穿新衣";
+        break; // 中斷並跳出 switch
+    case 2:
+        activity = "星期二，猴子肚子餓";
+        break;
+    default:
+        // 以上 case 都不符合時執行 (例如 0, 3, 4, 5, 6)
+        activity = "猴子放假去！";
+}
+console.log(activity);</code></pre>
+        </div>
+    </div>
+</div>
+                
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">迴圈控制與中斷語句 (Loops & Break/Continue)</h3>
+    <p class="card-text small text-muted">如果希望一遍又一遍地執行相同的代碼，並且每次帶入的值都不同，那麼使用迴圈是很方便的。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        現代前端實務上，<code>for...in</code> 主要是用來遍歷<strong>「物件屬性」</strong>。若要遍歷<strong>「陣列」</strong>，現代 JS 強烈推薦使用 ES6 的 <code>for...of</code> 迴圈或是陣列內建的 <code>.forEach()</code> 方法，語法更簡潔且不易出錯。
+    </div>
+    
+    
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎迴圈 (for, while, do/while)</h4>
+<pre class="code-block mb-0"><code>let htmlString = "";
+
+// 1. for - 計次迴圈 (已知執行次數)
+for (let i = 0; i < 3; i++) {
+    htmlString += `The number is ${i} &lt;br&gt;`;
+}
+
+// 2. while - 條件式迴圈 (條件不成立可能一次都不跑)
+let count = 0;
+while (count < 3) {
+    console.log(`執行第 ${count} 次`);
+    count++;
+}
+
+// 3. do/while - 條件式迴圈 (無論如何至少會執行一次)
+let num = 0;
+do {
+    console.log(`至少跑一次：${num}`);
+    num++;
+} while (num < 0); // 條件為 false，但已經印出 0 了</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 物件遍歷與中斷語句</h4>
+            <p class="small text-muted mb-1"><code>break</code> 用於跳出整個迴圈；<code>continue</code> 則是中斷本次代碼，直接進入下一次迴圈。</p>
+<pre class="code-block mb-0"><code>// for...in 遍歷物件屬性
+const person = { fname: "Bill", lname: "Gates", age: 56 };
+let text = "";
+for (let key in person) {
+    // 透過中括號存取物件的 key
+    text += `${person[key]} `; 
+}
+
+// Break 與 Continue 語句
+for (let i = 0; i <= 5; i++) {
+    if (i === 2) {
+        continue; // 遇到 2 時跳過，不印出 2
+    }
+    if (i === 4) {
+        break; // 遇到 4 時直接終止整個迴圈
+    }
+    console.log(`當前數字：${i}`); // 結果會印出 0, 1, 3
 }</code></pre>
-                </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">型別檢測與內建物件 (typeof, Math, Date)</h3>
+    <p class="card-text small text-muted">JavaScript 提供了許多方便的內建物件與運算子來處理資料與時間。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ typeof 運算子 & Math 數學物件</h4>
+<pre class="code-block mb-0"><code>// typeof 檢測資料型態
+typeof "John"          // 回傳 "string"
+typeof 3.14            // 回傳 "number"
+typeof false           // 回傳 "boolean"
+typeof [1, 2, 3, 4]    // 回傳 "object" (陣列也是物件)
+typeof { age: 34 }     // 回傳 "object"
+
+// Math 物件常用方法
+Math.PI;               // 取得圓周率 (3.14159...)
+Math.round(4.6);       // 四捨五入至整數 (回傳 5)
+Math.ceil(4.1);        // 無條件進位 (回傳 5)
+Math.floor(4.9);       // 無條件捨去 (回傳 4)
+Math.random();         // 取得 0 (含) ~ 1 (不含) 的亂數</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ Date 時間物件</h4>
+            <p class="small text-muted mb-1">注意：JavaScript 的月份是從 <code>0</code> 開始計算的（0 代表一月，11 代表十二月），因此實務上通常會 <code>+1</code>。</p>
+<pre class="code-block mb-0"><code>// 取得當日日期與當前時間
+const d = new Date();
+
+let year = d.getFullYear();   // 取得年份 (四位數)
+let month = d.getMonth() + 1; // 取得月份 (注意要 +1)
+let date = d.getDate();       // 取得日
+let day = d.getDay();         // 取得星期幾 (0 是週日)
+
+// 運用樣板字面值組合日期字串
+let todayStr = `${year}年${month}月${date}日`;
+
+// 設定特定日期 (年, 月, 日, 時, 分, 秒, 毫秒)
+// 註：月份帶入 1 代表設定為 2 月
+const specificDate = new Date(2026, 1, 21, 16, 45, 14);</code></pre>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
 
@@ -127,59 +415,291 @@ for (let i = 0; i < cars.length; i++) {
             </div>
 
             <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">函數 (Functions)</h3>
-                    <p class="card-text">函數是可重複使用的代碼區塊，可以帶入參數 (Parameters) 並回傳值 (Return)。</p>
-<pre class="code-block"><code>// 帶有參數與回傳值的函數
-function calculateArea(width, height) {
-    let area = width * height;
-    return area; // 將計算結果回傳
-}
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">函數 (Functions)</h3>
+    <p class="card-text small text-muted">函數是由事件驅動，或者當它被呼叫時執行的可重複使用代碼區塊。</p>
+    
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        1. 現代開發中，除了傳統的 <code>function</code> 宣告，也非常流行使用 ES6 引入的<strong>箭頭函數 (Arrow Functions)</strong>：<code>const myFunction = () => {};</code>。<br>
+        2. 雖然範例中使用 HTML 的 <code>onclick</code> 屬性來綁定事件很直覺，但在現代實務開發中，通常會使用 JavaScript 的 <code>addEventListener</code> 來將 HTML 結構與 JS 邏輯徹底分離。
+    </div>
 
-// 呼叫函數並將結果存入變數
-const myArea = calculateArea(10, 5); 
-console.log(myArea); // 輸出 50</code></pre>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">陣列 (Array) & 物件 (Object)</h3>
-                    <p class="card-text">陣列用來儲存有序清單；物件用來儲存具備「屬性」與「方法」的實體資料。</p>
-<pre class="code-block"><code>// 陣列 (Array) 與常用方法
-const skills = ["HTML", "CSS", "JS"];
-skills.push("React"); // 在結尾新增元素
-console.log(skills.length); // 取得陣列長度
-
-// 物件 (Object) 定義
-const person = {
-    firstName: "Reyna",
-    role: "Frontend Developer",
-    // 物件內的方法
-    greet: function() {
-        return "Hi, I am " + this.firstName;
-    }
-};
-console.log(person.role); // 存取物件屬性</code></pre>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">DOM 操作與事件聆聽</h3>
-                    <p class="card-text">JavaScript 核心應用：操作網頁上的 HTML 元素並產生互動。</p>
-<pre class="code-block"><code>&lt;!-- HTML 元素 --&gt;
-&lt;p id="demo"&gt;原始文字&lt;/p&gt;
-&lt;button id="myBtn"&gt;點擊更改&lt;/button&gt;
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 基礎函數與帶參數調用</h4>
+            <ul class="tech-list mb-1">
+                <li>函數包裹在 <code>{}</code> 中，前面使用關鍵字 <code>function</code>。</li>
+                <li>可以向函數傳遞任意數量的「參數 (Parameters)」，由逗號 <code>,</code> 分隔。呼叫時帶入的值必須與參數順序一致。</li>
+                <li>可以在某事件發生時直接調用（如點擊按鈕）。</li>
+            </ul>
+<pre class="code-block"><code>&lt;!-- HTML 觸發按鈕 --&gt;
+&lt;button onclick="greetUser('Reyna', 'Developer')"&gt;
+    點擊打招呼
+&lt;/button&gt;
 
 &lt;script&gt;
-// 1. 選取 DOM 元素
-const demoText = document.getElementById("demo");
-const btn = document.getElementById("myBtn");
-
-// 2. 註冊點擊事件 (現代寫法)
-btn.addEventListener("click", function() {
-    demoText.innerHTML = "&lt;strong&gt;JavaScript 成功修改了內容！&lt;/strong&gt;";
-    demoText.style.color = "blue"; // 動態修改 CSS
-});
+// 帶參數的函數定義
+function greetUser(name, job) {
+    // 參數可以在函數內部直接被使用
+    alert("Welcome " + name + ", the " + job + "!");
+}
 &lt;/script&gt;</code></pre>
-                </div>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 帶有返回值 (Return) 的函數</h4>
+            <ul class="tech-list mb-1">
+                <li>有時我們希望函數將運算結果「返回」給呼叫它的地方，這可以透過 <code>return</code> 語句來實現。</li>
+                <li><strong>⚠️ 重要提醒：</strong> 若 JS 需要直接輸出結果到 HTML 元素中，該腳本必須寫在 HTML 元素<strong>之後</strong>，否則 JS 執行時會找不到 DOM 節點！</li>
+            </ul>
+<pre class="code-block"><code>&lt;!-- HTML 顯示結果的容器 --&gt;
+&lt;div id="calcResult"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+// 帶有返回值的函數
+function multiply(a, b) {
+    return a * b; // 執行完畢後，回傳指定的值
+}
+
+// 1. 呼叫函數並取得回傳值 (4 * 3 = 12)
+// 2. 將回傳值寫入指定的 HTML 元素中
+document.getElementById("calcResult").innerHTML = multiply(4, 3);
+&lt;/script&gt;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">物件 (Object) 的定義與存取</h3>
+    <p class="card-text small text-muted">在 JavaScript 中，幾乎所有的事物都是物件。普通的變數只能包含單一值，而物件可以包含多個值（即屬性 Properties）與功能（即方法 Methods）。</p>
+    
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        宣告物件與陣列時，現代強烈建議使用 <code>const</code>。這會鎖定變數的「記憶體參考位置」，但<strong>物件內的屬性值依然是可以被修改的</strong>，這樣寫能大幅提升程式碼的安全性。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 定義物件與屬性</h4>
+            <p class="small text-muted mb-1">使用大括號 <code>{}</code> 定義物件，內部以 <code>鍵: 值</code> (Key: Value) 的形式儲存資料。</p>
+            
+            
+
+<pre class="code-block"><code>// 現代語法：宣告一個包含多種屬性的物件
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    // ES6 方法縮寫語法 (取代 getName: function() {})
+    getName() {
+        // 使用 this 存取同一個物件內的屬性
+        return this.firstName + " " + this.lastName;
+    }
+};</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 存取屬性與方法</h4>
+            <ul class="tech-list mb-1">
+                <li><strong>存取屬性：</strong> 可使用點 <code>.</code> 符號或中括號 <code>[]</code>。</li>
+                <li><strong>存取方法：</strong> 若加上小括號 <code>()</code> 會執行該函數；若不加則會回傳函數本身的定義。</li>
+            </ul>
+<pre class="code-block"><code>// 存取物件屬性
+console.log(person.lastName);   // 輸出: Doe
+console.log(person["lastName"]); // 輸出: Doe (適合用在鍵名為變數時)
+
+// 呼叫物件方法
+let fullName = person.getName(); 
+console.log(fullName); // 輸出: John Doe
+
+// 取得方法函數本身 (不會執行)
+let funcDefinition = person.getName;</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">陣列 (Array) 的建立與常用方法</h3>
+    <p class="card-text small text-muted">陣列的作用是使用「單獨的變數名稱」來儲存一系列有序的值。陣列中甚至可以混合包含字串、數字、物件、函數，或是其他陣列。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        現代開發中已極少使用 <code>new Array()</code> 來建立陣列，一律推薦使用更簡潔且執行效率更好的<strong>字面量方式 <code>[]</code></strong>。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 陣列的建立、存取與修改</h4>
+            
+            
+            
+            <p class="small text-muted mb-1">陣列的索引值 (Index) 是從 <code>0</code> 開始的。</p>
+<pre class="code-block"><code>// 現代語法：使用字面量方式建立陣列
+const cars = ["FORD", "TOYOTA", "MAZDA"];
+
+// 存取陣列的第一個值 (索引 0)
+let firstName = cars[0]; // FORD
+
+// 修改陣列元素
+cars[0] = "BMW"; 
+
+// 陣列可以包羅萬象 (混合型別)
+const myArray = [];
+myArray[0] = Date.now; // 放入函數
+myArray[1] = person;   // 放入前面定義的物件
+myArray[2] = cars;     // 放入另一個陣列</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 常用陣列方法與屬性</h4>
+            <p class="small text-muted mb-1">陣列內建了許多強大的方法來處理資料。</p>
+<pre class="code-block"><code>const fruits = ["Apple", "Banana"];
+
+// 屬性：取得元素數量
+let total = fruits.length; // 2
+
+// 尋找與轉換
+let index = fruits.indexOf("Banana"); // 取得索引值: 1
+let str1 = fruits.join(" - "); // "Apple - Banana"
+let str2 = fruits.toString();  // "Apple,Banana"
+
+// 新增元素 (會改變原陣列)
+fruits.push("Mango", "Orange");    // 在結尾寫入
+fruits.unshift("Papaya", "Kiwi");  // 在開頭寫入
+
+// 排序與反轉
+const numbers = [40, 100, 1, 5, 25, 10];
+numbers.reverse(); // 反轉陣列順序
+numbers.sort();    // 預設依「字串字母」排序 (數字排序會出錯)
+
+// 搭配 ES6 箭頭函數進行「數字排序」
+numbers.sort((a, b) => a - b); // 數字由小到大 (升冪)
+numbers.sort((a, b) => b - a); // 數字由大到小 (降冪)</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">DOM 選取與節點操作 (DOM Manipulation)</h3>
+    <p class="card-text small text-muted">DOM (文件物件模型) 將 HTML 解析為樹狀結構，讓 JavaScript 可以輕易存取並改變網頁的內容、結構與樣式。</p>
+
+    <div class="alert-box mb-3" style="font-size: 13px;">
+        <strong>💡 Modern JS 觀念：</strong><br>
+        現代開發強烈建議使用 <code>querySelector</code> 與 <code>querySelectorAll</code>，它們支援 CSS 選擇器寫法，比舊有的 <code>getElementById</code> 更靈活強大。此外，動態修改 CSS 類別時，請務必使用 <code>classList</code>。
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 現代元素選取與 Class 操作</h4>
+<pre class="code-block mb-0"><code>// 1. 現代 DOM 選取器
+const title = document.querySelector(".title"); // 選取第一個符合的 class
+const buttons = document.querySelectorAll("button"); // 選取所有 button (回傳 NodeList)
+
+// 2. 操作 CSS 類別 (classList)
+const box = document.querySelector("#myBox");
+box.classList.add("active");    // 新增 class
+box.classList.remove("hidden"); // 移除 class
+box.classList.toggle("dark");   // 切換 class (有則移除，無則新增)</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 內容修改與動態建立節點</h4>
+<pre class="code-block mb-0"><code>const container = document.querySelector(".container");
+
+// 1. 修改文字或 HTML 內容
+// textContent 較安全(防XSS)，innerHTML 會解析 HTML 標籤
+container.textContent = "純文字內容"; 
+container.innerHTML = "&lt;strong&gt;粗體內容&lt;/strong&gt;";
+
+// 2. 動態建立與插入新節點
+const newDiv = document.createElement("div"); // 建立新標籤
+newDiv.classList.add("card");
+newDiv.textContent = "我是新生成的卡片！";
+container.append(newDiv); // 將新節點附加到容器的最後面</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1;">
+    <h3 class="card-title">事件聆聽與互動 (Event Listeners)</h3>
+    <p class="card-text small text-muted">事件聆聽器是 JavaScript 與使用者互動的橋樑。當使用者點擊、輸入或捲動網頁時，觸發對應的函數。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 註冊事件與 Event 物件</h4>
+            <p class="small text-muted mb-1"><code>addEventListener</code> 可在同個元素綁定多個事件且不汙染 HTML。事件函數會接收一個 <code>event</code> (或 <code>e</code>) 物件。</p>
+<pre class="code-block mb-0"><code>const link = document.querySelector("a.submit-link");
+
+// 搭配 ES6 箭頭函數使用
+link.addEventListener("click", (e) =&gt; {
+    e.preventDefault(); // 阻止 HTML 預設行為 (例如 a 標籤跳轉頁面)
+    
+    // e.target 代表實際觸發事件的 DOM 元素
+    e.target.textContent = "處理中...";
+    console.log("事件類型:", e.type); // 輸出 "click"
+});</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 常見互動事件：鍵盤與表單輸入</h4>
+            <p class="small text-muted mb-1">除了 click，<code>keyup</code> (按鍵放開) 與 <code>input</code> (輸入內容時) 在表單資料處理上非常實用。</p>
+<pre class="code-block mb-0"><code>const searchInput = document.querySelector("#search");
+
+// 當使用者在輸入框打字時，即時獲取內容
+searchInput.addEventListener("input", (e) =&gt; {
+    console.log("目前輸入內容:", e.target.value);
+});
+
+// 監聽特定按鍵 (例如按下 Enter 鍵才觸發)
+searchInput.addEventListener("keyup", (e) =&gt; {
+    if (e.key === "Enter") {
+        alert(`正在搜尋：${e.target.value}`);
+    }
+});</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="grid-column: 1 / -1; border-top: 4px solid #f0db4f;">
+    <h3 class="card-title">💡 進階補充：現代 JavaScript (ES6+) 必備語法</h3>
+    <p class="card-text small text-muted">這些是現代前端開發 (如 React, Vue) 天天都會用到的核心語法，學會它們能讓你的程式碼大幅精簡。</p>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <h4 class="fs-6 fw-bold">⚫ 解構賦值與展開運算子</h4>
+<pre class="code-block mb-0"><code>// 1. 解構賦值 (Destructuring)：快速提取物件內容
+const user = { name: "Reyna", role: "Dev", age: 25 };
+const { name, role } = user; 
+console.log(name, role); // 直接取得 "Reyna" 與 "Dev"
+
+// 2. 展開運算子 (Spread Operator)：快速複製或合併資料 (...)
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5]; // 變成 [1, 2, 3, 4, 5]
+
+const updatedUser = { ...user, location: "Taipei" };
+// 變成 { name: "Reyna", role: "Dev", age: 25, location: "Taipei" }</code></pre>
+        </div>
+
+        <div class="col-md-6 mt-3 mt-md-0">
+            <h4 class="fs-6 fw-bold">⚫ 非同步請求 (Fetch API) 初探</h4>
+            <p class="small text-muted mb-1">現代網頁常需要和後端 API 索取資料，<code>fetch</code> 取代了舊有的 XMLHttpRequest (AJAX)。</p>
+<pre class="code-block mb-0"><code>// 向遠端 API 請求資料 (非同步)
+fetch("https://jsonplaceholder.typicode.com/users/1")
+    .then(response =&gt; {
+        // 將回應資料轉換為 JSON 格式
+        return response.json(); 
+    })
+    .then(data =&gt; {
+        console.log("取得使用者資料：", data.name);
+    })
+    .catch(error =&gt; {
+        console.error("請求發生錯誤：", error);
+    });</code></pre>
+        </div>
+    </div>
+</div>
+
             </div>
         </section>
 
