@@ -67,9 +67,19 @@
 
         <section class="page-section demo-section">
             <h2 class="section-title"><i class="bi bi-laptop"></i> 課堂實作 Demo (Live Preview)</h2>
-            <div class="demo-links">
-                <a href="#" class="demo-btn"><i class="bi bi-cloud-arrow-up"></i> Web 13: AJAX 非同步資料加載實作</a>
-            </div>
+
+<div class="demo-container card p-4">
+    <h3 class="fs-6 fw-bold mb-3">實作體驗：非同步名稱送出</h3>
+    
+    <div class="input-group mb-3">
+        <input type="text" id="userName" class="form-control" placeholder="請輸入姓名">
+        <button class="btn btn-primary" id="submitBtn">送出資料</button>
+    </div>
+
+    <ul id="resultList" class="list-group mt-2">
+        <li class="list-group-item disabled">目前無資料（送出後會出現在這）</li>
+    </ul>
+</div>
         </section>
 
 <section class="page-section">
@@ -407,6 +417,10 @@ formData.append('photo', $('#photo')[0].files[0]);</code></pre>
 
     </main>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="web13/script.js"></script>
 
 </body>
 </html>
