@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 08: React Router 路由｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item active" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 08: React Router 路由</h1>
+            <p>實現多頁面切換，讓 SPA 擁有真正的頁面導覽</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: 安裝與基礎設定 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-download"></i> 安裝與基礎設定</h3>
+                <p class="card-text">
+                    React 本身是 SPA（Single Page Application），只有一個 HTML 檔。
+                    要實現「多頁面切換」的效果，需要安裝 <strong>React Router</strong>。
+                </p>
+                <div class="code-block">
+<pre>npm install react-router-dom</pre>
+                </div>
+                <p class="card-text"><strong>在 main.jsx 用 BrowserRouter 包住整個 App：</strong></p>
+                <div class="code-block">
+<pre>// src/main.jsx
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.css';
+
+createRoot(document.getElementById('root')).render(
+  &lt;StrictMode&gt;
+    &lt;BrowserRouter&gt;
+      &lt;App /&gt;
+    &lt;/BrowserRouter&gt;
+  &lt;/StrictMode&gt;
+);</pre>
+                </div>
+                <p class="card-text">
+                    <code>BrowserRouter</code> 是路由的「容器」，它會監聽瀏覽器網址的變化，
+                    然後根據設定的路由規則來決定顯示哪個元件。
+                </p>
+            </div>
+
+            <!-- Card 2: 定義路由 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-signpost-split"></i> 定義路由：Routes + Route</h3>
+                <p class="card-text">
+                    在 App.jsx 中使用 <code>Routes</code> 和 <code>Route</code> 來定義每個頁面對應的路徑：
+                </p>
+                <div class="code-block">
+<pre>// src/App.jsx
+import { Routes, Route } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Dashboard from './pages/Dashboard';
+import Orders from './pages/Orders';
+import OrderDetail from './pages/OrderDetail';
+import NotFound from './pages/NotFound';
+
+function App() {
+  return (
+    &lt;div className="app-layout"&gt;
+      &lt;Sidebar /&gt;
+      &lt;main className="main-content"&gt;
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;Dashboard /&gt;} /&gt;
+          &lt;Route path="/orders" element={&lt;Orders /&gt;} /&gt;
+          &lt;Route path="/orders/:id" element={&lt;OrderDetail /&gt;} /&gt;
+          &lt;Route path="*" element={&lt;NotFound /&gt;} /&gt;
+        &lt;/Routes&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+                </div>
+                <ul class="tech-list">
+                    <li><code>path="/"</code>：首頁路徑，對應 Dashboard 元件</li>
+                    <li><code>path="/orders"</code>：訂單列表頁</li>
+                    <li><code>path="/orders/:id"</code>：動態路由，:id 是參數</li>
+                    <li><code>path="*"</code>：萬用路徑，所有不符合的路徑都顯示 404 頁面</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: Link 導覽 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-link-45deg"></i> Link 導覽 vs a 標籤</h3>
+                <p class="card-text">
+                    在 React Router 中，頁面切換要用 <code>&lt;Link&gt;</code> 而非 <code>&lt;a href&gt;</code>。
+                    因為 <code>&lt;a&gt;</code> 會<strong>重新載入整個頁面</strong>，破壞 SPA 的優勢。
+                </p>
+                <div class="code-block">
+<pre>import { Link, useLocation } from 'react-router-dom';
+
+function Sidebar() {
+  const location = useLocation();  // 取得目前路徑
+
+  const menuItems = [
+    { path: '/', label: '儀表板', icon: 'bi-speedometer2' },
+    { path: '/orders', label: '訂單管理', icon: 'bi-receipt' },
+    { path: '/products', label: '商品管理', icon: 'bi-box-seam' },
+    { path: '/settings', label: '系統設定', icon: 'bi-gear' },
+  ];
+
+  return (
+    &lt;nav className="sidebar"&gt;
+      {menuItems.map(item =&gt; (
+        &lt;Link
+          key={item.path}
+          to={item.path}
+          className={`nav-item ${
+            location.pathname === item.path ? 'active' : ''
+          }`}
+        &gt;
+          &lt;i className={`bi ${item.icon}`} /&gt;
+          {item.label}
+        &lt;/Link&gt;
+      ))}
+    &lt;/nav&gt;
+  );
+}</pre>
+                </div>
+                <div class="alert-box">
+                    <p class="card-text">
+                        <strong>重點：</strong><code>useLocation()</code> 回傳目前的路徑資訊，
+                        用 <code>location.pathname</code> 就能判斷現在在哪一頁，做出 active 高亮效果。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 4: 動態路由 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-braces"></i> 動態路由與 useParams</h3>
+                <p class="card-text">
+                    當頁面需要根據不同的 ID 顯示不同內容時，就要使用<strong>動態路由</strong>。
+                    例如：<code>/orders/123</code>、<code>/orders/456</code> 都對應同一個元件。
+                </p>
+                <div class="code-block">
+<pre>// 路由定義（App.jsx）
+&lt;Route path="/orders/:id" element={&lt;OrderDetail /&gt;} /&gt;
+
+// 元件中用 useParams 取得動態參數
+import { useParams, useNavigate } from 'react-router-dom';
+
+function OrderDetail() {
+  const { id } = useParams();  // 取得網址中的 :id
+  const navigate = useNavigate();  // 用來做程式化導航
+
+  const [order, setOrder] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/orders/${id}`)
+      .then(res => res.json())
+      .then(data => setOrder(data));
+  }, [id]);
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; navigate('/orders')}&gt;
+        返回訂單列表
+      &lt;/button&gt;
+      &lt;h2&gt;訂單編號：{id}&lt;/h2&gt;
+      {order && (
+        &lt;div&gt;
+          &lt;p&gt;客戶：{order.customer}&lt;/p&gt;
+          &lt;p&gt;金額：${order.total}&lt;/p&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</pre>
+                </div>
+                <ul class="tech-list">
+                    <li><code>useParams()</code>：從網址中取得動態參數（:id → id）</li>
+                    <li><code>useNavigate()</code>：程式化導航，用在按鈕點擊或條件判斷後的頁面跳轉</li>
+                    <li><code>useSearchParams()</code>：取得查詢字串參數（?page=2&sort=name）</li>
+                </ul>
+            </div>
+
+            <!-- Card 5: 建議檔案結構 (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-folder2-open"></i> 建議專案檔案結構</h3>
+                <p class="card-text">
+                    使用 React Router 後，專案結構建議按照「頁面」和「元件」來分資料夾：
+                </p>
+                <div class="code-block">
+<pre>src/
+├── main.jsx              # 入口，包 BrowserRouter
+├── App.jsx               # 路由定義（Routes + Route）
+├── index.css             # 全域樣式
+│
+├── pages/                # 頁面元件（對應路由）
+│   ├── Dashboard.jsx     # 首頁儀表板    path="/"
+│   ├── Orders.jsx        # 訂單列表      path="/orders"
+│   ├── OrderDetail.jsx   # 訂單詳情      path="/orders/:id"
+│   ├── Products.jsx      # 商品管理      path="/products"
+│   ├── Settings.jsx      # 系統設定      path="/settings"
+│   └── NotFound.jsx      # 404 頁面      path="*"
+│
+├── components/           # 共用元件（不對應路由）
+│   ├── Sidebar.jsx       # 側邊欄導覽（放 Link）
+│   ├── Header.jsx        # 頂部列
+│   ├── StatCard.jsx      # 統計卡片
+│   └── DataTable.jsx     # 資料表格
+│
+├── hooks/                # 自訂 Hook
+│   ├── useFetch.js       # API 請求
+│   └── useAuth.js        # 登入狀態
+│
+└── api/                  # API 相關
+    └── client.js         # axios instance</pre>
+                </div>
+                <p class="card-text"><strong>命名慣例：</strong></p>
+                <ul class="tech-list">
+                    <li><strong>pages/ 資料夾</strong>：放「頁面級」的元件，每個檔案對應一條路由，用大寫開頭命名</li>
+                    <li><strong>components/ 資料夾</strong>：放可重複使用的 UI 元件，不直接對應路由</li>
+                    <li><strong>hooks/ 資料夾</strong>：放自訂 Hook，檔名以 use 開頭（例如 useFetch）</li>
+                    <li><strong>api/ 資料夾</strong>：放 API 相關設定，如 axios instance、API 路徑常數</li>
+                </ul>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 05: 列表與條件渲染｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item active" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 05: 列表與條件渲染</h1>
+            <p>根據資料動態產生 UI，掌握 .map() 與條件判斷</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: 三種條件渲染寫法 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-question-diamond"></i> 三種條件渲染寫法</h3>
+                <p class="card-text">在 React 中，根據條件決定要顯示什麼內容，有三種常見的寫法：</p>
+
+                <p class="card-text"><strong>寫法一：三元運算子（最常用）</strong></p>
+                <div class="code-block">
+// 條件 ? 成立時顯示 : 不成立時顯示
+{isLoggedIn ? &lt;UserPanel /&gt; : &lt;LoginButton /&gt;}
+
+// 實際範例
+&lt;span className={`badge bg-${order.status === '已出貨' ? 'success' : 'warning'}`}&gt;
+  {order.status}
+&lt;/span&gt;</div>
+
+                <p class="card-text"><strong>寫法二：&& 短路求值（只有成立才顯示）</strong></p>
+                <div class="code-block">
+// 條件成立才顯示，不成立就什麼都不渲染
+{hasError &amp;&amp; &lt;p className="text-danger"&gt;發生錯誤！&lt;/p&gt;}
+
+{unreadCount &gt; 0 &amp;&amp; &lt;span className="badge bg-danger"&gt;{unreadCount}&lt;/span&gt;}</div>
+
+                <p class="card-text"><strong>寫法三：提前 return（整個元件不渲染）</strong></p>
+                <div class="code-block">
+function DataTable({ data, loading }) {
+  // 載入中 → 提前回傳 loading 畫面
+  if (loading) return &lt;p&gt;載入中...&lt;/p&gt;;
+
+  // 沒有資料 → 提前回傳空狀態
+  if (data.length === 0) return &lt;p&gt;暫無資料&lt;/p&gt;;
+
+  // 正常渲染
+  return &lt;table&gt;...&lt;/table&gt;;
+}</div>
+            </div>
+
+            <!-- Card 2: Tab 切換範例 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-segmented-nav"></i> Tab 切換範例</h3>
+                <p class="card-text">結合 useState 和條件渲染，做出 Tab 頁籤切換的效果：</p>
+                <div class="code-block">
+import { useState } from 'react';
+
+function Dashboard() {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  return (
+    &lt;div&gt;
+      {/* Tab 按鈕列 */}
+      &lt;ul className="nav nav-tabs mb-3"&gt;
+        &lt;li className="nav-item"&gt;
+          &lt;button
+            className={`nav-link ${activeTab === 'overview' ? 'active' : ''}`}
+            onClick={() =&gt; setActiveTab('overview')}
+          &gt;
+            總覽
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li className="nav-item"&gt;
+          &lt;button
+            className={`nav-link ${activeTab === 'orders' ? 'active' : ''}`}
+            onClick={() =&gt; setActiveTab('orders')}
+          &gt;
+            訂單
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li className="nav-item"&gt;
+          &lt;button
+            className={`nav-link ${activeTab === 'users' ? 'active' : ''}`}
+            onClick={() =&gt; setActiveTab('users')}
+          &gt;
+            用戶
+          &lt;/button&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+
+      {/* Tab 內容：用 &amp;&amp; 條件渲染 */}
+      {activeTab === 'overview' &amp;&amp; &lt;div&gt;這是總覽頁面的內容&lt;/div&gt;}
+      {activeTab === 'orders' &amp;&amp; &lt;div&gt;這是訂單列表&lt;/div&gt;}
+      {activeTab === 'users' &amp;&amp; &lt;div&gt;這是用戶管理&lt;/div&gt;}
+    &lt;/div&gt;
+  );
+}</div>
+                <p class="card-text">
+                    點擊不同的 Tab 按鈕 → <code>setActiveTab</code> 更新 State →
+                    React 重新渲染 → 對應的 className 和內容同時更新。
+                </p>
+            </div>
+
+            <!-- Card 3: 用 .map() 渲染列表 (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-table"></i> 用 .map() 渲染列表</h3>
+                <p class="card-text">
+                    在 React 中，要把陣列資料渲染成 UI，最常用的方法就是 <code>.map()</code>。
+                    它會遍歷陣列中的每一筆資料，回傳對應的 JSX 元素。
+                </p>
+                <div class="code-block">
+import { useState } from 'react';
+
+function OrderTable() {
+  const [orders] = useState([
+    { id: 1, customer: '王小明', product: 'MacBook Pro', amount: 59900, status: '已出貨' },
+    { id: 2, customer: '李小華', product: 'iPhone 15', amount: 35900, status: '處理中' },
+    { id: 3, customer: '張大偉', product: 'AirPods Pro', amount: 7490, status: '已出貨' },
+    { id: 4, customer: '陳美美', product: 'iPad Air', amount: 22900, status: '已取消' },
+    { id: 5, customer: '林小安', product: 'Apple Watch', amount: 13900, status: '處理中' },
+  ]);
+
+  return (
+    &lt;table className="table table-hover"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;#&lt;/th&gt;
+          &lt;th&gt;客戶&lt;/th&gt;
+          &lt;th&gt;商品&lt;/th&gt;
+          &lt;th&gt;金額&lt;/th&gt;
+          &lt;th&gt;狀態&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {orders.map((order) =&gt; (
+          &lt;tr key={order.id}&gt;
+            &lt;td&gt;{order.id}&lt;/td&gt;
+            &lt;td&gt;{order.customer}&lt;/td&gt;
+            &lt;td&gt;{order.product}&lt;/td&gt;
+            &lt;td&gt;${order.amount.toLocaleString()}&lt;/td&gt;
+            &lt;td&gt;
+              &lt;span className={`badge bg-${
+                order.status === '已出貨' ? 'success' :
+                order.status === '處理中' ? 'warning' : 'danger'
+              }`}&gt;
+                {order.status}
+              &lt;/span&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  );
+}</div>
+                <div class="alert-box">
+                    <strong>關鍵：每個元素都要有 key！</strong><br>
+                    <code>key={order.id}</code> 是 React 用來追蹤每個元素的唯一識別碼。
+                    有了 key，React 才能高效地判斷哪些元素需要更新、新增或刪除。
+                    通常使用資料的 <code>id</code> 作為 key 值。
+                </div>
+            </div>
+
+            <!-- Card 4: 加上搜尋篩選 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-funnel"></i> 加上搜尋篩選</h3>
+                <p class="card-text">
+                    結合 <code>.filter()</code> 和 <code>.map()</code>，可以做出即時搜尋篩選的效果：
+                </p>
+                <div class="code-block">
+import { useState } from 'react';
+
+function OrderTable() {
+  const [keyword, setKeyword] = useState('');
+  const [orders] = useState([
+    { id: 1, customer: '王小明', product: 'MacBook Pro', amount: 59900 },
+    { id: 2, customer: '李小華', product: 'iPhone 15', amount: 35900 },
+    { id: 3, customer: '張大偉', product: 'AirPods Pro', amount: 7490 },
+  ]);
+
+  // 先 filter 篩選，再 map 渲染
+  const filtered = orders.filter((o) =&gt;
+    o.customer.includes(keyword) ||
+    o.product.includes(keyword)
+  );
+
+  return (
+    &lt;div&gt;
+      &lt;input
+        type="text"
+        className="form-control mb-3"
+        placeholder="搜尋客戶或商品..."
+        value={keyword}
+        onChange={(e) =&gt; setKeyword(e.target.value)}
+      /&gt;
+
+      &lt;p className="text-muted"&gt;
+        搜尋結果：{filtered.length} 筆
+      &lt;/p&gt;
+
+      {filtered.length === 0
+        ? &lt;p&gt;沒有符合的資料&lt;/p&gt;
+        : filtered.map((order) =&gt; (
+            &lt;div key={order.id} className="card mb-2 p-3"&gt;
+              &lt;strong&gt;{order.customer}&lt;/strong&gt; - {order.product}
+              （${order.amount.toLocaleString()}）
+            &lt;/div&gt;
+          ))
+      }
+    &lt;/div&gt;
+  );
+}</div>
+                <p class="card-text">
+                    輸入關鍵字 → <code>setKeyword</code> 更新 State → React 重新渲染 →
+                    <code>filtered</code> 會根據新的 keyword 重新計算 → 畫面只顯示符合條件的項目。
+                </p>
+            </div>
+
+            <!-- Card 5: 重點提醒 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-exclamation-circle"></i> 重點提醒</h3>
+                <div class="alert-box">
+                    <strong>關於 key 的重要規則：</strong>
+                    <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+                        <li><code>.map()</code> 渲染的每個元素都必須有 <code>key</code> prop，沒有會出現 console 警告</li>
+                        <li>key 值必須在兄弟元素之間是唯一的（不需要全域唯一）</li>
+                        <li>最佳做法：使用資料本身的 <code>id</code> 作為 key</li>
+                        <li>不要用 <code>index</code> 當 key（除非列表是靜態的、不會重新排序或增刪）</li>
+                    </ul>
+                </div>
+                <p class="card-text"><strong>為什麼不要用 index 當 key？</strong></p>
+                <div class="code-block">
+// 不好的做法
+{orders.map((order, index) =&gt; (
+  &lt;tr key={index}&gt;...&lt;/tr&gt;  // 當列表增刪或重排時，會導致渲染錯誤
+))}
+
+// 好的做法
+{orders.map((order) =&gt; (
+  &lt;tr key={order.id}&gt;...&lt;/tr&gt;  // 用唯一且穩定的 id
+))}</div>
+                <p class="card-text">
+                    當列表項目被新增、刪除或重新排序時，index 會跟著改變。
+                    React 會誤認為元素沒有變動，導致畫面顯示錯誤或效能問題。
+                    使用穩定且唯一的 id 才能讓 React 正確追蹤每個元素。
+                </p>
+                <p class="card-text"><strong>本課重點摘要：</strong></p>
+                <ul class="tech-list">
+                    <li><strong>條件渲染</strong>：三元運算子、&& 短路求值、提前 return，三種方式依情境選用</li>
+                    <li><strong>列表渲染</strong>：使用 <code>.map()</code> 將陣列轉換成 JSX 元素，記得加 key</li>
+                    <li><strong>搜尋篩選</strong>：<code>.filter()</code> + <code>.map()</code> 組合技，搭配 useState 做即時搜尋</li>
+                    <li><strong>資料驅動畫面</strong>：不需要手動操作 DOM，只需要更新資料，React 自動更新畫面</li>
+                </ul>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

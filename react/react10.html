@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 10: 圖表、RWD 與部署｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item active" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 10: 圖表、RWD 與部署</h1>
+            <p>Recharts 資料視覺化、響應式設計、Dark Mode 與 Vercel 部署</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: Recharts 安裝與折線圖 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-graph-up"></i> Recharts 安裝與折線圖</h3>
+                <p class="card-text">
+                    <strong>Recharts</strong> 是基於 D3 的 React 圖表庫，用宣告式元件的方式畫圖表，
+                    非常直覺好上手。
+                </p>
+                <div class="code-block">
+<pre>npm install recharts</pre>
+                </div>
+                <p class="card-text"><strong>折線圖（LineChart）範例：</strong></p>
+                <div class="code-block">
+<pre>import {
+  ResponsiveContainer, LineChart, Line,
+  XAxis, YAxis, Tooltip, Legend, CartesianGrid
+} from 'recharts';
+
+const salesData = [
+  { month: '1月', revenue: 45000, orders: 120 },
+  { month: '2月', revenue: 52000, orders: 145 },
+  { month: '3月', revenue: 48000, orders: 132 },
+  { month: '4月', revenue: 61000, orders: 178 },
+  { month: '5月', revenue: 55000, orders: 156 },
+  { month: '6月', revenue: 67000, orders: 195 },
+];
+
+function SalesChart() {
+  return (
+    &lt;ResponsiveContainer width="100%" height={300}&gt;
+      &lt;LineChart data={salesData}&gt;
+        &lt;CartesianGrid strokeDasharray="3 3" /&gt;
+        &lt;XAxis dataKey="month" /&gt;
+        &lt;YAxis /&gt;
+        &lt;Tooltip /&gt;
+        &lt;Legend /&gt;
+        &lt;Line type="monotone" dataKey="revenue"
+              stroke="#6366f1" name="營收" /&gt;
+        &lt;Line type="monotone" dataKey="orders"
+              stroke="#f59e0b" name="訂單數" /&gt;
+      &lt;/LineChart&gt;
+    &lt;/ResponsiveContainer&gt;
+  );
+}</pre>
+                </div>
+                <ul class="tech-list">
+                    <li><code>ResponsiveContainer</code>：讓圖表自動適應父容器寬度</li>
+                    <li><code>CartesianGrid</code>：背景格線，strokeDasharray 設定虛線</li>
+                    <li><code>Tooltip</code>：滑鼠移到資料點時的彈出提示</li>
+                    <li><code>Legend</code>：圖例說明</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: 長條圖與圓餅圖 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-bar-chart"></i> 長條圖與圓餅圖</h3>
+                <p class="card-text"><strong>長條圖（BarChart）：適合做數值比較</strong></p>
+                <div class="code-block">
+<pre>import { ResponsiveContainer, BarChart, Bar,
+         XAxis, YAxis, Tooltip } from 'recharts';
+
+function CategoryChart({ data }) {
+  return (
+    &lt;ResponsiveContainer width="100%" height={300}&gt;
+      &lt;BarChart data={data}&gt;
+        &lt;XAxis dataKey="category" /&gt;
+        &lt;YAxis /&gt;
+        &lt;Tooltip /&gt;
+        &lt;Bar dataKey="count" fill="#6366f1" radius={[4,4,0,0]} /&gt;
+      &lt;/BarChart&gt;
+    &lt;/ResponsiveContainer&gt;
+  );
+}</pre>
+                </div>
+                <p class="card-text"><strong>圓餅圖（PieChart）：適合顯示比例分佈</strong></p>
+                <div class="code-block">
+<pre>import { ResponsiveContainer, PieChart, Pie,
+         Cell, Tooltip } from 'recharts';
+
+const COLORS = ['#6366f1', '#f59e0b', '#10b981', '#ef4444'];
+
+function StatusPie({ data }) {
+  return (
+    &lt;ResponsiveContainer width="100%" height={300}&gt;
+      &lt;PieChart&gt;
+        &lt;Pie data={data} dataKey="value" nameKey="name"
+             cx="50%" cy="50%"
+             innerRadius={60}  {/* innerRadius &gt; 0 = 甜甜圈圖 */}
+             outerRadius={100} label&gt;
+          {data.map((_, i) =&gt; (
+            &lt;Cell key={i} fill={COLORS[i % COLORS.length]} /&gt;
+          ))}
+        &lt;/Pie&gt;
+        &lt;Tooltip /&gt;
+      &lt;/PieChart&gt;
+    &lt;/ResponsiveContainer&gt;
+  );
+}</pre>
+                </div>
+            </div>
+
+            <!-- Card 3: CSS Grid Dashboard 佈局 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-grid-1x2"></i> CSS Grid Dashboard 佈局</h3>
+                <p class="card-text">
+                    用 CSS Grid 實現儀表板的經典佈局：統計卡片 → 折線圖 → 長條圖 + 圓餅圖 → 表格。
+                </p>
+                <div class="code-block">
+<pre>/* Dashboard Grid 佈局 */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* 統計卡片：各佔 1/3 */
+.stat-card {
+  /* 自動排列在三欄中 */
+}
+
+/* 折線圖：佔滿整行 */
+.chart-line {
+  grid-column: 1 / -1;  /* 從第 1 欄到最後 */
+}
+
+/* 長條圖 + 圓餅圖：各佔一半 */
+.chart-bar {
+  grid-column: span 2;  /* 佔 2 欄 */
+}
+.chart-pie {
+  grid-column: span 1;  /* 佔 1 欄 */
+}
+
+/* 訂單表格：佔滿整行 */
+.order-table {
+  grid-column: 1 / -1;
+}</pre>
+                </div>
+                <div class="code-block">
+<pre>// Dashboard.jsx
+function Dashboard() {
+  return (
+    &lt;div className="dashboard-grid"&gt;
+      &lt;StatCard title="本月營收" value="NT$ 67,000" /&gt;
+      &lt;StatCard title="訂單總數" value="195" /&gt;
+      &lt;StatCard title="新客戶" value="32" /&gt;
+
+      &lt;div className="chart-line"&gt;
+        &lt;SalesChart /&gt;
+      &lt;/div&gt;
+
+      &lt;div className="chart-bar"&gt;
+        &lt;CategoryChart data={categoryData} /&gt;
+      &lt;/div&gt;
+      &lt;div className="chart-pie"&gt;
+        &lt;StatusPie data={statusData} /&gt;
+      &lt;/div&gt;
+
+      &lt;div className="order-table"&gt;
+        &lt;OrderTable orders={orders} /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+                </div>
+            </div>
+
+            <!-- Card 4: RWD 響應式 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-phone"></i> RWD 響應式設計</h3>
+                <p class="card-text">
+                    使用 CSS Grid 的 <code>auto-fit</code> + <code>minmax</code> 讓佈局自動適應不同螢幕寬度：
+                </p>
+                <div class="code-block">
+<pre>/* 自動響應式：欄數根據螢幕寬度自動調整 */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* 手機版：隱藏側邊欄，用漢堡選單 */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;  /* 預設隱藏 */
+    transition: left 0.3s;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+  .hamburger-btn {
+    display: block;  /* 手機版才顯示 */
+  }
+}</pre>
+                </div>
+                <p class="card-text"><strong>useWindowSize 自訂 Hook：</strong></p>
+                <div class="code-block">
+<pre>// src/hooks/useWindowSize.js
+import { useState, useEffect } from 'react';
+
+function useWindowSize() {
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return size;
+}
+
+// 使用方式
+function Dashboard() {
+  const { width } = useWindowSize();
+  const isMobile = width &lt; 768;
+
+  return isMobile
+    ? &lt;MobileDashboard /&gt;
+    : &lt;DesktopDashboard /&gt;;
+}</pre>
+                </div>
+            </div>
+
+            <!-- Card 5: Dark Mode -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-moon-stars"></i> Dark Mode 深色模式</h3>
+                <p class="card-text">
+                    用 CSS 變數管理顏色，搭配 <code>[data-theme='dark']</code> 覆蓋變數值，實現深色模式切換：
+                </p>
+                <div class="code-block">
+<pre>/* CSS 變數定義 */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+}
+
+/* 深色模式覆蓋 */
+[data-theme='dark'] {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --card-bg: #1e293b;
+}</pre>
+                </div>
+                <p class="card-text"><strong>ThemeContext 全域管理 + localStorage 記住選擇：</strong></p>
+                <div class="code-block">
+<pre>// src/contexts/ThemeContext.jsx
+import { createContext, useContext, useState, useEffect } from 'react';
+
+const ThemeContext = createContext();
+
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem('theme') || 'light'
+  );
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    &lt;ThemeContext.Provider value={{ theme, toggleTheme }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+export const useTheme = () => useContext(ThemeContext);
+
+// 切換按鈕元件
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  return (
+    &lt;button onClick={toggleTheme}&gt;
+      {theme === 'light' ? '🌙 深色模式' : '☀️ 淺色模式'}
+    &lt;/button&gt;
+  );
+}</pre>
+                </div>
+            </div>
+
+            <!-- Card 6: 部署到 Vercel (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-rocket-takeoff"></i> 部署到 Vercel</h3>
+                <p class="card-text">
+                    Vercel 是最適合前端專案的部署平台，支援 React / Vite 專案一鍵部署，且免費方案就很夠用。
+                </p>
+
+                <p class="card-text"><strong>Step 1：建置專案</strong></p>
+                <div class="code-block">
+<pre># 先在本地測試建置是否成功
+npm run build
+
+# 建置完成後，產生 dist/ 資料夾
+# 這就是要部署的靜態檔案</pre>
+                </div>
+
+                <p class="card-text"><strong>Step 2：部署方式（二選一）</strong></p>
+                <div class="code-block">
+<pre># 方式一：Vercel CLI
+npm install -g vercel
+vercel          # 第一次部署，會引導你設定
+vercel --prod   # 之後部署到正式環境
+
+# 方式二：連接 GitHub（推薦）
+# 1. 將專案推送到 GitHub
+# 2. 到 vercel.com 登入 → Import Project
+# 3. 選擇你的 GitHub Repo
+# 4. Vercel 自動偵測 Vite，設定 Build Command 和 Output Directory
+# 5. 每次 push 到 main 分支，自動部署！</pre>
+                </div>
+
+                <p class="card-text"><strong>Step 3：修正 React Router 的 404 問題</strong></p>
+                <p class="card-text">
+                    SPA 的路由是由前端 JavaScript 處理的，但 Vercel 伺服器不知道這些路由。
+                    直接輸入 <code>/orders/123</code> 會出現 404。需要設定 rewrites：
+                </p>
+                <div class="code-block">
+<pre>// vercel.json（放在專案根目錄）
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}</pre>
+                </div>
+
+                <p class="card-text"><strong>Step 4：環境變數設定</strong></p>
+                <div class="code-block">
+<pre># .env.local（本地開發用，不要上傳到 Git）
+VITE_API_URL=http://localhost:3000/api
+VITE_APP_TITLE=My Dashboard
+
+# 在程式碼中使用
+const apiUrl = import.meta.env.VITE_API_URL;
+
+# 在 Vercel 後台設定正式環境的環境變數
+# Settings → Environment Variables → 加入 VITE_API_URL</pre>
+                </div>
+                <div class="alert-box">
+                    <p class="card-text">
+                        <strong>注意：</strong>Vite 的環境變數必須以 <code>VITE_</code> 開頭才會被打包進前端程式碼。
+                        不以 VITE_ 開頭的變數不會暴露給瀏覽器，適合放伺服器端的密鑰。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 7: 效能優化 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-speedometer2"></i> 效能優化技巧</h3>
+                <p class="card-text"><strong>1. useMemo 避免重複計算：</strong></p>
+                <div class="code-block">
+<pre>import { useMemo } from 'react';
+
+function Dashboard({ orders }) {
+  // 只在 orders 改變時才重新計算
+  const totalRevenue = useMemo(() => {
+    return orders.reduce((sum, o) => sum + o.total, 0);
+  }, [orders]);
+
+  const topProducts = useMemo(() => {
+    return [...orders]
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 5);
+  }, [orders]);
+
+  return &lt;div&gt;總營收：{totalRevenue}&lt;/div&gt;;
+}</pre>
+                </div>
+                <p class="card-text"><strong>2. 骨架屏 Skeleton Loading：</strong></p>
+                <div class="code-block">
+<pre>// 用 Ant Design 的 Skeleton 元件
+import { Skeleton, Card } from 'antd';
+
+function DashboardCard({ loading, title, value }) {
+  return (
+    &lt;Card&gt;
+      {loading ? (
+        &lt;Skeleton active paragraph={{ rows: 1 }} /&gt;
+      ) : (
+        &lt;&gt;
+          &lt;p&gt;{title}&lt;/p&gt;
+          &lt;h2&gt;{value}&lt;/h2&gt;
+        &lt;/&gt;
+      )}
+    &lt;/Card&gt;
+  );
+}</pre>
+                </div>
+                <p class="card-text"><strong>3. 空狀態 Empty State 提示：</strong></p>
+                <div class="code-block">
+<pre>import { Empty } from 'antd';
+
+function OrderList({ orders }) {
+  if (orders.length === 0) {
+    return (
+      &lt;Empty
+        description="目前沒有訂單資料"
+        image={Empty.PRESENTED_IMAGE_SIMPLE}
+      /&gt;
+    );
+  }
+  return &lt;OrderTable data={orders} /&gt;;
+}</pre>
+                </div>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

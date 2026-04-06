@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 06: useEffect 生命週期｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item active" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 06: useEffect 生命週期</h1>
+            <p>處理副作用與元件生命週期，掌握 useEffect 的三種用法</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: 什麼是副作用？ -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-exclamation-triangle"></i> 什麼是副作用（Side Effect）？</h3>
+                <p class="card-text">
+                    在 React 中，元件的主要工作是「根據資料渲染畫面」。但有些動作不屬於畫面渲染的範疇，這些就叫做<strong>副作用（Side Effect）</strong>。
+                </p>
+                <p class="card-text"><strong>常見的副作用包括：</strong></p>
+                <ul class="tech-list">
+                    <li><strong>打 API 取得資料</strong>：向後端伺服器發送請求，取得要顯示的資料</li>
+                    <li><strong>設定計時器</strong>：setTimeout、setInterval 等非同步操作</li>
+                    <li><strong>訂閱事件</strong>：addEventListener 監聽滾動、視窗大小改變等</li>
+                    <li><strong>操作 DOM</strong>：直接修改 document.title 或手動操控 DOM 節點</li>
+                    <li><strong>存取 localStorage</strong>：將資料儲存到瀏覽器本地端</li>
+                </ul>
+                <p class="card-text">
+                    這些副作用都不應該直接寫在元件函式的最上層，因為每次渲染都會重新執行。
+                    正確的做法是使用 <code>useEffect</code> Hook 來處理！
+                </p>
+            </div>
+
+            <!-- Card 2: useEffect 語法 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-code-slash"></i> useEffect 基本語法與三種用法</h3>
+                <p class="card-text">useEffect 接受兩個參數：一個<strong>回呼函式</strong>和一個<strong>依賴陣列</strong>。</p>
+                <div class="code-block">
+<pre>import { useEffect } from 'react';
+
+// 基本語法
+useEffect(() => {
+  // 這裡放要執行的副作用
+}, [依賴陣列]);</pre>
+                </div>
+                <p class="card-text"><strong>三種依賴陣列寫法：</strong></p>
+                <p class="card-text">
+                    <strong>1. 空陣列 <code>[]</code>：只在元件「首次掛載」時執行一次</strong>（最常用！打 API 就是用這個）
+                </p>
+                <div class="code-block">
+<pre>// 最常用：元件載入時打一次 API
+useEffect(() => {
+  fetch('/api/users')
+    .then(res => res.json())
+    .then(data => setUsers(data));
+}, []);  // 空陣列 = 只執行一次</pre>
+                </div>
+                <p class="card-text">
+                    <strong>2. 有依賴 <code>[count]</code>：當 count 改變時才執行</strong>
+                </p>
+                <div class="code-block">
+<pre>// count 改變時，更新網頁標題
+useEffect(() => {
+  document.title = `你點了 ${count} 次`;
+}, [count]);  // count 改變時才執行</pre>
+                </div>
+                <p class="card-text">
+                    <strong>3. 不寫依賴陣列：每次渲染都會執行</strong>（幾乎不用，容易造成無限迴圈！）
+                </p>
+                <div class="code-block">
+<pre>// 幾乎不用！每次渲染都會執行
+useEffect(() => {
+  console.log('元件重新渲染了');
+});  // 沒有第二個參數</pre>
+                </div>
+            </div>
+
+            <!-- Card 3: Cleanup 清除副作用 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-eraser"></i> Cleanup 清除副作用</h3>
+                <p class="card-text">
+                    useEffect 回呼函式可以 <strong>return 一個函式</strong>，這個函式會在元件「卸載（消失）」時自動執行，
+                    用來清除先前設定的副作用，避免記憶體洩漏（memory leak）。
+                </p>
+                <div class="code-block">
+<pre>useEffect(() => {
+  // 設定副作用
+  const timer = setInterval(() => {
+    console.log('每秒執行一次');
+  }, 1000);
+
+  // Cleanup：元件消失時清除計時器
+  return () => {
+    clearInterval(timer);
+    console.log('計時器已清除！');
+  };
+}, []);</pre>
+                </div>
+                <p class="card-text"><strong>常見需要 Cleanup 的場景：</strong></p>
+                <ul class="tech-list">
+                    <li><strong>clearInterval / clearTimeout</strong>：清除計時器，避免元件消失後還在執行</li>
+                    <li><strong>removeEventListener</strong>：取消事件監聽，避免重複綁定</li>
+                    <li><strong>取消 API 請求</strong>：使用 AbortController 取消尚未完成的請求</li>
+                    <li><strong>WebSocket 斷線</strong>：關閉 WebSocket 連線</li>
+                </ul>
+                <div class="code-block">
+<pre>// Cleanup 範例：監聽視窗大小
+useEffect(() => {
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+  window.addEventListener('resize', handleResize);
+
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);</pre>
+                </div>
+            </div>
+
+            <!-- Card 4: 計時器範例 (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-stopwatch"></i> 完整範例：useEffect + setInterval 計時器</h3>
+                <p class="card-text">
+                    以下是一個完整的倒數計時器元件，展示 useEffect 搭配 setInterval 和 cleanup 的用法：
+                </p>
+                <div class="code-block">
+<pre>import { useState, useEffect } from 'react';
+
+function CountdownTimer({ initialSeconds = 60 }) {
+  const [seconds, setSeconds] = useState(initialSeconds);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    // 如果沒有在運行，或已經倒數到 0，就不啟動計時器
+    if (!isRunning || seconds &lt;= 0) return;
+
+    // 設定每秒倒數的計時器
+    const timer = setInterval(() => {
+      setSeconds(prev => {
+        if (prev &lt;= 1) {
+          setIsRunning(false);  // 倒數結束，停止
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    // Cleanup：元件卸載或依賴改變時，清除計時器
+    return () => clearInterval(timer);
+  }, [isRunning, seconds]);
+
+  // 重設倒數
+  const handleReset = () => {
+    setIsRunning(false);
+    setSeconds(initialSeconds);
+  };
+
+  return (
+    &lt;div className="timer-card"&gt;
+      &lt;h2&gt;⏱ 倒數計時器&lt;/h2&gt;
+      &lt;p className="timer-display"&gt;{seconds} 秒&lt;/p&gt;
+      &lt;button onClick={() =&gt; setIsRunning(true)} disabled={isRunning}&gt;
+        開始
+      &lt;/button&gt;
+      &lt;button onClick={() =&gt; setIsRunning(false)} disabled={!isRunning}&gt;
+        暫停
+      &lt;/button&gt;
+      &lt;button onClick={handleReset}&gt;重設&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default CountdownTimer;</pre>
+                </div>
+                <p class="card-text">
+                    <strong>重點觀察：</strong>依賴陣列中放了 <code>[isRunning, seconds]</code>，
+                    表示當 isRunning 或 seconds 改變時，舊的 setInterval 會先被 cleanup 清除，
+                    然後再建立新的 setInterval。這確保了計時器行為的正確性。
+                </p>
+            </div>
+
+            <!-- Card 5: 記憶口訣 -->
+            <div class="card">
+                <div class="alert-box">
+                    <h3 class="card-title"><i class="bi bi-lightbulb"></i> useEffect 依賴陣列記憶口訣</h3>
+                    <p class="card-text"><strong><code>useEffect(() =&gt; { }, [])</code></strong><br>
+                    空陣列 <code>[]</code> → <strong>只跑一次</strong>（掛載時）→ 最常用來打 API</p>
+                    <p class="card-text"><strong><code>useEffect(() =&gt; { }, [count])</code></strong><br>
+                    有依賴 <code>[變數]</code> → <strong>變數改變才跑</strong> → 同步更新相關資料</p>
+                    <p class="card-text"><strong><code>useEffect(() =&gt; { })</code></strong><br>
+                    沒寫陣列 → <strong>每次渲染都跑</strong> → 幾乎不用，小心無限迴圈！</p>
+                    <p class="card-text" style="margin-top: 12px;">
+                        <strong>口訣：「空一次、有變跑、沒寫全都跑」</strong>
+                    </p>
+                </div>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

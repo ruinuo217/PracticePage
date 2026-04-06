@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 09: Context 與 UI 元件庫｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item active" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 09: Context 與 UI 元件庫</h1>
+            <p>用 Context API 管理全域狀態，搭配 Ant Design 打造專業介面</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: 為什麼需要 Context？ -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-diagram-3"></i> 為什麼需要 Context？</h3>
+                <p class="card-text">
+                    在 React 中，資料透過 Props 從父元件一層一層往下傳。但如果元件層級很深，
+                    中間的元件根本不需要這些資料，卻被迫要接收再往下傳 — 這就是<strong>「Props Drilling（Props 鑽孔）」</strong>問題。
+                </p>
+                <div class="code-block">
+<pre>// Props Drilling 的痛苦
+// App → Layout → Sidebar → UserInfo → Avatar
+// user 資料要經過 4 層才能到 Avatar，中間 3 層都只是「轉傳」
+
+&lt;App user={user}&gt;                    {/* 有 user */}
+  &lt;Layout user={user}&gt;                {/* 只是轉傳 */}
+    &lt;Sidebar user={user}&gt;             {/* 只是轉傳 */}
+      &lt;UserInfo user={user}&gt;          {/* 只是轉傳 */}
+        &lt;Avatar src={user.avatar} /&gt;  {/* 真正用到的地方 */}
+      &lt;/UserInfo&gt;
+    &lt;/Sidebar&gt;
+  &lt;/Layout&gt;
+&lt;/App&gt;</pre>
+                </div>
+                <p class="card-text"><strong>Context 解決的問題：</strong>讓任何層級的元件都能「直接」取用資料，不需要一層一層傳。</p>
+                <ul class="tech-list">
+                    <li><strong>登入狀態</strong>：整個 App 都需要知道目前是否已登入、登入的使用者是誰</li>
+                    <li><strong>語言切換（i18n）</strong>：所有元件都需要知道目前的語言設定</li>
+                    <li><strong>深色模式（Dark Mode）</strong>：全域的主題顏色切換</li>
+                    <li><strong>購物車資料</strong>：多個頁面都需要存取購物車內容</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: 建立 Context (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-code-slash"></i> 建立 Context：三步驟完整範例</h3>
+                <p class="card-text">
+                    以「登入狀態管理」為例，展示 Context 的三個步驟：<strong>createContext → Provider → useContext</strong>
+                </p>
+                <p class="card-text"><strong>Step 1：建立 AuthContext（src/contexts/AuthContext.jsx）</strong></p>
+                <div class="code-block">
+<pre>// src/contexts/AuthContext.jsx
+import { createContext, useContext, useState } from 'react';
+
+// 1. 建立 Context
+const AuthContext = createContext(null);
+
+// 2. 建立 Provider 元件（管理狀態 + 提供方法）
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+
+  // 登入
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  // 登出
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
+
+  // 判斷是否已登入
+  const isAuthenticated = !!user;
+
+  // 把 state 和方法都透過 value 傳出去
+  return (
+    &lt;AuthContext.Provider value={{ user, login, logout, isAuthenticated }}&gt;
+      {children}
+    &lt;/AuthContext.Provider&gt;
+  );
+}
+
+// 3. 建立自訂 Hook（方便取用）
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth 必須在 AuthProvider 內使用');
+  }
+  return context;
+}</pre>
+                </div>
+                <p class="card-text"><strong>Step 2：在任何子元件中直接取用</strong></p>
+                <div class="code-block">
+<pre>// 在任何元件中直接使用 useAuth()
+import { useAuth } from '../contexts/AuthContext';
+
+function Header() {
+  const { user, logout, isAuthenticated } = useAuth();
+
+  return (
+    &lt;header&gt;
+      {isAuthenticated ? (
+        &lt;&gt;
+          &lt;span&gt;歡迎，{user.name}&lt;/span&gt;
+          &lt;button onClick={logout}&gt;登出&lt;/button&gt;
+        &lt;/&gt;
+      ) : (
+        &lt;Link to="/login"&gt;請登入&lt;/Link&gt;
+      )}
+    &lt;/header&gt;
+  );
+}</pre>
+                </div>
+            </div>
+
+            <!-- Card 3: 套用 Provider -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-box-arrow-in-down"></i> 套用 Provider</h3>
+                <p class="card-text">
+                    在 main.jsx 最外層包上 Provider，這樣所有子元件都能存取 Context 中的資料：
+                </p>
+                <div class="code-block">
+<pre>// src/main.jsx
+import { AuthProvider } from './contexts/AuthContext';
+import { BrowserRouter } from 'react-router-dom';
+
+createRoot(document.getElementById('root')).render(
+  &lt;StrictMode&gt;
+    &lt;BrowserRouter&gt;
+      &lt;AuthProvider&gt;
+        &lt;App /&gt;
+      &lt;/AuthProvider&gt;
+    &lt;/BrowserRouter&gt;
+  &lt;/StrictMode&gt;
+);</pre>
+                </div>
+                <p class="card-text">
+                    <strong>Provider 的包裹順序很重要：</strong>外層的 Provider 可以被內層的所有元件取用。
+                    如果有多個 Provider（Auth、Theme、Cart），通常從外到內依序包裹。
+                </p>
+                <div class="code-block">
+<pre>// 多個 Provider 巢狀
+&lt;BrowserRouter&gt;
+  &lt;ThemeProvider&gt;
+    &lt;AuthProvider&gt;
+      &lt;CartProvider&gt;
+        &lt;App /&gt;
+      &lt;/CartProvider&gt;
+    &lt;/AuthProvider&gt;
+  &lt;/ThemeProvider&gt;
+&lt;/BrowserRouter&gt;</pre>
+                </div>
+            </div>
+
+            <!-- Card 4: Ant Design 安裝 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-palette"></i> Ant Design 安裝與設定</h3>
+                <p class="card-text">
+                    <strong>Ant Design（antd）</strong>是由螞蟻金服開發的企業級 UI 元件庫，提供豐富的高品質元件，
+                    特別適合做後台管理系統。
+                </p>
+                <div class="code-block">
+<pre># 安裝 Ant Design
+npm install antd
+
+# 安裝圖示庫（選用）
+npm install @ant-design/icons</pre>
+                </div>
+                <p class="card-text"><strong>在 main.jsx 引入樣式：</strong></p>
+                <div class="code-block">
+<pre>// src/main.jsx
+import 'antd/dist/reset.css';  // antd 5.x 的重置樣式
+import './index.css';           // 自己的樣式放在後面</pre>
+                </div>
+                <p class="card-text"><strong>antd 5.x 的特色：</strong></p>
+                <ul class="tech-list">
+                    <li>使用 CSS-in-JS，不再需要引入整包 CSS</li>
+                    <li>支援 Tree Shaking，只打包有用到的元件</li>
+                    <li>內建 ConfigProvider 可以全域設定主題色</li>
+                </ul>
+            </div>
+
+            <!-- Card 5: 常用 Ant Design 元件 (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-grid-3x3-gap"></i> 常用 Ant Design 元件</h3>
+
+                <p class="card-text"><strong>1. Button 按鈕：</strong></p>
+                <div class="code-block">
+<pre>import { Button, Space } from 'antd';
+import { SearchOutlined, DeleteOutlined } from '@ant-design/icons';
+
+function ActionButtons() {
+  return (
+    &lt;Space&gt;
+      &lt;Button type="primary"&gt;主要按鈕&lt;/Button&gt;
+      &lt;Button&gt;預設按鈕&lt;/Button&gt;
+      &lt;Button type="primary" danger&gt;危險按鈕&lt;/Button&gt;
+      &lt;Button type="primary" loading&gt;載入中&lt;/Button&gt;
+      &lt;Button icon={&lt;SearchOutlined /&gt;}&gt;搜尋&lt;/Button&gt;
+      &lt;Button icon={&lt;DeleteOutlined /&gt;} danger /&gt;
+    &lt;/Space&gt;
+  );
+}</pre>
+                </div>
+
+                <p class="card-text"><strong>2. Table 表格（最常用！）：</strong></p>
+                <div class="code-block">
+<pre>import { Table, Tag } from 'antd';
+
+function OrderTable({ orders }) {
+  const columns = [
+    {
+      title: '訂單編號',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: '客戶名稱',
+      dataIndex: 'customer',
+      key: 'customer',
+    },
+    {
+      title: '金額',
+      dataIndex: 'total',
+      key: 'total',
+      render: (value) =&gt; `NT$ ${value.toLocaleString()}`,  // 自訂顯示
+    },
+    {
+      title: '狀態',
+      dataIndex: 'status',
+      key: 'status',
+      render: (status) =&gt; {
+        const colorMap = {
+          '已完成': 'green',
+          '處理中': 'blue',
+          '已取消': 'red',
+        };
+        return &lt;Tag color={colorMap[status]}&gt;{status}&lt;/Tag&gt;;
+      },
+    },
+  ];
+
+  return (
+    &lt;Table
+      columns={columns}
+      dataSource={orders}
+      rowKey="id"
+      pagination={{ pageSize: 10 }}
+    /&gt;
+  );
+}</pre>
+                </div>
+
+                <p class="card-text"><strong>3. Card + Statistic 統計卡片：</strong></p>
+                <div class="code-block">
+<pre>import { Card, Statistic, Row, Col } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+
+function StatCards() {
+  return (
+    &lt;Row gutter={16}&gt;
+      &lt;Col span={8}&gt;
+        &lt;Card&gt;
+          &lt;Statistic title="本月營收" value={112893}
+            prefix="NT$" /&gt;
+        &lt;/Card&gt;
+      &lt;/Col&gt;
+      &lt;Col span={8}&gt;
+        &lt;Card&gt;
+          &lt;Statistic title="成長率" value={11.28}
+            precision={2} suffix="%"
+            valueStyle={{ color: '#3f8600' }}
+            prefix={&lt;ArrowUpOutlined /&gt;} /&gt;
+        &lt;/Card&gt;
+      &lt;/Col&gt;
+      &lt;Col span={8}&gt;
+        &lt;Card&gt;
+          &lt;Statistic title="退貨率" value={2.3}
+            precision={1} suffix="%"
+            valueStyle={{ color: '#cf1322' }}
+            prefix={&lt;ArrowDownOutlined /&gt;} /&gt;
+        &lt;/Card&gt;
+      &lt;/Col&gt;
+    &lt;/Row&gt;
+  );
+}</pre>
+                </div>
+
+                <p class="card-text"><strong>4. Form 表單驗證：</strong></p>
+                <div class="code-block">
+<pre>import { Form, Input, Button, message } from 'antd';
+
+function LoginForm() {
+  const onFinish = (values) =&gt; {
+    console.log('表單資料：', values);
+    message.success('登入成功！');
+  };
+
+  return (
+    &lt;Form layout="vertical" onFinish={onFinish}&gt;
+      &lt;Form.Item label="帳號" name="username"
+        rules={[{ required: true, message: '請輸入帳號' }]}&gt;
+        &lt;Input placeholder="請輸入帳號" /&gt;
+      &lt;/Form.Item&gt;
+
+      &lt;Form.Item label="密碼" name="password"
+        rules={[
+          { required: true, message: '請輸入密碼' },
+          { min: 6, message: '密碼至少 6 個字元' },
+        ]}&gt;
+        &lt;Input.Password placeholder="請輸入密碼" /&gt;
+      &lt;/Form.Item&gt;
+
+      &lt;Button type="primary" htmlType="submit" block&gt;
+        登入
+      &lt;/Button&gt;
+    &lt;/Form&gt;
+  );
+}</pre>
+                </div>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

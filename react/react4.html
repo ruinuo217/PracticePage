@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 04: useState 狀態管理｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item active" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 04: useState 狀態管理</h1>
+            <p>用 useState 讓畫面動起來，學習事件處理</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: 什麼是 State？ -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-lightning-charge"></i> 什麼是 State？</h3>
+                <p class="card-text">
+                    State（狀態）是 Component <strong>自己管理的資料</strong>。
+                    跟 Props 不同，State 是元件內部的，可以被修改。
+                </p>
+                <p class="card-text">
+                    當 State 改變時，React 會<strong>自動重新渲染</strong>（re-render）該元件的畫面。
+                    這就是 React 最核心的魔法：「資料驅動畫面」。
+                </p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 8px;">
+                    <thead>
+                        <tr style="background: var(--bg-secondary); text-align: left;">
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">比較項目</th>
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">Props</th>
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">資料來源</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">父元件傳入</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">元件自己管理</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">可否修改</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">不可修改（唯讀）</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">可以透過 set 函式修改</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">修改後效果</td>
+                            <td style="padding: 10px;">父元件重新渲染時子元件跟著更新</td>
+                            <td style="padding: 10px;">自動觸發元件重新渲染</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Card 2: useState 基礎用法 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-braces-asterisk"></i> useState 基礎用法</h3>
+                <p class="card-text">
+                    <code>useState</code> 是 React 提供的 Hook（鉤子），用來在函式元件中建立 State。
+                </p>
+                <div class="code-block">
+import { useState } from 'react';
+
+function Counter() {
+  // 解構賦值：[目前的值, 更新用的函式] = useState(初始值)
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;目前計數：{count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;+1&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</div>
+                <div class="alert-box">
+                    <strong>絕對禁止：直接修改 State 變數！</strong><br>
+                    <code>count = count + 1</code> 是錯誤的做法。React 不會知道資料改了，畫面不會更新。
+                    一定要透過 <code>setCount()</code> 這個 set 函式來更新 State。
+                </div>
+            </div>
+
+            <!-- Card 3: 計數器範例 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-plus-slash-minus"></i> 計數器範例</h3>
+                <p class="card-text">一個完整的計數器，包含加、減、重置功能：</p>
+                <div class="code-block">
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div className="text-center p-4"&gt;
+      &lt;h2 className="mb-3"&gt;計數器&lt;/h2&gt;
+      &lt;p className="display-4 fw-bold"&gt;{count}&lt;/p&gt;
+
+      &lt;div className="d-flex gap-2 justify-content-center"&gt;
+        &lt;button
+          className="btn btn-success"
+          onClick={() =&gt; setCount(count + 1)}
+        &gt;
+          + 1
+        &lt;/button&gt;
+
+        &lt;button
+          className="btn btn-danger"
+          onClick={() =&gt; setCount(count - 1)}
+        &gt;
+          - 1
+        &lt;/button&gt;
+
+        &lt;button
+          className="btn btn-secondary"
+          onClick={() =&gt; setCount(0)}
+        &gt;
+          重置
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</div>
+                <p class="card-text">
+                    每次點擊按鈕，<code>setCount</code> 會更新 <code>count</code> 的值，
+                    React 偵測到 State 變化後，自動重新渲染畫面，顯示新的數字。
+                </p>
+            </div>
+
+            <!-- Card 4: 即時搜尋欄 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-search"></i> 即時搜尋欄</h3>
+                <p class="card-text">
+                    用 useState 搭配 <code>onChange</code> 事件，可以做出即時搜尋的效果：
+                </p>
+                <div class="code-block">
+import { useState } from 'react';
+
+function SearchBar() {
+  const [keyword, setKeyword] = useState('');
+
+  return (
+    &lt;div className="p-4"&gt;
+      &lt;h2&gt;即時搜尋&lt;/h2&gt;
+
+      &lt;input
+        type="text"
+        className="form-control mb-3"
+        placeholder="輸入關鍵字..."
+        value={keyword}
+        onChange={(e) =&gt; setKeyword(e.target.value)}
+      /&gt;
+
+      &lt;p&gt;你輸入了：&lt;strong&gt;{keyword}&lt;/strong&gt;&lt;/p&gt;
+      &lt;p&gt;字數：{keyword.length}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</div>
+                <p class="card-text">
+                    <strong>關鍵概念：受控元件（Controlled Component）</strong><br>
+                    input 的 <code>value</code> 綁定 State 變數，<code>onChange</code> 更新 State。
+                    這樣 React 完全掌控 input 的值，稱為「受控元件」。這是 React 表單處理的標準做法。
+                </p>
+            </div>
+
+            <!-- Card 5: 事件處理整理 (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-cursor"></i> 事件處理整理</h3>
+                <p class="card-text">React 常用的事件處理方式：</p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 8px;">
+                    <thead>
+                        <tr style="background: var(--bg-secondary); text-align: left;">
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">事件</th>
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">說明</th>
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">範例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onClick</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">點擊事件</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onClick={() => setCount(count + 1)}</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onChange</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">輸入變化事件</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onChange={(e) => setKeyword(e.target.value)}</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onSubmit</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">表單提交事件</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onSubmit={(e) => { e.preventDefault(); ... }}</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onMouseEnter</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">滑鼠移入</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>onMouseEnter={() => setHovered(true)}</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;"><code>onKeyDown</code></td>
+                            <td style="padding: 10px;">鍵盤按下</td>
+                            <td style="padding: 10px;"><code>onKeyDown={(e) => e.key === 'Enter' && submit()}</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert-box" style="margin-top: 16px;">
+                    <strong>常見錯誤：事件綁定的寫法</strong><br>
+                    正確：<code>onClick={() =&gt; handleClick()}</code> 或 <code>onClick={handleClick}</code><br>
+                    錯誤：<code>onClick={handleClick()}</code> — 這樣會在渲染時就立即執行函式，而不是等到點擊時才執行！
+                </div>
+                <div class="code-block">
+// 抽出事件處理函式（推薦做法）
+function App() {
+  const [count, setCount] = useState(0);
+
+  // 把邏輯抽出來，程式碼更清晰
+  const handleIncrement = () =&gt; setCount(count + 1);
+  const handleDecrement = () =&gt; setCount(count - 1);
+  const handleReset = () =&gt; setCount(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;{count}&lt;/p&gt;
+      &lt;button onClick={handleIncrement}&gt;+1&lt;/button&gt;
+      &lt;button onClick={handleDecrement}&gt;-1&lt;/button&gt;
+      &lt;button onClick={handleReset}&gt;重置&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</div>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

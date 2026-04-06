@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 02: JSX 與 Component｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item active" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 02: JSX 與 Component</h1>
+            <p>學習 JSX 語法與元件化開發思維</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: JSX vs HTML 差異 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-arrow-left-right"></i> JSX vs HTML 差異</h3>
+                <p class="card-text">
+                    JSX 看起來像 HTML，但其實是 JavaScript 的語法擴展。以下是兩者的關鍵差異：
+                </p>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 8px;">
+                    <thead>
+                        <tr style="background: var(--bg-secondary); text-align: left;">
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">項目</th>
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">HTML</th>
+                            <th style="padding: 10px; border-bottom: 2px solid var(--border);">JSX</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">CSS 類別</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>class="btn"</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>className="btn"</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">行內樣式</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>style="color: red"</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>style={{ color: 'red' }}</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">自閉合標籤</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>&lt;img&gt;</code>、<code>&lt;br&gt;</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>&lt;img /&gt;</code>、<code>&lt;br /&gt;</code>（必須加 /）</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">for 屬性</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>for="name"</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>htmlFor="name"</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);">註解</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>&lt;!-- 註解 --&gt;</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border);"><code>{/* 註解 */}</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px;">插入變數</td>
+                            <td style="padding: 10px;">不支援</td>
+                            <td style="padding: 10px;"><code>{變數名稱}</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Card 2: 用 {} 插入變數 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-braces"></i> 用 {} 插入變數</h3>
+                <p class="card-text">
+                    在 JSX 中，使用大括號 <code>{}</code> 可以插入任何 JavaScript 表達式，包括變數、運算、函式呼叫等。
+                </p>
+                <div class="code-block">
+function App() {
+  const name = 'Alice';
+  const age = 25;
+  const scores = [90, 85, 92];
+
+  return (
+    &lt;div&gt;
+      {/* 插入變數 */}
+      &lt;h2&gt;使用者：{name}&lt;/h2&gt;
+
+      {/* 做運算 */}
+      &lt;p&gt;明年 {age + 1} 歲&lt;/p&gt;
+
+      {/* 呼叫函式 */}
+      &lt;p&gt;最高分：{Math.max(...scores)}&lt;/p&gt;
+
+      {/* 三元運算子 */}
+      &lt;p&gt;{age &gt;= 18 ? '成年' : '未成年'}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</div>
+            </div>
+
+            <!-- Card 3: JSX 注意事項 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-exclamation-triangle"></i> JSX 注意事項</h3>
+                <div class="alert-box">
+                    <strong>規則一：最外層只能有一個根元素</strong><br>
+                    JSX 回傳的內容最外層只能有一個元素。如果不想多加一層 <code>&lt;div&gt;</code>，
+                    可以使用空標籤 <code>&lt;&gt;...&lt;/&gt;</code>（Fragment）來包裹。
+                </div>
+                <div class="code-block">
+// 錯誤：兩個根元素
+return (
+  &lt;h1&gt;標題&lt;/h1&gt;
+  &lt;p&gt;內容&lt;/p&gt;
+)
+
+// 正確：用 Fragment 包起來
+return (
+  &lt;&gt;
+    &lt;h1&gt;標題&lt;/h1&gt;
+    &lt;p&gt;內容&lt;/p&gt;
+  &lt;/&gt;
+)</div>
+                <div class="alert-box">
+                    <strong>規則二：return 多行要加小括號</strong><br>
+                    如果 return 後面的 JSX 超過一行，必須用 <code>()</code> 包起來，
+                    否則 JavaScript 會在 return 後面自動加上分號，導致什麼都不會回傳。
+                </div>
+            </div>
+
+            <!-- Card 4: 什麼是 Component？ -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-puzzle"></i> 什麼是 Component？</h3>
+                <p class="card-text">
+                    Component（元件）是 React 的核心概念。把 UI 拆成獨立的積木，每個積木就是一個 Component。
+                    就像樂高一樣，你可以用不同的積木組合出各種畫面。
+                </p>
+                <p class="card-text"><strong>元件化的好處：</strong></p>
+                <ul class="tech-list">
+                    <li><strong>可重複使用</strong>：同一個元件可以在不同地方使用，不用重複寫程式碼</li>
+                    <li><strong>容易維護</strong>：每個元件獨立管理自己的邏輯，修改一個不影響其他的</li>
+                    <li><strong>容易協作</strong>：不同開發者可以分別負責不同元件</li>
+                    <li><strong>容易測試</strong>：可以單獨測試每個元件的功能</li>
+                </ul>
+                <div class="alert-box">
+                    <strong>命名規則：</strong>Component 名稱的首字母必須大寫！
+                    例如 <code>StatCard</code>、<code>NavBar</code>、<code>UserProfile</code>。
+                    如果首字母小寫，React 會把它當成一般的 HTML 標籤。
+                </div>
+            </div>
+
+            <!-- Card 5: 建立第一個 Component (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-file-earmark-code"></i> 建立第一個 Component</h3>
+                <p class="card-text">我們來建立一個簡單的 StatCard 元件，並在 App.jsx 中使用它：</p>
+                <p class="card-text"><strong>步驟一：建立 src/components/StatCard.jsx</strong></p>
+                <div class="code-block">
+// src/components/StatCard.jsx
+function StatCard() {
+  return (
+    &lt;div className="card text-center shadow-sm" style={{ width: '18rem' }}&gt;
+      &lt;div className="card-body"&gt;
+        &lt;h5 className="card-title text-muted"&gt;總營收&lt;/h5&gt;
+        &lt;p className="card-text fs-2 fw-bold"&gt;$12,500&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default StatCard;</div>
+                <p class="card-text"><strong>步驟二：在 App.jsx 中引入並使用</strong></p>
+                <div class="code-block">
+// src/App.jsx
+import StatCard from './components/StatCard';
+
+function App() {
+  return (
+    &lt;div className="container mt-5"&gt;
+      &lt;h1 className="mb-4"&gt;Dashboard&lt;/h1&gt;
+      &lt;div className="d-flex gap-3"&gt;
+        &lt;StatCard /&gt;
+        &lt;StatCard /&gt;
+        &lt;StatCard /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</div>
+                <p class="card-text">
+                    現在畫面上會出現 3 張一模一樣的卡片。但它們都顯示相同的內容，
+                    要讓每張卡片顯示不同資料，就需要用到下一課的 <strong>Props</strong>！
+                </p>
+            </div>
+
+            <!-- Card 6: 建議的資料夾結構 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-folder-symlink"></i> 建議的資料夾結構</h3>
+                <p class="card-text">隨著專案變大，建議按照以下方式組織檔案：</p>
+                <div class="code-block">
+src/
+├── components/      # 可重複使用的元件
+│   ├── StatCard.jsx
+│   ├── NavBar.jsx
+│   └── Footer.jsx
+├── pages/           # 頁面元件（每個路由一個頁面）
+│   ├── Dashboard.jsx
+│   ├── Orders.jsx
+│   └── Settings.jsx
+├── App.jsx          # 根元件，組合所有頁面和元件
+├── main.jsx         # 程式進入點，渲染 App
+└── custom.scss      # 自訂樣式</div>
+                <ul class="tech-list">
+                    <li><strong>components/</strong>：放可以在多個地方重複使用的元件（按鈕、卡片、導覽列等）</li>
+                    <li><strong>pages/</strong>：放頁面層級的元件，通常對應一個路由</li>
+                    <li><strong>App.jsx</strong>：負責組合所有頁面和佈局</li>
+                    <li><strong>main.jsx</strong>：程式的起點，把 App 渲染到 #root</li>
+                </ul>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

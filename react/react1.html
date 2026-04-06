@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 01: 環境設定 Vite + React｜Reyna Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="layout">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    <label for="menu-toggle" class="menu-toggle-btn">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-sidebar-btn">
+            <i class="bi bi-x-lg"></i>
+        </label>
+        <div class="brand">
+            <h2 class="logo">Reyna Gao</h2>
+            <p class="sub">Frontend Developer</p>
+        </div>
+        <nav class="menu">
+            <p class="menu-label">Portfolio Sections</p>
+            <a class="menu-item" href="../index.html"><i class="bi bi-house-door"></i> Opening Page</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning Milestones</p>
+            <a class="menu-item" href="../lesson1.html"><i class="bi bi-globe"></i> M01: 網頁運作基礎</a>
+            <a class="menu-item" href="../lesson2.html"><i class="bi bi-filetype-html"></i> M02: HTML 語意化標籤</a>
+            <a class="menu-item" href="../lesson3.html"><i class="bi bi-filetype-css"></i> M03: CSS 樣式與排版</a>
+            <a class="menu-item" href="../lesson4.html"><i class="bi bi-filetype-js"></i> M04: JavaScript 核心</a>
+            <a class="menu-item" href="../lesson5.html"><i class="bi bi-lightning-charge"></i> M05: JS 進階與 DOM</a>
+            <a class="menu-item" href="../lesson6.html"><i class="bi bi-boxes"></i> M06: jQuery 實戰</a>
+            <a class="menu-item" href="../lesson7.html"><i class="bi bi-bootstrap"></i> M07: Bootstrap 框架</a>
+            <a class="menu-item" href="../lesson8.html"><i class="bi bi-server"></i> M08: PHP 後端基礎</a>
+            <a class="menu-item" href="../lesson9.html"><i class="bi bi-database"></i> M09: MySQL 資料庫操作</a>
+            <a class="menu-item" href="../lesson10.html"><i class="bi bi-cloud-arrow-down"></i> M10: Web API 串接</a>
+
+            <p class="menu-label" style="margin-top: 16px;">Learning React</p>
+            <a class="menu-item active" href="react1.html"><i class="bi bi-gear"></i> R01: 環境設定 Vite + React</a>
+            <a class="menu-item" href="react2.html"><i class="bi bi-code-slash"></i> R02: JSX 與 Component</a>
+            <a class="menu-item" href="react3.html"><i class="bi bi-arrow-down-up"></i> R03: Props 資料傳遞</a>
+            <a class="menu-item" href="react4.html"><i class="bi bi-toggles"></i> R04: useState 狀態管理</a>
+            <a class="menu-item" href="react5.html"><i class="bi bi-list-check"></i> R05: 列表與條件渲染</a>
+            <a class="menu-item" href="react6.html"><i class="bi bi-arrow-repeat"></i> R06: useEffect 生命週期</a>
+            <a class="menu-item" href="react7.html"><i class="bi bi-cloud-download"></i> R07: API 串接實戰</a>
+            <a class="menu-item" href="react8.html"><i class="bi bi-signpost-split"></i> R08: React Router 路由</a>
+            <a class="menu-item" href="react9.html"><i class="bi bi-diagram-3"></i> R09: Context 與 UI 元件庫</a>
+            <a class="menu-item" href="react10.html"><i class="bi bi-rocket-takeoff"></i> R10: 圖表、RWD 與部署</a>
+        </nav>
+        <div class="bottom-info">
+            <p>&copy; 2026 Reyna Gao.</p>
+            <p>Based in Taipei, Taiwan.</p>
+        </div>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>React 01: 環境設定 Vite + React</h1>
+            <p>使用 Vite 建立 React 開發環境，搭配 Bootstrap + Sass</p>
+        </header>
+
+        <section class="page-section">
+            <div class="cards" style="grid-template-columns: 1fr;">
+
+            <!-- Card 1: 什麼是 React？ -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-question-circle"></i> 什麼是 React？</h3>
+                <p class="card-text">
+                    React 是由 Facebook（現 Meta）開發並維護的 JavaScript UI 函式庫，專門用於建構使用者介面。
+                    它不是完整的框架，而是專注在「View」這一層，讓開發者可以用「元件化」的方式來組裝畫面。
+                </p>
+                <p class="card-text"><strong>React 的三大核心概念：</strong></p>
+                <ul class="tech-list">
+                    <li><strong>Component-Based（元件化）</strong>：將 UI 拆成一個個獨立的積木，每個積木就是一個 Component，可以重複使用、獨立維護</li>
+                    <li><strong>Virtual DOM（虛擬 DOM）</strong>：React 不會直接操作真實 DOM，而是先在記憶體中建立虛擬 DOM，計算差異後再最小幅度地更新真實 DOM，效能更好</li>
+                    <li><strong>單向資料流（One-Way Data Flow）</strong>：資料只能從父元件流向子元件，讓資料的流動更容易追蹤與除錯</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Vite 專案建立 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-terminal"></i> Vite 專案建立</h3>
+                <p class="card-text">
+                    Vite 是新一代的前端建構工具，啟動速度極快（比 Create React App 快非常多）。
+                    我們使用 Vite 來建立 React 專案：
+                </p>
+                <p class="card-text"><strong>建立全新專案：</strong></p>
+                <div class="code-block">
+# 建立名為 my-app 的 React 專案
+npm create vite@latest my-app -- --template react
+
+# 進入專案資料夾
+cd my-app
+
+# 安裝依賴套件
+npm install</div>
+                <p class="card-text"><strong>在現有資料夾中建立（不建立子資料夾）：</strong></p>
+                <div class="code-block">
+# 在當前目錄建立 React 專案（注意 . 代表當前目錄）
+npm create vite@latest . -- --template react</div>
+                <p class="card-text"><strong>安裝 Bootstrap 與 Sass：</strong></p>
+                <div class="code-block">
+# 安裝 bootstrap 和 sass
+npm install bootstrap sass</div>
+            </div>
+
+            <!-- Card 3: 專案結構說明 (full-width) -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title"><i class="bi bi-folder2-open"></i> 專案結構說明</h3>
+                <p class="card-text">使用 Vite 建立的 React 專案，目錄結構如下：</p>
+                <div class="code-block">
+my-app/
+├── node_modules/    # 所有安裝的套件（不需要手動修改，也不上傳 Git）
+├── public/          # 靜態資源（圖片、favicon 等，不會被 Vite 處理）
+├── src/             # 主要開發區域，所有程式碼都寫在這裡
+│   ├── App.jsx      # 根元件，整個應用的入口元件
+│   ├── App.css      # App 元件的樣式
+│   ├── main.jsx     # 程式的起點，負責把 App 渲染到 DOM
+│   └── index.css    # 全域樣式
+├── index.html       # 唯一的 HTML 檔案，只有一個 &lt;div id="root"&gt;
+├── package.json     # 專案設定、依賴套件清單、scripts 指令
+├── vite.config.js   # Vite 的設定檔
+└── .gitignore       # Git 忽略清單（node_modules 等）</div>
+                <div class="alert-box">
+                    <strong>重點觀念：SPA（Single Page Application）</strong><br>
+                    整個專案只有一個 index.html，裡面只有一個 <code>&lt;div id="root"&gt;&lt;/div&gt;</code>。
+                    React 會把所有元件渲染到這個 div 裡面。切換頁面時不是載入新的 HTML，而是由 JavaScript 動態替換畫面內容。
+                    這就是所謂的「單頁應用程式」。
+                </div>
+            </div>
+
+            <!-- Card 4: Bootstrap + Sass 設定 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-palette"></i> Bootstrap + Sass 設定</h3>
+                <p class="card-text">
+                    我們可以透過 Sass 來自訂 Bootstrap 的主題色彩，讓專案有自己的風格。
+                </p>
+                <p class="card-text"><strong>步驟一：建立 src/custom.scss</strong></p>
+                <div class="code-block">
+// src/custom.scss
+
+// 1. 自訂 Bootstrap 變數（必須在 import 之前）
+$primary: #5a67d8;
+$success: #48bb78;
+$danger:  #f56565;
+$warning: #ecc94b;
+$info:    #4299e1;
+
+// 2. 引入 Bootstrap 的完整樣式
+@import "bootstrap/scss/bootstrap";</div>
+                <p class="card-text"><strong>步驟二：修改 src/main.jsx，引入 custom.scss</strong></p>
+                <div class="code-block">
+// src/main.jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './custom.scss'   // 引入自訂的 Bootstrap 樣式
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;,
+)</div>
+            </div>
+
+            <!-- Card 5: 啟動開發伺服器 -->
+            <div class="card">
+                <h3 class="card-title"><i class="bi bi-play-circle"></i> 啟動開發伺服器</h3>
+                <p class="card-text">一切準備好之後，啟動開發伺服器來預覽成果：</p>
+                <div class="code-block">
+# 啟動 Vite 開發伺服器
+npm run dev
+
+# 預設開啟網址：http://localhost:5173</div>
+                <p class="card-text"><strong>清除預設內容，開始動手寫：</strong></p>
+                <div class="code-block">
+// src/App.jsx — 清除預設內容，寫上自己的第一行
+function App() {
+  return (
+    &lt;div className="container mt-5"&gt;
+      &lt;h1&gt;Hello Dashboard!&lt;/h1&gt;
+      &lt;p&gt;我的 React 學習之旅開始了！&lt;/p&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default App</div>
+                <div class="alert-box">
+                    <strong>小提醒：</strong>Vite 的 HMR（Hot Module Replacement）功能非常快速，
+                    修改程式碼後存檔，瀏覽器會立即反映變更，不需要手動重新整理頁面！
+                </div>
+            </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
